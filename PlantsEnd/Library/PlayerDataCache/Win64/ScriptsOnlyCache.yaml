@@ -774,4 +774,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Game.unity
   - Assets/Scenes/GoodEnd.unity
   - Assets/Scenes/BadEnd.unity
-  playerPath: C:/Users/MikhailP/Desktop/Unity/SFprojects/SFproject_7/PlantsEnd (build)/PlantsEnd.exe
+  playerPath: C:/Users/MikhailP/Documents/GitHub/PlantsEnd/PlantsEnd (build)/PlantsEnd.exe
