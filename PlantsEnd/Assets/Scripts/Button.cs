@@ -54,6 +54,7 @@ namespace Garden
                 World.GreedMode = false;
                 World.Mode = 0;
                 World.time = 0;
+                InfoActive = false;
                 Cursor.SetCursor(null, hotSpot, cursorMode);
                 SceneManager.LoadScene(0);
             }
