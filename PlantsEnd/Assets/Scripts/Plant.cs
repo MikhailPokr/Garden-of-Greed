@@ -47,6 +47,8 @@ namespace Garden
             maxStage = Random.Range(stagesSprites.Count + 4, 25);
             breeds = Random.value > 0.8f;
             woodCost = Random.Range(-2, 10);
+            woodCost = woodCost < 0 ? -Mathf.RoundToInt(woodCost * Shop.BonusWood) - woodCost : Mathf.RoundToInt(woodCost * Shop.BonusWood);
+            
         }
         internal virtual void CreateBreed()
         {
@@ -67,6 +69,7 @@ namespace Garden
                 pl.maxStage = maxStage + Random.Range(-2, 5);
                 pl.breeds = Random.value > 0.9f;
                 pl.woodCost = woodCost + Random.Range(-1, 5);
+                pl.woodCost = pl.woodCost < 0 ? -Mathf.RoundToInt(pl.woodCost * ((Shop.BonusWood - 1) / 2 + 1)) - pl.woodCost : Mathf.RoundToInt(pl.woodCost * ((Shop.BonusWood - 1) / 2 + 1));
                 p.transform.parent = gameObject.transform.parent;
                 pl.garden = garden;
             }

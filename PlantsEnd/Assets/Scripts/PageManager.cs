@@ -25,6 +25,8 @@ namespace Garden
         //14 - FruitTree Super Description
         //15 - EvilTree Super Description
         //16 - Mode 0 Greed
+        //17 - Mode 17 Default
+        //18 - Mode 0 Shop
 
         public void SwitchPage(int pageNum, GameObject obj)
         {
@@ -88,6 +90,17 @@ namespace Garden
                     PageVariations[pageNum].GetComponentInChildren<Text>().text = text3;
                     Time.timeScale = 0;
                     goto case 7;
+                case 18:
+                    PageVariations[pageNum].SetActive(true);
+                    string text4 =
+                        "Сейчас:\n" +
+                       $"Всего улучшений: {Shop.level}\n" +
+                       $"Стоимость улучшения: {Shop.value}\n" +
+                       $"Древесина: {Shop.BonusWood} / 3\n" +
+                       $"Фрукты: {Shop.BonusFruit} / 2\n" +
+                       $"Трава: +{Shop.BonusGrass} / +5";
+                    PageVariations[pageNum].transform.Find("Stats").GetComponent<Text>().text = text4;
+                    break;
                 default:
                     PageVariations[pageNum].SetActive(true);
                     break;
@@ -105,6 +118,8 @@ namespace Garden
             }
             if (World.Mode == 0 && World.GreedMode)
                 PageVariations[16].SetActive(true);
+            else if (Shop.ShopActive)
+                PageVariations[18].SetActive(true);
             else
                 PageVariations[World.Mode].SetActive(true);
         }

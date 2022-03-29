@@ -23,8 +23,10 @@ namespace Garden
             maxFruit = Random.Range(stagesSprites.Count + 3, 15);
             maxStage = Random.Range(maxFruit + 2, maxFruit + 5);
             fruitCost = Random.Range(-5, 0);
+            fruitCost = Mathf.RoundToInt(fruitCost * Shop.BonusFruit);
             breeds = Random.value > 0.5f;
             woodCost = Random.Range(-10, 0);
+            woodCost = Mathf.RoundToInt(woodCost * Shop.BonusWood);
         }
         internal override void CreateBreed()
         {
@@ -51,8 +53,14 @@ namespace Garden
                 pl.maxFruit = maxFruit + Random.Range(-2, 5);
                 pl.maxStage = maxStage + Random.Range(-2, 5);
                 pl.fruitCost = fruitCost + Random.Range(-2, 4);
+                pl.fruitCost = Mathf.RoundToInt(pl.fruitCost * ((Shop.BonusFruit - 1) / 2 + 1));
+                if (pl.fruitCost > 0 && Random.value < (0.1f * Shop.level))
+                    pl.fruitCost = -pl.fruitCost;
                 pl.breeds = Random.value > 0.7f;
                 pl.woodCost = woodCost + Random.Range(-2, 4);
+                pl.woodCost = Mathf.RoundToInt(pl.woodCost * ((Shop.BonusWood - 1) / 2 + 1));
+                if (pl.woodCost > 0 && Random.value < (0.1f * Shop.level))
+                    pl.woodCost = -pl.woodCost;
                 p.transform.parent = gameObject.transform.parent;
                 pl.garden = garden;
             }

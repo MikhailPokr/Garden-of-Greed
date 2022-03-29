@@ -16,6 +16,7 @@ namespace Garden
         }
         private void OnMouseUpAsButton()
         {
+            cost = cost == 0 ? 0 : cost+Shop.BonusGrass;
             World.money += cost;
             Destroy(gameObject);
             GameObject.Find("Notices").GetComponent<Notice>().Show(0, cost.ToString());
