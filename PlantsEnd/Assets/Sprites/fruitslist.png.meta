@@ -153,7 +153,7 @@ TextureImporter:
       213: 4844736995342703916
     second: fruitslist_49
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -170,10 +170,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -212,6 +214,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -223,6 +227,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -235,6 +240,33 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1300,9 +1332,59 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      fruitslist_0: 146862101853992951
+      fruitslist_1: 4291080265896786440
+      fruitslist_10: 634165105118548105
+      fruitslist_11: 50736248816486374
+      fruitslist_12: 1468615689318603037
+      fruitslist_13: -8490754376067090976
+      fruitslist_14: -5741299166612290467
+      fruitslist_15: -9184071511040110556
+      fruitslist_16: -2055884444844236477
+      fruitslist_17: 3240916167059648836
+      fruitslist_18: 251687290341734120
+      fruitslist_19: 6825634458985490974
+      fruitslist_2: -3733764830613601850
+      fruitslist_20: 8942973894886036645
+      fruitslist_21: 3217563978184979814
+      fruitslist_22: 8164694382741433630
+      fruitslist_23: 2370385802414857419
+      fruitslist_24: 7638523235893955819
+      fruitslist_25: 7947217414835444905
+      fruitslist_26: 2641469033716083117
+      fruitslist_27: -9079015571552651174
+      fruitslist_28: -3795873920423673230
+      fruitslist_29: -3332450983359276594
+      fruitslist_3: -7709361942239614256
+      fruitslist_30: 1092862169976063616
+      fruitslist_31: 2108968538302854581
+      fruitslist_32: -2071199255976593526
+      fruitslist_33: -1176483736815851204
+      fruitslist_34: -8434599442589596754
+      fruitslist_35: -8429175878303600865
+      fruitslist_36: 6844302764129374916
+      fruitslist_37: -727653079773240478
+      fruitslist_38: -5943828093250159217
+      fruitslist_39: -7877057518928797376
+      fruitslist_4: 204876654087227354
+      fruitslist_40: -3131932139731643062
+      fruitslist_41: 5129688868171287355
+      fruitslist_42: 4663126002738595058
+      fruitslist_43: -2367627076527406905
+      fruitslist_44: -3833040431750370472
+      fruitslist_45: 1828846614946019295
+      fruitslist_46: -5513983143780179806
+      fruitslist_47: -5225175479501311696
+      fruitslist_48: -6355165965641764988
+      fruitslist_49: 4844736995342703916
+      fruitslist_5: 6157901995463108772
+      fruitslist_6: 6520258128899519241
+      fruitslist_7: -4194747176113433112
+      fruitslist_8: 6636553645282517322
+      fruitslist_9: 7389522437932045983
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

@@ -855,7 +855,7 @@ TextureImporter:
       213: -8806758590004479466
     second: Items icons_283
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -872,10 +872,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -914,6 +916,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -925,6 +929,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -937,6 +942,33 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -6916,9 +6948,293 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      Items icons_0: 1705574070778965746
+      Items icons_1: -3736499181578130854
+      Items icons_10: 2976784569551878068
+      Items icons_100: -8062146120582162843
+      Items icons_101: -695062393023957485
+      Items icons_102: 4131022801544572537
+      Items icons_103: 4605479838948975736
+      Items icons_104: 6517256038702221798
+      Items icons_105: 6610402134486317649
+      Items icons_106: 6504292629714946815
+      Items icons_107: 2381702971645157051
+      Items icons_108: -112166896208714462
+      Items icons_109: -8851360126746724856
+      Items icons_11: -1497575935011052301
+      Items icons_110: -3024060916857163739
+      Items icons_111: 3699040516444709333
+      Items icons_112: 8722870207817445437
+      Items icons_113: -163230605711322396
+      Items icons_114: -6793507674690223277
+      Items icons_115: -1506460670982103868
+      Items icons_116: -4829715417604690470
+      Items icons_117: 4848542672292844735
+      Items icons_118: 4645365543198439488
+      Items icons_119: -1521602424275717772
+      Items icons_12: -7739068863321122971
+      Items icons_120: -7431165353431127489
+      Items icons_121: -8431610454060166401
+      Items icons_122: -3496484641665026919
+      Items icons_123: -5379273438115034877
+      Items icons_124: -255177223666259398
+      Items icons_125: 6863667014690516327
+      Items icons_126: 6257483167332855834
+      Items icons_127: 3189549624066889967
+      Items icons_128: -8188485688330573154
+      Items icons_129: -4157097439680038882
+      Items icons_13: -5248834982782969349
+      Items icons_130: -3800822202550191854
+      Items icons_131: -136371327259069957
+      Items icons_132: -4215544977822974482
+      Items icons_133: -9077932888888808546
+      Items icons_134: -3420668119370542834
+      Items icons_135: -8848059922562283719
+      Items icons_136: 5350099333635834794
+      Items icons_137: 2069573032704062791
+      Items icons_138: -4416303004669082945
+      Items icons_139: 6005726488270783556
+      Items icons_14: -8801447580461558810
+      Items icons_140: 5616530503726394691
+      Items icons_141: 4014113542460421098
+      Items icons_142: 7706379232755207870
+      Items icons_143: 3188493759882157338
+      Items icons_144: 6843472361811710117
+      Items icons_145: 6568549420674454985
+      Items icons_146: 5010107689715727660
+      Items icons_147: -362969047387210828
+      Items icons_148: -265830024709500950
+      Items icons_149: 3029502000259756241
+      Items icons_15: -3273341765126260640
+      Items icons_150: 6736902351329866275
+      Items icons_151: -4071974854318997149
+      Items icons_152: -7213005275046766795
+      Items icons_153: -1381348747097207459
+      Items icons_154: -4679181521091599483
+      Items icons_155: -9148080380495042809
+      Items icons_156: 3353850659296409270
+      Items icons_157: 4490807877243878610
+      Items icons_158: -3504030634081633734
+      Items icons_159: 5688334602796660091
+      Items icons_16: -4576932245408883367
+      Items icons_160: 5779093437614180820
+      Items icons_161: 1638492377952289310
+      Items icons_162: -5064608129652302988
+      Items icons_163: -2112395870039366970
+      Items icons_164: 8480054094062490104
+      Items icons_165: -4313998801945793971
+      Items icons_166: 9133748757079175550
+      Items icons_167: 6040839117443263221
+      Items icons_168: -1997803664906891983
+      Items icons_169: 2658771218151934823
+      Items icons_17: -8692780473720974368
+      Items icons_170: 7781253013345305917
+      Items icons_171: 5961168973020479392
+      Items icons_172: 3894090480505777609
+      Items icons_173: -4866083229096138878
+      Items icons_174: -2393264199348275425
+      Items icons_175: -3818451655737497694
+      Items icons_176: -3225153485489348094
+      Items icons_177: -8667936104831664217
+      Items icons_178: 3861811588293708023
+      Items icons_179: 8852617208320443609
+      Items icons_18: 1172337450222469335
+      Items icons_180: 7833887436025633190
+      Items icons_181: 3937539572679703175
+      Items icons_182: -1270987559599630664
+      Items icons_183: 649407891882102028
+      Items icons_184: 2673519153916262132
+      Items icons_185: -5290057140436517675
+      Items icons_186: -454652535748308686
+      Items icons_187: 2864885817125441154
+      Items icons_188: 8271014524154964673
+      Items icons_189: 793832849601258214
+      Items icons_19: -5610740212426310689
+      Items icons_190: 1520704410908964311
+      Items icons_191: -8328591022841250030
+      Items icons_192: 7302902766439748868
+      Items icons_193: -3471898589932846104
+      Items icons_194: -7066086479383070421
+      Items icons_195: -1902789796081310533
+      Items icons_196: -8625743726873550168
+      Items icons_197: -9049063034957065055
+      Items icons_198: 598199458518667971
+      Items icons_199: 6127735229218644953
+      Items icons_2: -8033315739857962220
+      Items icons_20: 171207174738370380
+      Items icons_200: -7328902054717501076
+      Items icons_201: 8719806540697176586
+      Items icons_202: 2392968462607126818
+      Items icons_203: -752613438565254481
+      Items icons_204: -4934982941955246568
+      Items icons_205: 2179254092738529715
+      Items icons_206: -1293371908944851511
+      Items icons_207: 2462590560512656372
+      Items icons_208: 737377936784401925
+      Items icons_209: 2594840912583741655
+      Items icons_21: -5251846482198551535
+      Items icons_210: -4596087425656844141
+      Items icons_211: -7326555041847876953
+      Items icons_212: 7859347143338836688
+      Items icons_213: 4899310186538417814
+      Items icons_214: 3650665410456779643
+      Items icons_215: -8523459288541920480
+      Items icons_216: -3425204624903241381
+      Items icons_217: 1918682148746784799
+      Items icons_218: -5212030871213013535
+      Items icons_219: -1412328698319958914
+      Items icons_22: -8560670143860960880
+      Items icons_220: 6194767507243152777
+      Items icons_221: -1986333867499308154
+      Items icons_222: 2347849159882882781
+      Items icons_223: -1166894302657641389
+      Items icons_224: -2233279941767922602
+      Items icons_225: -7759918448504661076
+      Items icons_226: 5587308425358052474
+      Items icons_227: 4632243784043818711
+      Items icons_228: 1619878858477798733
+      Items icons_229: -5584790868116176147
+      Items icons_23: 6843295032408416332
+      Items icons_230: 7346488624602776194
+      Items icons_231: -4052268865896390577
+      Items icons_232: 706953481793401979
+      Items icons_233: 3306059737691022226
+      Items icons_234: -8764417070618322915
+      Items icons_235: -977231049058030788
+      Items icons_236: 3232465958058488404
+      Items icons_237: -2860416518712946834
+      Items icons_238: -2047271825681418948
+      Items icons_239: -8557103898386178503
+      Items icons_24: -5383153399999757173
+      Items icons_240: 4860321133116499635
+      Items icons_241: 6931525900789179188
+      Items icons_242: -5347102921798447488
+      Items icons_243: -6273729088742686333
+      Items icons_244: 6959326046083281295
+      Items icons_245: -7672652108981661551
+      Items icons_246: 3082606901348331201
+      Items icons_247: -243882958586262236
+      Items icons_248: 9168081097861020085
+      Items icons_249: 7026536250767731427
+      Items icons_25: -8911080178959599692
+      Items icons_250: 1910533043681211310
+      Items icons_251: -6017896245718930088
+      Items icons_252: 5657703505873169485
+      Items icons_253: 8606366728387317957
+      Items icons_254: 179354083489497757
+      Items icons_255: -3111530472652024659
+      Items icons_256: 4455606888921489189
+      Items icons_257: 4565548832431182899
+      Items icons_258: 3801234730025022054
+      Items icons_259: -3120633830717161531
+      Items icons_26: 5315775557516678118
+      Items icons_260: 7242066195025377628
+      Items icons_261: 4666401320581546868
+      Items icons_262: -5492356679007602456
+      Items icons_263: 8131280091403211318
+      Items icons_264: 7273337598244560550
+      Items icons_265: -4250083533580972404
+      Items icons_266: 5639742525586588293
+      Items icons_267: -2252631297901425764
+      Items icons_268: 8276682954236650262
+      Items icons_269: 5503425605780694363
+      Items icons_27: -5072198147830365985
+      Items icons_270: 381748518288013327
+      Items icons_271: -3756142489716268524
+      Items icons_272: -8562202770456802569
+      Items icons_273: 1370302287374023521
+      Items icons_274: -5885502295159974975
+      Items icons_275: -195669533251865617
+      Items icons_276: 1056690718038951862
+      Items icons_277: 3336022354950138162
+      Items icons_278: -2274312001973313182
+      Items icons_279: -5574849988761782417
+      Items icons_28: 3519814858689608799
+      Items icons_280: 1112209659201254582
+      Items icons_281: 3071557114834161374
+      Items icons_282: 2551783288208684867
+      Items icons_283: -8806758590004479466
+      Items icons_29: -8940836703420512618
+      Items icons_3: -3883461206207935955
+      Items icons_30: 2539129610806642746
+      Items icons_31: 343486143963480672
+      Items icons_32: 2880595309654159622
+      Items icons_33: -2103834652742740004
+      Items icons_34: 1764054760043892060
+      Items icons_35: 8908567400314226241
+      Items icons_36: -7393967367307487493
+      Items icons_37: 8159567229062640589
+      Items icons_38: 1893584146273997087
+      Items icons_39: 3111882762207839967
+      Items icons_4: 2791318353381999830
+      Items icons_40: 5483262172598869382
+      Items icons_41: -738267564960464223
+      Items icons_42: 520825897832099498
+      Items icons_43: -1549345232529681053
+      Items icons_44: -865530046551906343
+      Items icons_45: -2060120271360722732
+      Items icons_46: -5130622685239117395
+      Items icons_47: 7002817323973516097
+      Items icons_48: 5023579515627843479
+      Items icons_49: -8491497457584773125
+      Items icons_5: 3795323285684870101
+      Items icons_50: 8507254261252966036
+      Items icons_51: -8869306748765664154
+      Items icons_52: -5451520622188407685
+      Items icons_53: 4276496556920102135
+      Items icons_54: 1822639311087303794
+      Items icons_55: 7361680271107179631
+      Items icons_56: 8490948573497035016
+      Items icons_57: -2355196272243610363
+      Items icons_58: 5116117431412439897
+      Items icons_59: 7257836759502911766
+      Items icons_6: -8658993219968882288
+      Items icons_60: -7096712517257613817
+      Items icons_61: -8911640869586673612
+      Items icons_62: 3856863814188039271
+      Items icons_63: 4557279039330559911
+      Items icons_64: -5389087359081366679
+      Items icons_65: -6759758931173779092
+      Items icons_66: -8581848494575837487
+      Items icons_67: -1724949748483302293
+      Items icons_68: -8978535428245831954
+      Items icons_69: -6638107976035062498
+      Items icons_7: -8816750480680712283
+      Items icons_70: 1232776793336778355
+      Items icons_71: -7825064025614639797
+      Items icons_72: 1393937947637383403
+      Items icons_73: -4328547784294128044
+      Items icons_74: -4833813992452611417
+      Items icons_75: -2302320109857200733
+      Items icons_76: -4188388085662974511
+      Items icons_77: -8610592557844653306
+      Items icons_78: 4675703113371363716
+      Items icons_79: -7044790068205868311
+      Items icons_8: 5642052433543378145
+      Items icons_80: -3020892188479942070
+      Items icons_81: 666583093947656267
+      Items icons_82: -3629448000998748445
+      Items icons_83: -7806910382864062530
+      Items icons_84: 5389795367073107824
+      Items icons_85: 1164105156936644568
+      Items icons_86: 6217151836212245419
+      Items icons_87: -5963157394879622066
+      Items icons_88: 161428639519364238
+      Items icons_89: -3416766804855374297
+      Items icons_9: -6018414099559590223
+      Items icons_90: 5139091787634130914
+      Items icons_91: -6257785422793457435
+      Items icons_92: -6164672746147697841
+      Items icons_93: 3572440721703725359
+      Items icons_94: -9194795097015948970
+      Items icons_95: 8090415715190904977
+      Items icons_96: 1393982482769578198
+      Items icons_97: -7685510638300277305
+      Items icons_98: 8321874028555019291
+      Items icons_99: 7646896811413078793
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

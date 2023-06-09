@@ -216,7 +216,7 @@ TextureImporter:
       213: 6731196738670882633
     second: plants_70
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -233,10 +233,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -275,6 +277,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -286,6 +290,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -298,6 +303,33 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -1804,9 +1836,80 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      plants_0: -3527876879021525145
+      plants_1: -1927889906097043966
+      plants_10: -2185335503829088403
+      plants_11: 6915438452729039185
+      plants_12: 6984442412936397737
+      plants_13: -2245023530354808097
+      plants_14: 3275049470109395508
+      plants_15: 8482285269433270328
+      plants_16: -7143087039398124151
+      plants_17: 5924623212766854295
+      plants_18: -7059391928232544011
+      plants_19: -3521152321408532758
+      plants_2: 5004531278555049960
+      plants_20: -385290471789066283
+      plants_21: -4231635334726906192
+      plants_22: 3390126664149698875
+      plants_23: -2249434992766814959
+      plants_24: 5328145295879839526
+      plants_25: -3019525895240463030
+      plants_26: 3278829644637341985
+      plants_27: 968803793874081956
+      plants_28: -5286125387984224900
+      plants_29: -5119893442609476536
+      plants_3: -5395861003456798081
+      plants_30: 2393381137972445386
+      plants_31: 1181448965997768054
+      plants_32: 7842343618658517417
+      plants_33: -6177575451595206957
+      plants_34: -4938982115208973816
+      plants_35: 6211092494976579438
+      plants_36: -3391556680458123218
+      plants_37: 3057675692530835814
+      plants_38: -8321886959466736737
+      plants_39: 2069992328310058220
+      plants_4: -6800931340347744238
+      plants_40: -862800679913824809
+      plants_41: 2688582254844517938
+      plants_42: 4759676146435412010
+      plants_43: -2943151524547710194
+      plants_44: -7037530020992878781
+      plants_45: -3800458654278106549
+      plants_46: -1771324499330494199
+      plants_47: -454235979964385530
+      plants_48: -9045544968778989044
+      plants_49: 7706506614371038907
+      plants_5: 3017316628048636319
+      plants_50: 1552293971409657765
+      plants_51: -5932848443960681115
+      plants_52: 1542332037955997900
+      plants_53: 600972281788702382
+      plants_54: 4520043904958138793
+      plants_55: -2563997866307534203
+      plants_56: -5079803094218993648
+      plants_57: 9131881252884925626
+      plants_58: 4036042958030610248
+      plants_59: 6064885918328035644
+      plants_6: -4350115279957141132
+      plants_60: 2295074158156208388
+      plants_61: 2058452498137720555
+      plants_62: -5403765933329744214
+      plants_63: -5259100394514023836
+      plants_64: -3938595090488358857
+      plants_65: -1681136544372352868
+      plants_66: 2290201263535448636
+      plants_67: -7793342561321067897
+      plants_68: 27937274555157101
+      plants_69: 8146231736373082932
+      plants_7: -810785574404401188
+      plants_70: 6731196738670882633
+      plants_8: -3030608088069509471
+      plants_9: -5568842699155709627
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
