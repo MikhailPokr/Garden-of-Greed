@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d8a3e92bd4b446885ef195e61ea2557, type: 3}
+  m_Name: TreeGenerationOptions
+  m_EditorClassIdentifier: Assembly-CSharp::Garden.TreeGenerationOptions
+  <MaximumStagesReduction>k__BackingField: 0
+  <DryWoodCostRange>k__BackingField: {x: 0, y: 3}
+  <AutoBreedChance>k__BackingField: 0.15
+  <AutoBreedCountRange>k__BackingField: {x: 1, y: 3}
+  <AutoBreedMutationRange>k__BackingField: {x: -15, y: 20}
+  <NormalStageTimeRange>k__BackingField: {x: 4, y: 15}
+  <NormalMaxStageRange>k__BackingField: {x: 2, y: 20}
+  <NormalWoodCostRange>k__BackingField: {x: 2, y: 12}
+  <FruitChance>k__BackingField: 0.4
+  <FruitStageTimeRange>k__BackingField: {x: 4, y: 20}
+  <LastFruitStageRange>k__BackingField: {x: 6, y: 20}
+  <FruitMaxStageRange>k__BackingField: {x: 2, y: 20}
+  <FruitWoodCostRange>k__BackingField: {x: -2, y: 10}
+  <BaseFruitCostRange>k__BackingField: {x: 2, y: 10}
+  <EvilChance>k__BackingField: 0.2
+  <EvilStageTimeRange>k__BackingField: {x: 4, y: 12}
+  <EvilLastFruitStageRange>k__BackingField: {x: 6, y: 15}
+  <EvilMaxStageRange>k__BackingField: {x: 6, y: 5}
+  <EvilWoodCostRange>k__BackingField: {x: -10, y: 0}
+  <EvilBaseFruitCostRange>k__BackingField: {x: -5, y: 0}

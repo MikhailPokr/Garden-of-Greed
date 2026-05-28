@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd781840d90d44beba74041d6e296000, type: 3}
+  m_Name: PlayerStartOptions
+  m_EditorClassIdentifier: Assembly-CSharp::Garden.PlayerStartOptions
+  <StartMoney>k__BackingField: 50
+  <MaxStamina>k__BackingField: 10
+  <MaxFire>k__BackingField: 10
