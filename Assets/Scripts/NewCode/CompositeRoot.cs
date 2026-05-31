@@ -5,9 +5,10 @@ namespace Garden
 {
     public class CompositeRoot : MonoBehaviour
     {
-        [SerializeField] private Palette _palette;
-        [SerializeField] private EntityView _entityView;
-        [SerializeField] private DinamicField _dinamicField;
+        [SerializeField] private GeneralPalette _generalPalette;
+        [SerializeField] private TreePalette _treePalette;
+        [SerializeField] private TreeView _treeView;
+        [SerializeField] private Field field;
         [Header("Options")]
         [SerializeField] private PlayerStartOptions _startOptions;
         [SerializeField] private TreeGenerationOptions _treeGenerationOptions;
@@ -24,9 +25,10 @@ namespace Garden
             _player = new Player(_startOptions);
             _operationManager = new OperationManager();
             _fieldManager = new FieldManager(
-                _entityView,
-                _dinamicField,
-                _palette,
+                _treeView,
+                field,
+                _generalPalette,
+                _treePalette,
                 _player,
                 _operationManager,
                 _treeGenerationOptions,

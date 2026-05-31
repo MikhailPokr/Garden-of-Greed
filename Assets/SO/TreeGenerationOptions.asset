@@ -12,23 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8a3e92bd4b446885ef195e61ea2557, type: 3}
   m_Name: TreeGenerationOptions
   m_EditorClassIdentifier: Assembly-CSharp::Garden.TreeGenerationOptions
-  <MaximumStagesReduction>k__BackingField: 0
-  <DryWoodCostRange>k__BackingField: {x: 0, y: 3}
-  <AutoBreedChance>k__BackingField: 0.15
-  <AutoBreedCountRange>k__BackingField: {x: 1, y: 3}
-  <AutoBreedMutationRange>k__BackingField: {x: -15, y: 20}
-  <NormalStageTimeRange>k__BackingField: {x: 4, y: 15}
-  <NormalMaxStageRange>k__BackingField: {x: 2, y: 20}
-  <NormalWoodCostRange>k__BackingField: {x: 2, y: 12}
-  <FruitChance>k__BackingField: 0.4
-  <FruitStageTimeRange>k__BackingField: {x: 4, y: 20}
-  <LastFruitStageRange>k__BackingField: {x: 6, y: 20}
-  <FruitMaxStageRange>k__BackingField: {x: 2, y: 20}
-  <FruitWoodCostRange>k__BackingField: {x: -2, y: 10}
-  <BaseFruitCostRange>k__BackingField: {x: 2, y: 10}
-  <EvilChance>k__BackingField: 0.2
-  <EvilStageTimeRange>k__BackingField: {x: 4, y: 12}
-  <EvilLastFruitStageRange>k__BackingField: {x: 6, y: 15}
-  <EvilMaxStageRange>k__BackingField: {x: 6, y: 5}
-  <EvilWoodCostRange>k__BackingField: {x: -10, y: 0}
-  <EvilBaseFruitCostRange>k__BackingField: {x: -5, y: 0}
+  _dryWoodCostRange: {x: 0, y: 5}
+  _growthLastStageRange: {x: 1, y: 6}
+  _autoBreedCountRange: {x: 0, y: 3}
+  _autoBreedMutationPercentRange: {x: -15, y: 15}
+  _stageTimeRange: {x: 4, y: 15}
+  _maxStageRange: {x: 2, y: 20}
+  _woodCostRange: {x: 2, y: 12}
+  _fruitChance: 35
+  _fruitStageTimeRange: {x: 4, y: 20}
+  _lastFruitStageRange: {x: 6, y: 20}
+  _fruitMaxStageRange: {x: 2, y: 20}
+  _fruitWoodCostRange: {x: -2, y: 10}
+  _baseFruitCostRange: {x: 2, y: 10}
+  _evilChance: 20
+  _evilAutoBreedCountRange: {x: 1, y: 4}
+  _evilBreedMutationPercentRange: {x: -30, y: 30}
+  _evilStageTimeRange: {x: 4, y: 12}
+  _evilLastFruitStageRange: {x: 6, y: 15}
+  _evilMaxStageRange: {x: 2, y: 5}
+  _evilWoodCostRange: {x: -10, y: 0}
+  _evilBaseFruitCostRange: {x: -5, y: 0}

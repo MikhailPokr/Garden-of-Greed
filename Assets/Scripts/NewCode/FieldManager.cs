@@ -8,30 +8,30 @@ namespace Garden
     public class FieldManager
     {
         public event Action<float> ColorChanged;
-        public readonly Palette Palette;
+        public readonly GeneralPalette GeneralPalette;
         public readonly Camera Camera;
         public readonly Player Player;
         
-        private readonly EntityView _entityViewPrefab;
-        private readonly DinamicField _dinamicFieldPrefab;
-
+        private readonly TreePalette _treePalette;
         
-        private readonly TreeFabric _treeFabric;
-        private readonly FruitFabric _fruitFabric;
-        private readonly GrassFabric _grassFabric;
-        private readonly BerryFabric _berryFabric;
+        private readonly EntityView _entityViewPrefab;
+        private readonly Field _fieldPrefab;
+        
+        private readonly TreeFactory _treeFactory;
+        private readonly FruitFactory _fruitFactory;
+        private readonly GrassFactory _grassFactory;
+        private readonly BerryFactory _berryFactory;
         
         private readonly OperationManager _operationManager;
         
-        private DinamicField _dinamicField;
+        private Field _field;
         
         public List<IEntityData> _entities { get; }
-
-        public Color EvilColor => Palette.EvilColor;
         public FieldManager(
             EntityView entityView,
-            DinamicField dinamicField,
-            Palette palette,
+            Field field,
+            GeneralPalette generalPalette,
+            TreePalette treePalette,
             Player player,
             OperationManager operationManager,
             TreeGenerationOptions treeGenerationOptions,
@@ -40,14 +40,15 @@ namespace Garden
             GrassGenerationOptions grassGenerationOptions)
         {
             _entityViewPrefab = entityView;
-            _dinamicFieldPrefab = dinamicField;
-            Palette = palette;
+            _fieldPrefab = field;
+            GeneralPalette = generalPalette;
+            _treePalette = treePalette;
             Player = player;
             _operationManager = operationManager;
-            _treeFabric = new TreeFabric(Palette, treeGenerationOptions, Player);
-            _fruitFabric = new FruitFabric(fruitGenerationOptions);
-            _grassFabric = new GrassFabric(Palette, grassGenerationOptions);
-            _berryFabric = new BerryFabric(Palette, berryGenerationOptions);
+            _treeFactory = new TreeFactory(treePalette,  treeGenerationOptions, Player);
+            _fruitFactory = new FruitFactory(fruitGenerationOptions);
+            _grassFactory = new GrassFactory(this.GeneralPalette, grassGenerationOptions);
+            _berryFactory = new BerryFactory(this.GeneralPalette, berryGenerationOptions);
             _entities = new List<IEntityData>();
             Camera = Camera.main;
         }
@@ -58,29 +59,37 @@ namespace Garden
             {
                 entity.Update(Player.Time);
             }
-
-            _dinamicField?.Check();
         }
 
         public void CreateField()
         {
-            _dinamicField = Object.Instantiate(_dinamicFieldPrefab);
-            _dinamicField.Init(this);
+            _field = Object.Instantiate(_fieldPrefab);
+            _field.Init(this);
 
-            CreateEntity(_treeFabric.Create(), true);
+            for (int y = -5; y <= 7; y++)
+            {
+                for (int i = -2; i <= 2; i++)
+                {
+                    var o = CreateEntity(_treeFactory.Create(), _treePalette, new Vector2Int(i, y));
+                }
+            }
+            
+            
             
             ColorChanged?.Invoke(0);
         }
 
 
-        private void CreateEntity(IEntityData data, bool needChangeColor)
+        private EntityView CreateEntity(IEntityData data, IPalette palette, Vector2Int position)
         {
             var entityView = Object.Instantiate(_entityViewPrefab);
-            entityView.Init(data, this, _dinamicField, needChangeColor);
+            entityView.Init(data, this, palette, _field, position);
             _operationManager.RegisterEntity(entityView);
             _entities.Add(data);
             data.DestroyRequest += OnEntityDestroyRequest;
             data.Start();
+            
+            return entityView; 
         }
         
         private void OnEntityDestroyRequest(IEntityData data)

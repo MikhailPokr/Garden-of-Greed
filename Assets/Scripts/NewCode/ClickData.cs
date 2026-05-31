@@ -7,14 +7,12 @@ namespace Garden
     {
         public InteractionType InteractionType { get; private set; }
         public PointerEventData PointerEventData { get; private set; }
-        public Collider2D Collider2D { get; private set; }
         public IEntityData EntityData { get; private set; }
         
-        public ClickData(InteractionType interactionType, PointerEventData pointerEventData, Collider2D collider2D, IEntityData entityData)
+        public ClickData(InteractionType interactionType, PointerEventData pointerEventData, IEntityData entityData)
         {
             InteractionType = interactionType;
             PointerEventData = pointerEventData;
-            Collider2D = collider2D;
             EntityData = entityData;
         }
     }
