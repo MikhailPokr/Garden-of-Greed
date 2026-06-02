@@ -42,14 +42,16 @@ namespace Garden
                     _treePalette.TreeEvilSprites.Count),
                 _ => SeedUtils.GetRandom(seed, ParamType.TreeSprite, _treePalette.TreeSprites.Count)
             };
+            var greenOffset = SeedUtils.GetRandom(seed, ParamType.GreenColorOffset, _options.GetGreenOffsetRange());
             
             var stageTime = SeedUtils.GetRandom(seed, ParamType.StageTime, _options.GetStageTimeRange(treeType));
             var woodCost = SeedUtils.GetRandom(seed, ParamType.WoodCost, _options.GetWoodCostRange(treeType));
             var dryWoodCost = SeedUtils.GetRandom(seed, ParamType.DryWoodCost, _options.GetDryWoodCostRange());
+            var woodColor = SeedUtils.GetRandom(seed, ParamType.WoodColor, _treePalette.WoodColors.Count);
             
-            int maxStage = lastGrowthStage + 1 + SeedUtils.GetRandom(seed, ParamType.MaxStage, _options.GetMaxStageRange(treeType));
+            var maxStage = lastGrowthStage + 1 + SeedUtils.GetRandom(seed, ParamType.MaxStage, _options.GetMaxStageRange(treeType));
             
-            int lastFruitStage = 0;
+            var lastFruitStage = 0;
             
             if (treeType.HasFlag(TreeType.Fruit))
             {
@@ -65,10 +67,12 @@ namespace Garden
                 TreeType = treeType,
                 LastGrowthStage = lastGrowthStage,
                 GrownSpriteIndex = sprite,
+                GreenOffset = greenOffset,
                 StageTime = stageTime,
                 MaxStage = maxStage,
                 WoodCost = woodCost,
                 WoodCostDry = dryWoodCost,
+                WoodColorIndex = woodColor,
                 LastFruitStage = lastFruitStage
             };
             
@@ -100,8 +104,10 @@ namespace Garden
                 TimerStart = _player.Time,
                 TreeType = data.DataConfig.TreeType,
                 LastGrowthStage = data.DataConfig.LastGrowthStage,
+                GreenOffset = data.DataConfig.GreenOffset,
                 GrownSpriteIndex = data.DataConfig.GrownSpriteIndex,
                 WoodCostDry = data.DataConfig.WoodCostDry,
+                WoodColorIndex =  data.DataConfig.WoodColorIndex,
                 LastFruitStage = data.DataConfig.LastFruitStage,
                 
                 StageTime = GetRandomMutation(childSeed, data.DataConfig.TreeType, ParamType.StageTime, data.DataConfig.StageTime),

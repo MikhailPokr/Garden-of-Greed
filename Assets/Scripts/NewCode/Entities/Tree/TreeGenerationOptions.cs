@@ -10,6 +10,7 @@ namespace Garden
         [Header("General")]
         [SerializeField] private Vector2Int _dryWoodCostRange;
         [SerializeField, Min(1)] private Vector2Int _growthLastStageRange;
+        [SerializeField] private Vector2 _greenOffsetRange;
 
         [Header("Normal")]
         [SerializeField] private Vector2Int _autoBreedCountRange;
@@ -37,6 +38,7 @@ namespace Garden
         [SerializeField] private Vector2Int _evilBaseFruitCostRange;
 
         public Vector2Int GetGrowthLastStageRange(TreeType treeType) => _growthLastStageRange;
+        public Vector2 GetGreenOffsetRange() => _greenOffsetRange;
         public Vector2 GetStageTimeRange(TreeType treeType) => treeType switch
         {
             _ when (treeType & TreeType.Evil) != 0 => _evilStageTimeRange,
@@ -78,7 +80,6 @@ namespace Garden
             _ when (treeType & TreeType.Evil) != 0 => _evilLastFruitStageRange,
             _ => _lastFruitStageRange
         };
-        
 
         public List<TreeTypeConfig> GetChances() => new List<TreeTypeConfig>()
         {

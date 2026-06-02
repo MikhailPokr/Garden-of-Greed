@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c108ce31ad6c4d068d3960a02babe194, type: 3}
   m_Name: Palette
   m_EditorClassIdentifier: Assembly-CSharp::Garden.Palette
-  <NoColor>k__BackingField: {r: 1, g: 1, b: 1, a: 0}
-  <NormalColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+  <NoColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+  <NormalColor>k__BackingField: {r: 0.6667037, g: 1, b: 0.6367924, a: 1}
   <EvilColor>k__BackingField: {r: 0.6792453, g: 0.1785392, b: 0.028835872, a: 1}

@@ -6,9 +6,7 @@ using Object = UnityEngine.Object;
 namespace Garden
 {
     public class FieldManager
-    {
-        public event Action<float> ColorChanged;
-        
+    {   
         public readonly int _seed;
         private readonly Field _fieldPrefab;
         public readonly GeneralPalette GeneralPalette;
@@ -33,11 +31,8 @@ namespace Garden
             _field = Object.Instantiate(_fieldPrefab);
             _field.Init(this);
             
-            ColorChanged?.Invoke(0);
+            SignalBus<ColorModeChangedSignal>.Fire(new(false));
             return _field;
         }
-
-
-        
     }
 }

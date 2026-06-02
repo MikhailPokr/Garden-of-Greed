@@ -11,10 +11,12 @@
         TreeSprite = 101,
         StageTime = 102,
         MaxStage = 103,
+        GreenColorOffset = 104,
         
         //Wood
         WoodCost = 200,
         DryWoodCost = 201,
+        WoodColor = 202,
         
         //AutoBread
         AutoBreedCount = 300,

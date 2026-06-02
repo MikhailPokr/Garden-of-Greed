@@ -13,12 +13,14 @@ namespace Garden
         public TreeType TreeType;
         public int LastGrowthStage;
         public int GrownSpriteIndex;
+        public float GreenOffset;
         
         public float StageTime;
         public int MaxStage;
         
         public int WoodCost;
         public int WoodCostDry;
+        public int WoodColorIndex;
         
         public int LastFruitStage;
         public int BaseFruitCost;

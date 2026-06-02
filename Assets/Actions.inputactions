@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "name": "Actions",
+    "maps": [
+        {
+            "name": "Standart",
+            "id": "2fde9ba7-093e-4417-86a5-dd820e22280e",
+            "actions": [
+                {
+                    "name": "Color",
+                    "type": "Button",
+                    "id": "f6c1c453-1529-4c64-8b89-1142bae4a7f8",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a1faa9d3-2a00-46a9-9d31-a4561172c9df",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Color",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -5,40 +5,39 @@ namespace Garden
 {
     public class EntityCreationManager
     {
-        private readonly int _seed;
-        private readonly List<EntityBundle> _entityBundles;
-        private readonly GeneralPalette _generalPalette;
-        private readonly SpriteOrderOptions _spriteOrderOptions;
         private readonly OperationManager _operationManager;
         private readonly Player _player;
-        private readonly Field _field;
 
-        private Dictionary<EntityType, EntityBundle> _entityBundleLookup;
-        private Dictionary<EntityType, IFactory> _factories;
+        private readonly Dictionary<EntityType, EntityBundle> _entityBundleLookup;
+        private readonly Dictionary<EntityType, IFactory> _factories;
+        
+        private VisualContext _context;
         
         public List<IEntityData> _entities { get; }
         
-        public EntityCreationManager(int seed, List<EntityBundle> entityBundles, SpriteOrderOptions spriteOrderOptions, OperationManager operationManager, Player player, Field field)
+        public EntityCreationManager(
+            int seed,
+            VisualContext visualContext,
+            List<EntityBundle> entityBundles,
+            OperationManager operationManager,
+            Player player)
         {
-            _seed = seed;
-            _entityBundles = entityBundles;
-            _spriteOrderOptions = spriteOrderOptions;
             _operationManager = operationManager;
             _player = player;
-            _field = field;
+            _context = visualContext;
             
             _entities = new List<IEntityData>();
             
             _entityBundleLookup = new Dictionary<EntityType, EntityBundle>();
             
-            foreach (var entityBundle in _entityBundles)
+            foreach (var entityBundle in entityBundles)
                 _entityBundleLookup[entityBundle.EntityType] = entityBundle;
             
             _factories = new Dictionary<EntityType, IFactory>()
             {
                 {
                     EntityType.Tree,
-                    new TreeFactory(_seed, _entityBundleLookup[EntityType.Tree], _player)
+                    new TreeFactory(seed, _entityBundleLookup[EntityType.Tree], _player)
                 },
             };
 
@@ -54,10 +53,8 @@ namespace Garden
             
             var entityView = Object.Instantiate(_entityBundleLookup[signal.EntityType].EntityView);
             
-            if (signal.EntityData == null)
-                signal.EntityData = _factories[signal.EntityType].Create();
-            
-            entityView.Init(signal.EntityData, _spriteOrderOptions, _entityBundleLookup[signal.EntityType].Palette, _field, signal.Position);
+            _context.SpecialPalette = _entityBundleLookup[signal.EntityType].Palette;
+            entityView.Init(signal.EntityData, _context, signal.Position);
             _operationManager.RegisterEntity(entityView);
             _entities.Add(signal.EntityData);
             signal.EntityData.DestroyRequest += OnEntityDestroyRequest;

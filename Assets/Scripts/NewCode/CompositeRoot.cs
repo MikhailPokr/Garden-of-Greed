@@ -15,6 +15,7 @@ namespace Garden
         private OperationManager _operationManager;
         private EntityCreationManager _creationManager;
         private Shop _shop;
+        private InputManager _inputManager;
         
         private void Awake()
         {
@@ -30,15 +31,18 @@ namespace Garden
                 _gameConfig.GeneralPalette,
                 _player);
             
+            Field field = _fieldManager.CreateField();
+            
             _creationManager = new EntityCreationManager(
                 _seed,
+                new VisualContext(_gameConfig, field),
                 _gameConfig.EntityBundles,
-                _gameConfig.SpriteOrderOptions,
                 _operationManager,
-                _player,
-                _fieldManager.CreateField());
+                _player);
 
             _shop = new Shop(_seed, 1);
+            
+            _inputManager = new InputManager();
             
             for (int y = -5; y <= 7; y++)
             {

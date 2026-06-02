@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,22 +9,21 @@ namespace Garden
     {
         public event Action<ClickData> ClickAction;
         
-        protected SpriteOrderOptions _spriteOrderOptions;
-        protected Vector2Int _position;
+        private Vector2Int _position;
+        
+        protected VisualContext _context;
         
         public abstract IEntityData EntityData { get; }
         
-        public virtual void Init(IEntityData entityData, SpriteOrderOptions spriteOrderOptions, IPalette specialPalette, Field field, Vector2Int position)
+        public virtual void Init(IEntityData entityData, VisualContext context, Vector2Int position)
         {
             EntityData.DestroyRequest += OnDestroyRequest;
-            EntityData.SetColor += OnSetColor;
             
-            _spriteOrderOptions = spriteOrderOptions;
+            _context = context;
+            
             _position = position;
-            transform.position = field.GetPoint(_position);
+            transform.position = context.Field.GetPoint(_position);
         }
-
-        protected abstract void OnSetColor(bool color);
 
         protected virtual void OnDestroyRequest(IEntityData data)
         {
@@ -37,5 +37,16 @@ namespace Garden
         public void OnPointerExit(PointerEventData eventData) => ClickAction?.Invoke(GetClickData(eventData, InteractionType.HoverEnd));
 
         private ClickData GetClickData(PointerEventData eventData, InteractionType type) => new ClickData(type, eventData, EntityData);
+        
+        protected static Color ApplyDeviation(Color baseColor, float offset)
+        {
+            Color.RGBToHSV(baseColor, out float h, out float s, out float v);
+    
+            h += offset;
+    
+            h = Mathf.Repeat(h, 1f); 
+    
+            return Color.HSVToRGB(h, s, v);
+        }
     }
 }

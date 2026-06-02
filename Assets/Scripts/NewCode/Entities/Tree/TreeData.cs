@@ -10,6 +10,8 @@ namespace Garden
         
         private int _stage;
         private bool _timerEnabled;
+        
+        public bool IsSprout => _stage <= DataConfig.LastGrowthStage;
 
         public event Action<bool> SetColor;
         public event Action<IEntityData> DestroyRequest;
@@ -24,7 +26,7 @@ namespace Garden
             _stage = 0;
             _timerEnabled = false;
         }
-        
+
         public void Start()
         {
             _timerEnabled = true;
@@ -44,29 +46,30 @@ namespace Garden
 
         private void SetNextStage()
         {
-            if (_stage <= DataConfig.LastGrowthStage)
+            int processingStage = _stage;
+            _stage++;
+            
+            if (processingStage <= DataConfig.LastGrowthStage)
             {
-                GrowRequest?.Invoke(_stage < DataConfig.LastGrowthStage ? _stage : -1);
+                GrowRequest?.Invoke(processingStage < DataConfig.LastGrowthStage ? processingStage : -1);
             }
 
-            if (DataConfig.TreeType.HasFlag(TreeType.Fruit) && _stage > DataConfig.LastFruitStage + 1 && _stage <= DataConfig.LastFruitStage)
+            if (DataConfig.TreeType.HasFlag(TreeType.Fruit) && processingStage > DataConfig.LastFruitStage + 1 && processingStage <= DataConfig.LastFruitStage)
             {
                 FruitRequest?.Invoke(this);
             }
             
-            if (_stage == DataConfig.MaxStage - 1)
+            if (processingStage == DataConfig.MaxStage - 1)
             {
                 if (!DataConfig.TreeType.HasFlag(TreeType.Fruit))
                     BreedRequest?.Invoke(this);
             }
 
-            if (_stage == DataConfig.MaxStage)
+            if (processingStage == DataConfig.MaxStage)
             {
                 DryRequest?.Invoke();
                 _timerEnabled = false;
             }
-
-            _stage++;
         }
     }
 }

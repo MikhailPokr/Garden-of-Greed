@@ -1,4 +1,5 @@
 ﻿using System;
+using PrimeTween;
 using UnityEngine;
 
 namespace Garden
@@ -11,6 +12,8 @@ namespace Garden
         [SerializeField] private Vector3 _center;
         
         private FieldManager _fieldManager;
+        private Sequence _colorSequence;
+        
 
         public void Init(FieldManager fieldManager)
         {
@@ -20,13 +23,32 @@ namespace Garden
             
             _fieldManager = fieldManager;
             
-            fieldManager.ColorChanged += OnColorChanged;
+            SignalBus<ColorModeChangedSignal>.OnEvent += OnColorChanged;
         }
 
-        private void OnColorChanged(float level)
+        private void OnColorChanged(ColorModeChangedSignal signal)
         {
-            _spriteRenderer.color = Color.Lerp(_fieldManager.GeneralPalette.NormalColor, _fieldManager.GeneralPalette.EvilColor, level);
+            PlayColorSequence(signal.IsColored);
         }
+        
+        private void PlayColorSequence(bool toFullColor)
+        {
+            if (_colorSequence.isAlive)
+                _colorSequence.Stop();
+    
+            _colorSequence = Sequence.Create();
+            float duration = 0.15f;
+
+            Color targetColor = toFullColor 
+                ? _fieldManager.GeneralPalette.NormalColor 
+                : _fieldManager.GeneralPalette.NoColor;
+
+            if (_spriteRenderer.color != targetColor)
+            {
+                _colorSequence.Group(Tween.Color(_spriteRenderer, targetColor, duration));
+            }
+        }
+        
 
         public Vector3 GetPoint(Vector2Int position)
         {

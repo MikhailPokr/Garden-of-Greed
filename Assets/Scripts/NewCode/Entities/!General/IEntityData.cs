@@ -5,7 +5,6 @@ namespace Garden
 {
     public interface IEntityData
     {
-        event Action<bool> SetColor;
         event Action<IEntityData> DestroyRequest;
 
         void Start();
