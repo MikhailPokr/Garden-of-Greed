@@ -18,5 +18,7 @@ MonoBehaviour:
   - {fileID: -1268064389544249124, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
   <TreeSprites>k__BackingField:
   - {fileID: 8635903978712429406, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
+  <CrownSprites>k__BackingField:
+  - {fileID: 1025324256, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
   <TreeEvilSprites>k__BackingField: []
   <WoodColors>k__BackingField: []

@@ -2,7 +2,7 @@
 
 namespace Garden
 {
-    [CreateAssetMenu(menuName = "Garden/PlayerStartOptions", fileName = "PlayerStartOptions")]
+    [CreateAssetMenu(menuName = "Garden/Options/PlayerStartOptions", fileName = "PlayerStartOptions")]
     public class PlayerStartOptions : ScriptableObject
     {
         [field: SerializeField] public int StartMoney { get; set; }

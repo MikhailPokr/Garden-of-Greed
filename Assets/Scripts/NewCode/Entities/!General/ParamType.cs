@@ -19,7 +19,6 @@
         //AutoBread
         AutoBreedCount = 300,
         AutoBreedMutation = 301,
-        ChildSeedOffset = 302,
         
         
         //Fruit

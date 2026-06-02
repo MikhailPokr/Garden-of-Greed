@@ -240,15 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eade2e71c10216c41881ae10662a7772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Garden.CompositeRoot
-  _generalPalette: {fileID: 11400000, guid: f9bb9853f81c0604fbb279102b53bdd8, type: 2}
-  _treePalette: {fileID: 11400000, guid: 15b5b080858f8074abe9b2d11b78b993, type: 2}
-  _treeView: {fileID: 2022535662318301625, guid: 6e8cd06ea66f5f7428774c72c536cf5b, type: 3}
-  field: {fileID: 4710773942203756902, guid: cc1dd61ad7e2e9e4d83ad73ace45e2b6, type: 3}
-  _startOptions: {fileID: 11400000, guid: 937c295ea01fd60489e0d71970cc112f, type: 2}
-  _treeGenerationOptions: {fileID: 11400000, guid: 18b8c6af59454d749b319be520a5d4c3, type: 2}
-  _fruitGenerationOptions: {fileID: 11400000, guid: d2b0a529fdf70334e9c09099345a4be0, type: 2}
-  _berryGenerationOptions: {fileID: 11400000, guid: 72a4313d52156f24e8eb710a66bf9bad, type: 2}
-  _grassGenerationOption: {fileID: 11400000, guid: 2419a402ce18a0048a55154d2a1b2cc8, type: 2}
+  _gameConfig: {fileID: 11400000, guid: ea8703bedaeb3ce47982d620b2eff00c, type: 2}
 --- !u!4 &1963592108
 Transform:
   m_ObjectHideFlags: 0

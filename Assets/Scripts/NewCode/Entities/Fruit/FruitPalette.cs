@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace Garden
 {
-    [CreateAssetMenu(fileName = "FruitPalette", menuName = "Game/Palette/FruitPalette")]
-    public class FruitPalette : ScriptableObject
+    [CreateAssetMenu(fileName = "FruitPalette", menuName = "Garden/Palette/FruitPalette")]
+    public class FruitPalette : BasePalette
     {
         [field: SerializeField] public List<Sprite> FruitSprites { get; private set; }
         [field: SerializeField] public List<Sprite> FruitEvilSprites { get; private set; }

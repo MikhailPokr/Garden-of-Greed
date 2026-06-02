@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TreeGenerationOptions
   m_EditorClassIdentifier: Assembly-CSharp::Garden.TreeGenerationOptions
   _dryWoodCostRange: {x: 0, y: 5}
-  _growthLastStageRange: {x: 1, y: 6}
+  _growthLastStageRange: {x: 2, y: 8}
   _autoBreedCountRange: {x: 0, y: 3}
   _autoBreedMutationPercentRange: {x: -15, y: 15}
   _stageTimeRange: {x: 4, y: 15}

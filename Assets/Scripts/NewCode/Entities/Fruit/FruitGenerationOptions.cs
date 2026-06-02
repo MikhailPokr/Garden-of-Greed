@@ -2,8 +2,8 @@
 
 namespace Garden
 {
-    [CreateAssetMenu(fileName = "FruitGenerationOptions", menuName = "Garden/Options/FruitGenerationOptions")]
-    public class FruitGenerationOptions : ScriptableObject
+    [CreateAssetMenu(fileName = "FruitGenerationOptions", menuName = "Garden/Options/Entities/FruitGenerationOptions")]
+    public class FruitGenerationOptions : BaseGenerationOptions
     {
         
     }

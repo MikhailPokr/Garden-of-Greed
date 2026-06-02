@@ -137,7 +137,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u0420\u043E\u0441\u0442\u043E\u043A 2"
+      name: Sprout 2
       rect:
         serializedVersion: 2
         x: 254
@@ -145,7 +145,7 @@ TextureImporter:
         width: 268
         height: 186
       alignment: 9
-      pivot: {x: 0.5757074, y: 0.09742983}
+      pivot: {x: 0.5757074, y: 0.13715585}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -159,7 +159,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u0420\u043E\u0441\u0442\u043E\u043A 3"
+      name: Sprout 3
       rect:
         serializedVersion: 2
         x: 547
@@ -167,7 +167,7 @@ TextureImporter:
         width: 310
         height: 200
       alignment: 9
-      pivot: {x: 0.5093502, y: 0.09903992}
+      pivot: {x: 0.4998159, y: 0.12859619}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -181,13 +181,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u0420\u043E\u0441\u0442\u043E\u043A 1"
+      name: Sprout 1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 1850
+        x: 17
+        y: 1856
         width: 216
-        height: 150
+        height: 164
       alignment: 9
       pivot: {x: 0.5357842, y: 0.12963542}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,15 +203,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: "\u0414\u0435\u0440\u0435\u0432\u043E"
+      name: Tree 1
       rect:
         serializedVersion: 2
         x: 8
-        y: 1235
+        y: 1241
         width: 525
-        height: 579
+        height: 571
       alignment: 9
-      pivot: {x: 0.5508751, y: 0.031599134}
+      pivot: {x: 0.5508752, y: 0.057480153}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -220,6 +220,28 @@ TextureImporter:
       bones: []
       spriteID: e537985e9e4e8d770800000000000000
       internalID: 8635903978712429406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crown 1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 830
+        width: 542
+        height: 381
+      alignment: 9
+      pivot: {x: 0.56105113, y: 0.4908574}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec15ff78979d52f499aab0f82f82f69e
+      internalID: 1025324256
       vertices: []
       indices: 
       edges: []
@@ -240,13 +262,14 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
+      Crown 1: 1025324256
       Plants_1: -4881008103234269068
       Plants_4: -5840972274582744104
       Plants_5: 3442116038242085032
-      "\u0414\u0435\u0440\u0435\u0432\u043E": 8635903978712429406
-      "\u0420\u043E\u0441\u0442\u043E\u043A 1": -7391759607893831176
-      "\u0420\u043E\u0441\u0442\u043E\u043A 2": 1352955200029874055
-      "\u0420\u043E\u0441\u0442\u043E\u043A 3": -1268064389544249124
+      Sprout 1: -7391759607893831176
+      Sprout 2: 1352955200029874055
+      Sprout 3: -1268064389544249124
+      Tree 1: 8635903978712429406
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

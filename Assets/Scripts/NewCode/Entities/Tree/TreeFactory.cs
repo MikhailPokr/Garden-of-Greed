@@ -11,45 +11,56 @@ namespace Garden
         private readonly TreePalette _treePalette;
         private readonly TreeGenerationOptions _options;
         private readonly Player _player;
-        
-        public TreeFactory(TreePalette palette, TreeGenerationOptions options, Player player)
-        {
-            _treePalette = palette;
-            _options = options;
-            _player = player;
-        }
-        
-        public TreeData Create()
-        {
-            var seed = Random.Range(int.MinValue, int.MaxValue);
 
+        private readonly int _seed;
+        private int _seedUsages;
+        
+        public TreeFactory(int globalSeed, EntityBundle bundle, Player player)
+        {
+            _treePalette = (TreePalette)bundle.Palette;
+            _options = (TreeGenerationOptions)bundle.Options;
+            _player = player;
+            
+            _seed = SeedUtils.GetNewSeed(globalSeed, SeedUserType.TreeFactory);
+            _seedUsages = 0;
+        }
+
+        IEntityData IFactory.Create() => Create();
+        IEntityData IFactory.Create(int seed) => Create(seed);
+
+        public TreeData Create() => Create(SeedUtils.GetNewSeed(_seed, _seedUsages++));
+        
+        public TreeData Create(int seed)
+        {
             TreeType treeType = GenerateType(seed);
             
-            var lastGrowthStage = IFactory.GetRandom(seed, ParamType.LastGrowthStage, _options.GetGrowthLastStageRange(treeType));
+            var lastGrowthStage = SeedUtils.GetRandom(seed, ParamType.LastGrowthStage, _options.GetGrowthLastStageRange(treeType));
             lastGrowthStage = Math.Clamp(lastGrowthStage, 0, _treePalette.StageSprites.Count);
             var sprite = treeType switch
             {
-                _ when treeType.HasFlag(TreeType.Evil) => IFactory.GetRandom(seed, ParamType.TreeSprite,
+                _ when treeType.HasFlag(TreeType.Evil) => SeedUtils.GetRandom(seed, ParamType.TreeSprite,
                     _treePalette.TreeEvilSprites.Count),
-                _ => IFactory.GetRandom(seed, ParamType.TreeSprite, _treePalette.TreeSprites.Count)
+                _ => SeedUtils.GetRandom(seed, ParamType.TreeSprite, _treePalette.TreeSprites.Count)
             };
             
-            var stageTime = IFactory.GetRandom(seed, ParamType.StageTime, _options.GetStageTimeRange(treeType));
-            var woodCost = IFactory.GetRandom(seed, ParamType.WoodCost, _options.GetWoodCostRange(treeType));
-            var dryWoodCost = IFactory.GetRandom(seed, ParamType.DryWoodCost, _options.GetDryWoodCostRange());
+            var stageTime = SeedUtils.GetRandom(seed, ParamType.StageTime, _options.GetStageTimeRange(treeType));
+            var woodCost = SeedUtils.GetRandom(seed, ParamType.WoodCost, _options.GetWoodCostRange(treeType));
+            var dryWoodCost = SeedUtils.GetRandom(seed, ParamType.DryWoodCost, _options.GetDryWoodCostRange());
             
-            int maxStage = lastGrowthStage + 1 + IFactory.GetRandom(seed, ParamType.MaxStage, _options.GetMaxStageRange(treeType));
+            int maxStage = lastGrowthStage + 1 + SeedUtils.GetRandom(seed, ParamType.MaxStage, _options.GetMaxStageRange(treeType));
             
             int lastFruitStage = 0;
             
             if (treeType.HasFlag(TreeType.Fruit))
             {
-                lastFruitStage = IFactory.GetRandom(seed, ParamType.LastFruitStage, _options.GetLastFruitStageRange(treeType));
+                lastFruitStage = SeedUtils.GetRandom(seed, ParamType.LastFruitStage, _options.GetLastFruitStageRange(treeType));
             }
             
             var config = new TreeDataConfig
             {
+                RootSeed = seed,
                 Seed = seed,
+                Indexes = new List<int>(),
                 TimerStart = _player.Time,
                 TreeType = treeType,
                 LastGrowthStage = lastGrowthStage,
@@ -70,7 +81,7 @@ namespace Garden
             TreeType treeType = 0;
             foreach (var treeTypeConfig in chances)
             {
-                if (IFactory.GetRandom(seed, treeTypeConfig.ParamType, 100) < treeTypeConfig.ChanceInPercent)
+                if (SeedUtils.GetRandom(seed, treeTypeConfig.ParamType, 100) < treeTypeConfig.ChanceInPercent)
                     treeType |= treeTypeConfig.TreeType;
             }
             return treeType;
@@ -78,14 +89,14 @@ namespace Garden
 
         public TreeData Create(TreeData data, int childIndex)
         {
-            int childSeed = IFactory.GetRandom(
-                data.DataConfig.Seed, 
-                (ParamType)((int)ParamType.ChildSeedOffset + childIndex), 
-                int.MaxValue
-            );
+            int childSeed = SeedUtils.GetNewSeed(data.DataConfig.Seed, childIndex);
+            List<int> Indexes = new List<int>(data.DataConfig.Indexes);
+            Indexes.Add(childIndex);
             var config = new TreeDataConfig
             {
+                RootSeed = data.DataConfig.RootSeed,
                 Seed = childSeed,
+                Indexes = Indexes,
                 TimerStart = _player.Time,
                 TreeType = data.DataConfig.TreeType,
                 LastGrowthStage = data.DataConfig.LastGrowthStage,
@@ -106,10 +117,10 @@ namespace Garden
         }
 
         private int GetRandomMutation(int childSeed, TreeType treeType, ParamType paramType, int origin) => 
-            Mathf.FloorToInt(GetRandomMutation(childSeed, treeType, paramType, origin));
+            Mathf.FloorToInt(GetRandomMutation(childSeed, treeType, paramType, (float)origin));
         private float GetRandomMutation(int childSeed, TreeType treeType, ParamType paramType, float origin)
         {
-            int mutationPercent = IFactory.GetRandom(childSeed, paramType, _options.GetAutoBreedMutationPercentRange(treeType));
+            int mutationPercent = SeedUtils.GetRandom(childSeed, paramType, _options.GetAutoBreedMutationPercentRange(treeType));
     
             float multiplier = 100f + mutationPercent;
             return origin * (multiplier / 100f);

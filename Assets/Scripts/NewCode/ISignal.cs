@@ -1,7 +1,6 @@
 ﻿namespace Garden
 {
-    public enum ValueType
+    public interface ISignal
     {
-        
     }
 }

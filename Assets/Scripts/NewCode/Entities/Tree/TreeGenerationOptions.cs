@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Garden
 {
-    [CreateAssetMenu(fileName = "TreeGenerationOptions", menuName = "Garden/Options/TreeGenerationOptions")]
-    public class TreeGenerationOptions : ScriptableObject
+    [CreateAssetMenu(fileName = "TreeGenerationOptions", menuName = "Garden/Options/Entities/TreeGenerationOptions")]
+    public class TreeGenerationOptions : BaseGenerationOptions
     {
         [Header("General")]
         [SerializeField] private Vector2Int _dryWoodCostRange;

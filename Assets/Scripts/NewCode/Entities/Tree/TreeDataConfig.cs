@@ -5,7 +5,10 @@ namespace Garden
 {
     public struct TreeDataConfig
     {
+        public int RootSeed;
         public int Seed;
+        public List<int> Indexes;
+        
         public float TimerStart;
         public TreeType TreeType;
         public int LastGrowthStage;

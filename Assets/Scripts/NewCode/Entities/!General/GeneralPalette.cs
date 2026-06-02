@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Garden
 {
-    [CreateAssetMenu(fileName = "GeneralPalette", menuName = "Game/Palette/GeneralPalette")]
+    [CreateAssetMenu(fileName = "GeneralPalette", menuName = "Garden/Palette/GeneralPalette")]
     public class GeneralPalette : ScriptableObject
     {
         [field: SerializeField] public Color NoColor { get; private set; }

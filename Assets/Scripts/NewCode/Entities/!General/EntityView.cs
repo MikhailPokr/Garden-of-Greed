@@ -8,21 +8,20 @@ namespace Garden
     {
         public event Action<ClickData> ClickAction;
         
-        protected FieldManager _fieldManager;
+        protected SpriteOrderOptions _spriteOrderOptions;
         protected Vector2Int _position;
         
         public abstract IEntityData EntityData { get; }
         
-        public virtual void Init(IEntityData entityData, FieldManager manager, IPalette specialPalette, Field field, Vector2Int position)
+        public virtual void Init(IEntityData entityData, SpriteOrderOptions spriteOrderOptions, IPalette specialPalette, Field field, Vector2Int position)
         {
             EntityData.DestroyRequest += OnDestroyRequest;
             EntityData.SetColor += OnSetColor;
             
-            _fieldManager = manager;
+            _spriteOrderOptions = spriteOrderOptions;
             _position = position;
             transform.position = field.GetPoint(_position);
         }
-            /**/
 
         protected abstract void OnSetColor(bool color);
 

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71029a5b2f664ab2a654a8069257ca1d, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Garden.GameConfig
+  <GeneralPalette>k__BackingField: {fileID: 11400000, guid: f9bb9853f81c0604fbb279102b53bdd8, type: 2}
+  <StartOptions>k__BackingField: {fileID: 11400000, guid: 937c295ea01fd60489e0d71970cc112f, type: 2}
+  <SpriteOrderOptions>k__BackingField: {fileID: 11400000, guid: 9260f43d43e9adb419bc98a6c3d82779, type: 2}
+  <FieldPrefab>k__BackingField: {fileID: 4710773942203756902, guid: cc1dd61ad7e2e9e4d83ad73ace45e2b6, type: 3}
+  <EntityBundles>k__BackingField:
+  - EntityType: 0
+    Palette: {fileID: 11400000, guid: 15b5b080858f8074abe9b2d11b78b993, type: 2}
+    EntityView: {fileID: 2022535662318301625, guid: 6e8cd06ea66f5f7428774c72c536cf5b, type: 3}
+    Options: {fileID: 11400000, guid: 18b8c6af59454d749b319be520a5d4c3, type: 2}
+  <UseSeed>k__BackingField: 0
+  <Seed>k__BackingField: 0
