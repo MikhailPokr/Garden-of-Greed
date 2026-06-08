@@ -8,14 +8,18 @@ namespace Garden
     public class CompositeRoot : MonoBehaviour
     {
         [SerializeField] private GameConfig _gameConfig;
+        [SerializeField] private ShopUI _shopUI;
+        [SerializeField] private RectInt _bounds;
         
         private int _seed;
         private Player _player;
         private FieldManager _fieldManager;
+        private Field _field;
         private OperationManager _operationManager;
         private EntityCreationManager _creationManager;
         private Shop _shop;
         private InputManager _inputManager;
+        private Arm _arm;
         
         private void Awake()
         {
@@ -29,28 +33,24 @@ namespace Garden
                 _seed,
                 _gameConfig.FieldPrefab,
                 _gameConfig.GeneralPalette,
-                _player);
+                _player,
+                _bounds);
             
-            Field field = _fieldManager.CreateField();
+            _field = _fieldManager.CreateField();
+            
+            _inputManager = new InputManager();
             
             _creationManager = new EntityCreationManager(
                 _seed,
-                new VisualContext(_gameConfig, field),
+                new VisualContext(_gameConfig, _field, _inputManager),
                 _gameConfig.EntityBundles,
                 _operationManager,
                 _player);
 
             _shop = new Shop(_seed, 1);
+            _shopUI.Init(_shop);
             
-            _inputManager = new InputManager();
-            
-            for (int y = -5; y <= 7; y++)
-            {
-                for (int i = -2; i <= 2; i++)
-                {
-                    SignalBus<EntityCreationRequestSignal>.Fire(new EntityCreationRequestSignal(EntityType.Tree, new Vector2Int(i, y)));
-                }
-            }
+            _arm = new Arm(_field, _creationManager, _bounds);
         }
 
         private void Update()
@@ -58,7 +58,7 @@ namespace Garden
             float time = Time.deltaTime;
             _player.Update(time);
             _creationManager.Update(time);
-            
+            _fieldManager.Update();
         }
     }
 }

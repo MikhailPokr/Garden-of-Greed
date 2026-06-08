@@ -8,7 +8,14 @@ namespace Garden
         public event Action<Sprite> ChangeSpriteRequest;
         public event Action<bool> SetColor;
         public event Action<IEntityData> DestroyRequest;
+        public Vector2Int? Position { get; }
+
         public void Start()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetPosition(Vector2Int position)
         {
             throw new NotImplementedException();
         }

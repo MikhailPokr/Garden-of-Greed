@@ -102,6 +102,42 @@ namespace Garden
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Click"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""8cd4558d-efe5-4291-80b3-9a4b089ecbf5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RightClick"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""fb749b7c-85ee-4029-91e9-0766364ae518"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Point"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""8acefb29-d07f-4cb9-8f7e-13875de11c65"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Speed"",
+                    ""type"": ""Value"",
+                    ""id"": ""e69659b9-033a-4de3-9c9c-792bf07fa632"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -115,6 +151,127 @@ namespace Garden
                     ""action"": ""Color"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e5e898a-93b8-43ae-b441-093e7efd3a4b"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0f2f5cce-facb-4421-b96b-46a17212e51d"",
+                    ""path"": ""<Pen>/tip"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47e36811-800b-4426-8d91-f1d68b5e86f0"",
+                    ""path"": ""<Touchscreen>/touch*/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53500db0-f921-446e-aaf8-f94df9a4ff0e"",
+                    ""path"": ""<XRController>/trigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XR"",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8975ec1-c4fa-4739-abaa-79ce87405e49"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""RightClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f8d67c42-2d39-4589-9b99-9e3c024b39b9"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1103fbd6-f201-4370-9cfa-8d300b553e44"",
+                    ""path"": ""<Pen>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""000a9da7-7b97-465f-84a2-b17aeb9f9574"",
+                    ""path"": ""<Touchscreen>/touch*/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Touch"",
+                    ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""fed9a2bb-aec7-475e-b4b3-c730171b7295"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Speed"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Negative"",
+                    ""id"": ""312603a7-aac7-4d6d-8245-8a5ca76baf16"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Speed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Positive"",
+                    ""id"": ""e2680d79-5bdf-429b-8fbb-c73a8f9776b5"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Speed"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -124,6 +281,10 @@ namespace Garden
             // Standart
             m_Standart = asset.FindActionMap("Standart", throwIfNotFound: true);
             m_Standart_Color = m_Standart.FindAction("Color", throwIfNotFound: true);
+            m_Standart_Click = m_Standart.FindAction("Click", throwIfNotFound: true);
+            m_Standart_RightClick = m_Standart.FindAction("RightClick", throwIfNotFound: true);
+            m_Standart_Point = m_Standart.FindAction("Point", throwIfNotFound: true);
+            m_Standart_Speed = m_Standart.FindAction("Speed", throwIfNotFound: true);
         }
 
         ~@Actions()
@@ -205,6 +366,10 @@ namespace Garden
         private readonly InputActionMap m_Standart;
         private List<IStandartActions> m_StandartActionsCallbackInterfaces = new List<IStandartActions>();
         private readonly InputAction m_Standart_Color;
+        private readonly InputAction m_Standart_Click;
+        private readonly InputAction m_Standart_RightClick;
+        private readonly InputAction m_Standart_Point;
+        private readonly InputAction m_Standart_Speed;
         /// <summary>
         /// Provides access to input actions defined in input action map "Standart".
         /// </summary>
@@ -220,6 +385,22 @@ namespace Garden
             /// Provides access to the underlying input action "Standart/Color".
             /// </summary>
             public InputAction @Color => m_Wrapper.m_Standart_Color;
+            /// <summary>
+            /// Provides access to the underlying input action "Standart/Click".
+            /// </summary>
+            public InputAction @Click => m_Wrapper.m_Standart_Click;
+            /// <summary>
+            /// Provides access to the underlying input action "Standart/RightClick".
+            /// </summary>
+            public InputAction @RightClick => m_Wrapper.m_Standart_RightClick;
+            /// <summary>
+            /// Provides access to the underlying input action "Standart/Point".
+            /// </summary>
+            public InputAction @Point => m_Wrapper.m_Standart_Point;
+            /// <summary>
+            /// Provides access to the underlying input action "Standart/Speed".
+            /// </summary>
+            public InputAction @Speed => m_Wrapper.m_Standart_Speed;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -249,6 +430,18 @@ namespace Garden
                 @Color.started += instance.OnColor;
                 @Color.performed += instance.OnColor;
                 @Color.canceled += instance.OnColor;
+                @Click.started += instance.OnClick;
+                @Click.performed += instance.OnClick;
+                @Click.canceled += instance.OnClick;
+                @RightClick.started += instance.OnRightClick;
+                @RightClick.performed += instance.OnRightClick;
+                @RightClick.canceled += instance.OnRightClick;
+                @Point.started += instance.OnPoint;
+                @Point.performed += instance.OnPoint;
+                @Point.canceled += instance.OnPoint;
+                @Speed.started += instance.OnSpeed;
+                @Speed.performed += instance.OnSpeed;
+                @Speed.canceled += instance.OnSpeed;
             }
 
             /// <summary>
@@ -263,6 +456,18 @@ namespace Garden
                 @Color.started -= instance.OnColor;
                 @Color.performed -= instance.OnColor;
                 @Color.canceled -= instance.OnColor;
+                @Click.started -= instance.OnClick;
+                @Click.performed -= instance.OnClick;
+                @Click.canceled -= instance.OnClick;
+                @RightClick.started -= instance.OnRightClick;
+                @RightClick.performed -= instance.OnRightClick;
+                @RightClick.canceled -= instance.OnRightClick;
+                @Point.started -= instance.OnPoint;
+                @Point.performed -= instance.OnPoint;
+                @Point.canceled -= instance.OnPoint;
+                @Speed.started -= instance.OnSpeed;
+                @Speed.performed -= instance.OnSpeed;
+                @Speed.canceled -= instance.OnSpeed;
             }
 
             /// <summary>
@@ -310,6 +515,34 @@ namespace Garden
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnColor(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Click" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnClick(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "RightClick" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnRightClick(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Point" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnPoint(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Speed" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnSpeed(InputAction.CallbackContext context);
         }
     }
 }

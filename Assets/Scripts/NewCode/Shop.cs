@@ -6,7 +6,8 @@ namespace Garden
     {
         private int _seed;
         private int[] _currentSlots;
-        public int _lastIndex;
+        private int _lastIndex;
+        
         public Shop(int globalSeed, int slotsCount)
         {
             _seed = SeedUtils.GetNewSeed(globalSeed, SeedUserType.Shop);
@@ -22,7 +23,7 @@ namespace Garden
 
         public EntityCreationRequestSignal Get(int slot)
         {
-            var item = new EntityCreationRequestSignal(EntityType.Tree, SeedUtils.GetNewSeed(_seed, slot), Vector2Int.zero);
+            var item = new EntityCreationRequestSignal(EntityType.Tree, SeedUtils.GetNewSeed(_seed, _currentSlots[slot]), Vector2Int.zero);
             SlotShift(slot);
             return item;
         }

@@ -1,22 +1,34 @@
-﻿using UnityEngine.InputSystem;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Garden
 {
     public class InputManager
     {
         private InputAction _colorAction;
-        public bool _color;
+        private InputAction _speedAction;
+        public bool Color { get; private set; }
+
         public InputManager()
         {
             _colorAction = InputSystem.actions.FindAction("Color");
             _colorAction.performed += OnColorAction;
-            _color = false;
+            Color = false;
+            
+            _speedAction = InputSystem.actions.FindAction("Speed");
+            _speedAction.performed += OnSpeedAction;
+        }
+
+        private void OnSpeedAction(InputAction.CallbackContext obj)
+        {
+            Time.timeScale += obj.ReadValue<float>() * 0.1f;
+            Debug.Log(Time.timeScale);
         }
 
         private void OnColorAction(InputAction.CallbackContext obj)
         {
-            _color = !_color;
-            SignalBus<ColorModeChangedSignal>.Fire(new(_color));
+            Color = !Color;
+            SignalBus<ColorModeChangedSignal>.Fire(new(Color));
         }
     }
 }

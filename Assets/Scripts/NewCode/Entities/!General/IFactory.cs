@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Garden
 {
     public interface IFactory
     {
-        IEntityData Create();
-        IEntityData Create(int seed);
+        IEntityData Create(EntityCreationRequestSignal signal);
+        List<IEntityData> Create(EntityView origin);
     }
 }

@@ -5,38 +5,41 @@ using UnityEngine.EventSystems;
 
 namespace Garden
 {
-    public abstract class EntityView : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public abstract class EntityView : MonoBehaviour
     {
-        public event Action<ClickData> ClickAction;
-        
-        private Vector2Int _position;
+        public event Action<EntityView, InteractionType> ClickAction;
         
         protected VisualContext _context;
         
         public abstract IEntityData EntityData { get; }
         
-        public virtual void Init(IEntityData entityData, VisualContext context, Vector2Int position)
+        public virtual void Init(IEntityData entityData, VisualContext context)
         {
             EntityData.DestroyRequest += OnDestroyRequest;
             
             _context = context;
-            
-            _position = position;
-            transform.position = context.Field.GetPoint(_position);
+
+            if (entityData.Position == null)
+                throw new Exception("Incorrect creation order");
+            transform.position = context.Field.GetPoint((Vector2Int)entityData.Position);
+
+            _context.Field.FieldInteract += (type, position) =>
+            {
+                if (position != entityData.Position)
+                    return;
+                OnInteract(type);
+            };
+        }
+
+        protected virtual void OnInteract(InteractionType type)
+        {
+            ClickAction?.Invoke(this, type);
         }
 
         protected virtual void OnDestroyRequest(IEntityData data)
         {
             Destroy(gameObject);
         }
-
-        public void OnPointerClick(PointerEventData eventData) => ClickAction?.Invoke(GetClickData(eventData, InteractionType.Click));
-
-        public void OnPointerEnter(PointerEventData eventData) => ClickAction?.Invoke(GetClickData(eventData, InteractionType.HoverStart));
-
-        public void OnPointerExit(PointerEventData eventData) => ClickAction?.Invoke(GetClickData(eventData, InteractionType.HoverEnd));
-
-        private ClickData GetClickData(PointerEventData eventData, InteractionType type) => new ClickData(type, eventData, EntityData);
         
         protected static Color ApplyDeviation(Color baseColor, float offset)
         {

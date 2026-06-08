@@ -21,6 +21,7 @@
         //AutoBread
         AutoBreedCount = 300,
         AutoBreedMutation = 301,
+        AutoBreedLocation = 302,
         
         
         //Fruit

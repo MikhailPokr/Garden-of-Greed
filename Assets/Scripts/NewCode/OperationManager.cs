@@ -1,4 +1,6 @@
-﻿using UnityEngine.EventSystems;
+﻿using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace Garden
 {
@@ -9,12 +11,9 @@ namespace Garden
             view.ClickAction += OnAction;
         }
 
-        private void OnAction(ClickData data)
+        private void OnAction(EntityView view, InteractionType type)
         {
-            switch (data.InteractionType)
-            {
-                
-            }
+            
         }
     }
 }

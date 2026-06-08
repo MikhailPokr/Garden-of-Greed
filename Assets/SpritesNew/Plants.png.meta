@@ -246,6 +246,50 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Tree 2
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 1243
+        width: 469
+        height: 491
+      alignment: 9
+      pivot: {x: 0.5500849, y: 0.08378548}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b78717a2edd320e4f84693c010e65f9f
+      internalID: -173562501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Crown 2
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 818
+        width: 469
+        height: 388
+      alignment: 9
+      pivot: {x: 0.5450765, y: 0.59918684}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 191b10381e895764faedc56c278b6af2
+      internalID: -807385931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -263,6 +307,7 @@ TextureImporter:
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Crown 1: 1025324256
+      Crown 2: -807385931
       Plants_1: -4881008103234269068
       Plants_4: -5840972274582744104
       Plants_5: 3442116038242085032
@@ -270,6 +315,7 @@ TextureImporter:
       Sprout 2: 1352955200029874055
       Sprout 3: -1268064389544249124
       Tree 1: 8635903978712429406
+      Tree 2: -173562501
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -8,6 +8,7 @@ namespace Garden
         public IEntityData EntityData;
         public Vector2Int Position;
         public int? Seed;
+        public Transform Parent;
 
         public EntityCreationRequestSignal(EntityType entityType, IEntityData entityData, Vector2Int position)
         {
@@ -15,6 +16,7 @@ namespace Garden
             EntityData = entityData;
             Position = position;
             Seed = null;
+            Parent = null;
         }
         public EntityCreationRequestSignal(EntityType entityType, Vector2Int position)
         {
@@ -22,6 +24,7 @@ namespace Garden
             EntityData = null;
             Position = position;
             Seed = null;
+            Parent = null;
         }
         public EntityCreationRequestSignal(EntityType entityType, int seed, Vector2Int position)
         {
@@ -29,6 +32,7 @@ namespace Garden
             EntityData = null;
             Position = position;
             Seed = seed;
+            Parent = null;
         }
     }
 }

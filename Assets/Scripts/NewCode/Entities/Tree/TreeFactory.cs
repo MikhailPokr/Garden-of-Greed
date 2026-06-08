@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -7,7 +8,6 @@ namespace Garden
 {
     public class TreeFactory : IFactory
     {
-        private readonly FieldManager _fieldManager;
         private readonly TreePalette _treePalette;
         private readonly TreeGenerationOptions _options;
         private readonly Player _player;
@@ -24,9 +24,31 @@ namespace Garden
             _seed = SeedUtils.GetNewSeed(globalSeed, SeedUserType.TreeFactory);
             _seedUsages = 0;
         }
+        
+        public IEntityData Create(EntityCreationRequestSignal signal)
+        {
+            if (signal.EntityData != null)
+                return signal.EntityData;
+            if (signal.Seed != null)
+                return Create((int)signal.Seed);
+            return Create();
+        }
 
-        IEntityData IFactory.Create() => Create();
-        IEntityData IFactory.Create(int seed) => Create(seed);
+        public List<IEntityData> Create(EntityView origin)
+        {
+            TreeData originTreeData = (TreeData)origin.EntityData;
+            int count = SeedUtils.GetRandom(originTreeData.DataConfig.Seed, ParamType.AutoBreedCount,
+                _options.GetAutoBreedCountRange(originTreeData.DataConfig.TreeType));
+            
+            List<IEntityData> newTreeData = new List<IEntityData>();
+            
+            for (int i = 0; i < count; i++)
+            {
+                newTreeData.Add(Create(originTreeData, i));
+            }
+
+            return newTreeData;
+        }
 
         public TreeData Create() => Create(SeedUtils.GetNewSeed(_seed, _seedUsages++));
         
@@ -96,6 +118,11 @@ namespace Garden
             int childSeed = SeedUtils.GetNewSeed(data.DataConfig.Seed, childIndex);
             List<int> Indexes = new List<int>(data.DataConfig.Indexes);
             Indexes.Add(childIndex);
+            
+            float adultPeriod = data.DataConfig.MaxStage - data.DataConfig.LastGrowthStage;
+            int mutatedAdultPeriod = Mathf.RoundToInt(GetRandomMutation(childSeed, data.DataConfig.TreeType, ParamType.MaxStage, adultPeriod));
+            
+            
             var config = new TreeDataConfig
             {
                 RootSeed = data.DataConfig.RootSeed,
@@ -111,7 +138,7 @@ namespace Garden
                 LastFruitStage = data.DataConfig.LastFruitStage,
                 
                 StageTime = GetRandomMutation(childSeed, data.DataConfig.TreeType, ParamType.StageTime, data.DataConfig.StageTime),
-                MaxStage = GetRandomMutation(childSeed, data.DataConfig.TreeType, ParamType.MaxStage, data.DataConfig.MaxStage),
+                MaxStage = data.DataConfig.LastGrowthStage + Mathf.Max(mutatedAdultPeriod, 2),
                 WoodCost = GetRandomMutation(childSeed, data.DataConfig.TreeType, ParamType.WoodCost, data.DataConfig.WoodCost),
             };
             
@@ -121,9 +148,7 @@ namespace Garden
         {
             throw  new NotImplementedException();
         }
-
-        private int GetRandomMutation(int childSeed, TreeType treeType, ParamType paramType, int origin) => 
-            Mathf.FloorToInt(GetRandomMutation(childSeed, treeType, paramType, (float)origin));
+        
         private float GetRandomMutation(int childSeed, TreeType treeType, ParamType paramType, float origin)
         {
             int mutationPercent = SeedUtils.GetRandom(childSeed, paramType, _options.GetAutoBreedMutationPercentRange(treeType));
@@ -131,5 +156,7 @@ namespace Garden
             float multiplier = 100f + mutationPercent;
             return origin * (multiplier / 100f);
         }
+
+       
     }
 }

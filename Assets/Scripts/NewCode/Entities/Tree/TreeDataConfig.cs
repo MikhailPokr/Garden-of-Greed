@@ -11,21 +11,21 @@ namespace Garden
         
         public float TimerStart;
         public TreeType TreeType;
-        public int LastGrowthStage;
+        public float LastGrowthStage;
         public int GrownSpriteIndex;
         public float GreenOffset;
         
         public float StageTime;
-        public int MaxStage;
+        public float MaxStage;
         
-        public int WoodCost;
-        public int WoodCostDry;
+        public float WoodCost;
+        public float WoodCostDry;
         public int WoodColorIndex;
         
-        public int LastFruitStage;
-        public int BaseFruitCost;
+        public float LastFruitStage;
+        public float BaseFruitCost;
         
-        public readonly float GetNextTimer(int stage) => TimerStart + StageTime * stage;
-        public readonly int GetCost(int stage) => stage == MaxStage ? WoodCostDry : WoodCost;
+        public readonly float GetNextTimer(int stage) => TimerStart + StageTime * (stage + 1);
+        public readonly float GetCost(int stage) => stage == Mathf.RoundToInt(MaxStage) ? WoodCostDry : WoodCost;
     }
 }

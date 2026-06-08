@@ -12,8 +12,7 @@ namespace Garden
         private bool _timerEnabled;
         
         public bool IsSprout => _stage <= DataConfig.LastGrowthStage;
-
-        public event Action<bool> SetColor;
+        public Vector2Int? Position { get; private set; }
         public event Action<IEntityData> DestroyRequest;
         public event Action<int> GrowRequest;
         public event Action DryRequest;
@@ -25,11 +24,18 @@ namespace Garden
             DataConfig = dataConfig;
             _stage = 0;
             _timerEnabled = false;
+            Position = null;
         }
-
+        
         public void Start()
         {
             _timerEnabled = true;
+            GrowRequest?.Invoke(0);
+        }
+
+        public void SetPosition(Vector2Int position)
+        {
+            Position = position;
         }
 
         public void Update(float currentTime)
@@ -46,30 +52,31 @@ namespace Garden
 
         private void SetNextStage()
         {
-            int processingStage = _stage;
-            _stage++;
+            Debug.Log(_stage);
             
-            if (processingStage <= DataConfig.LastGrowthStage)
+            if (_stage <= DataConfig.LastGrowthStage)
             {
-                GrowRequest?.Invoke(processingStage < DataConfig.LastGrowthStage ? processingStage : -1);
+                GrowRequest?.Invoke(_stage < DataConfig.LastGrowthStage ? _stage : -1);
             }
 
-            if (DataConfig.TreeType.HasFlag(TreeType.Fruit) && processingStage > DataConfig.LastFruitStage + 1 && processingStage <= DataConfig.LastFruitStage)
+            if (DataConfig.TreeType.HasFlag(TreeType.Fruit) && _stage > DataConfig.LastFruitStage + 1 && _stage <= DataConfig.LastFruitStage)
             {
                 FruitRequest?.Invoke(this);
             }
             
-            if (processingStage == DataConfig.MaxStage - 1)
+            if (_stage == Mathf.RoundToInt(DataConfig.MaxStage) - 1)
             {
                 if (!DataConfig.TreeType.HasFlag(TreeType.Fruit))
                     BreedRequest?.Invoke(this);
             }
 
-            if (processingStage == DataConfig.MaxStage)
+            if (_stage == Mathf.RoundToInt(DataConfig.MaxStage))
             {
                 DryRequest?.Invoke();
                 _timerEnabled = false;
             }
+            
+            _stage++;
         }
     }
 }

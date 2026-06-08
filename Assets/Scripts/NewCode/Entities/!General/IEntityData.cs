@@ -6,9 +6,11 @@ namespace Garden
     public interface IEntityData
     {
         event Action<IEntityData> DestroyRequest;
+        public Vector2Int? Position { get; }
 
         void Start();
+        void SetPosition(Vector2Int position);
 
-        void Update(float deltaTime);
+        void Update(float currentTime);
     }
 }

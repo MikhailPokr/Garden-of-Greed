@@ -15,7 +15,15 @@ namespace Garden
             DataConfig = dataConfig;
         }
 
+
+        public Vector2Int? Position { get; }
+
         public void Start()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetPosition(Vector2Int position)
         {
             throw new NotImplementedException();
         }
