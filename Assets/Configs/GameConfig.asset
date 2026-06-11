@@ -16,10 +16,18 @@ MonoBehaviour:
   <StartOptions>k__BackingField: {fileID: 11400000, guid: 937c295ea01fd60489e0d71970cc112f, type: 2}
   <SpriteOrderOptions>k__BackingField: {fileID: 11400000, guid: 9260f43d43e9adb419bc98a6c3d82779, type: 2}
   <FieldPrefab>k__BackingField: {fileID: 4710773942203756902, guid: cc1dd61ad7e2e9e4d83ad73ace45e2b6, type: 3}
+  <FieldOptions>k__BackingField:
+    CellWidth: 2.68
+    RowHeight: 0.67
+    Center: {x: 0, y: 0, z: 0}
+    Bounds:
+      x: -2
+      y: -2
+      width: 2
+      height: 2
   <EntityBundles>k__BackingField:
   - EntityType: 0
     Palette: {fileID: 11400000, guid: 15b5b080858f8074abe9b2d11b78b993, type: 2}
     EntityView: {fileID: 2022535662318301625, guid: 6e8cd06ea66f5f7428774c72c536cf5b, type: 3}
-    Options: {fileID: 11400000, guid: 18b8c6af59454d749b319be520a5d4c3, type: 2}
   <UseSeed>k__BackingField: 0
   <Seed>k__BackingField: 0
