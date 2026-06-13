@@ -5,31 +5,42 @@ using UnityEngine;
 namespace Garden
 {
     public class SpatialMap : ISpatialMap
-    {   
+    {
         private readonly FieldOptions _fieldOptions;
-        
+
         public Dictionary<Vector2Int, EntityType> EntitiesMainCell { get; }
-        
+        public Dictionary<Vector2Int, Dictionary<EntityType, int>> EntitiesFreeCell { get; }
+
         private static readonly Vector2Int[][] NeighborDirections = new Vector2Int[][]
         {
-            new Vector2Int[] 
+            new Vector2Int[]
             {
                 new Vector2Int(0, -1),
                 new Vector2Int(0, 1),
                 new Vector2Int(0, 2),
                 new Vector2Int(-1, 1),
                 new Vector2Int(-1, -1),
-                new Vector2Int(0, -2) 
+                new Vector2Int(0, -2)
             },
-            new Vector2Int[] 
+            new Vector2Int[]
             {
-                new Vector2Int(1, -1), 
-                new Vector2Int(1, 1), 
-                new Vector2Int(0, 2), 
-                new Vector2Int(0, 1), 
-                new Vector2Int(0, -1), 
-                new Vector2Int(0, -2) 
+                new Vector2Int(1, -1),
+                new Vector2Int(1, 1),
+                new Vector2Int(0, 2),
+                new Vector2Int(0, 1),
+                new Vector2Int(0, -1),
+                new Vector2Int(0, -2)
             }
+        };
+
+        private List<EntityType> _mainCellEntity = new List<EntityType>()
+        {
+            EntityType.Tree
+        };
+
+        private List<EntityType> _freeCellEntity = new List<EntityType>()
+        {
+            EntityType.Fruit,
         };
         
         public SpatialMap(
@@ -41,12 +52,30 @@ namespace Garden
 
         public void OccupyTile(Vector2Int pos, EntityType entity)
         {
-            EntitiesMainCell[pos] = entity;
+            if (_mainCellEntity.Contains(entity))
+            {
+                EntitiesMainCell[pos] = entity;
+            }
+            if (_freeCellEntity.Contains(entity))
+            {
+                if (!EntitiesFreeCell.ContainsKey(pos))
+                    EntitiesFreeCell[pos] = new Dictionary<EntityType, int>();
+                if (!EntitiesFreeCell[pos].ContainsKey(entity))
+                    EntitiesFreeCell[pos][entity] = 0;
+                EntitiesFreeCell[pos][entity]++;
+            }
         }
 
-        public void FreeTile(Vector2Int pos)
+        public void FreeTile(Vector2Int pos, EntityType entity)
         {
-            EntitiesMainCell.Remove(pos);
+            if (_mainCellEntity.Contains(entity))
+            {
+                EntitiesMainCell.Remove(pos);
+            }
+            if (_freeCellEntity.Contains(entity))
+            {
+                EntitiesFreeCell[pos][entity]--;
+            }
         }
 
         public bool IsTileFreeAndValid(Vector2Int pos)

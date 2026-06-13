@@ -25,7 +25,8 @@
         
         
         //Fruit
-        LastFruitStage = 400,
-        BaseFruitCost = 401,
+        FruitCount = 401,
+        LastFruitStage = 402,
+        BaseFruitCost = 403,
     }
 }

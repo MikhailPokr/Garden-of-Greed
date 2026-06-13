@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace Garden
 {
-    public class TreeCreationManager : IEntityManager
+    public class TreeCreationController : IEntityCreationController
     {
         private ISpatialMap _spatialMap;
         private TreeGenerationOptions _options;
-        private TreeDataFactory _factory;
+        private TreeFactory _factory;
         
-        public TreeCreationManager(
+        public TreeCreationController(
             int seed,
             EntityBundle bundle,
             ISpatialMap spatialMap,
@@ -19,7 +19,7 @@ namespace Garden
         {
             _options = bundle.GenerationOptions as TreeGenerationOptions;
             _spatialMap = spatialMap;
-            _factory = new TreeDataFactory(seed, bundle.Palette as ITreePalette, _options, mutationFactory, player);
+            _factory = new TreeFactory(seed, bundle.Palette as ITreePalette, _options, mutationFactory, player);
 
             SignalBus<AutoBreedSignal>.OnEvent += (signal) => this.OnBreedRequest(signal.TreeData);
             SignalBus<ArmPlantTreeSignal>.OnEvent += (signal) =>
@@ -37,9 +37,7 @@ namespace Garden
             
             
             SignalBus<EntityCreationRequestSignal>.Fire(new EntityCreationRequestSignal(
-                EntityType.Tree,
                 treeData,
-                _spatialMap.GetPoint(position),
                 position));
         }
 
@@ -48,10 +46,8 @@ namespace Garden
             List<Vector2Int> placesRaw = _spatialMap.GetNeighbors((Vector2Int)treeData.Position)
                 .Where(_spatialMap.IsTileFreeAndValid)
                 .ToList();
-            
-            TreeGenomeConfig config = treeData.TreeGenome;
 
-            List<TreeData> newTreeData = _factory.Create(config);
+            List<TreeData> newTreeData = _factory.Create(treeData);
             
             foreach (var tree in newTreeData)
             {
@@ -61,9 +57,7 @@ namespace Garden
                 placesRaw.Remove(place);
                 tree.SetPosition(place);
                 SignalBus<EntityCreationRequestSignal>.Fire(new EntityCreationRequestSignal(
-                    EntityType.Tree,
                     tree,
-                    _spatialMap.GetPoint(place),
                     place));
             }
             

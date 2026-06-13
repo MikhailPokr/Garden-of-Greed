@@ -52,5 +52,13 @@ namespace Garden
     
             return Color.HSVToRGB(h, s, v);
         }
+
+        public void SetEntity(EntityView entity)
+        {
+            entity.gameObject.transform.SetParent(transform);
+            entity.gameObject.transform.localPosition = GetPosition();
+        }
+        
+        protected abstract Vector2 GetPosition();
     }
 }

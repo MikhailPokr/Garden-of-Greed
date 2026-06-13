@@ -4,6 +4,7 @@
     {
         Field,
         TreeFactory,
+        FruitFactory,
         Shop,
     }
 }

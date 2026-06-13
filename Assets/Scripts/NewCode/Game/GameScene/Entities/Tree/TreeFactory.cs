@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Garden
 {
-    public class TreeDataFactory
+    public class TreeFactory : IFactory
     {
         private readonly ITreePalette _treePalette;
         private readonly TreeGenerationOptions _options;
@@ -14,7 +14,7 @@ namespace Garden
         private readonly int _seed;
         private int _seedUsages;
         
-        public TreeDataFactory(
+        public TreeFactory(
             int globalSeed,
             ITreePalette palette,
             TreeGenerationOptions options,
@@ -30,17 +30,20 @@ namespace Garden
             _seedUsages = 0;
         }
 
-        public List<TreeData> Create(TreeGenomeConfig treeGenomeConfig)
+        public List<TreeData> Create(TreeData treeData)
         {
-            int count = SeedUtils.GetRandom(treeGenomeConfig.Seed, ParamType.AutoBreedCount,
-                _options.GetAutoBreedCountRange(treeGenomeConfig.TreeType));
+            var config = treeData.TreeGenome;
+            
+            int count = treeData.BreedCount + SeedUtils.GetRandom(config.Seed, ParamType.AutoBreedCount,
+                _options.GetAutoBreedCountRange(config.TreeType));
             
             List<TreeData> newTreeData = new List<TreeData>();
             
-            for (int i = 0; i < count; i++)
+            for (int i = treeData.BreedCount; i < count; i++)
             {
-                newTreeData.Add(Create(treeGenomeConfig, i));
+                newTreeData.Add(Create(config, i));
             }
+            treeData.AddBreed(count);
 
             return newTreeData;
         }

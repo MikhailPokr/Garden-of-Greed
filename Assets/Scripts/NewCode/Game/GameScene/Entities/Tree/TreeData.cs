@@ -6,14 +6,19 @@ namespace Garden
 {
     public class TreeData : IEntityData
     {
+        
         private readonly TreeDataConfig _dataConfig;
         public TreeGenomeConfig TreeGenome => _dataConfig.TreeGenomeConfig;
         
         private int _stage;
         private bool _timerEnabled;
+        public int BreedCount { get; private set; }
+        public int FruitCount { get; private set; }
+
         
         public bool IsSprout => _stage <= TreeGenome.LastGrowthStage;
         public Vector2Int? Position { get; private set; }
+        public EntityType EntityType => EntityType.Tree;
         public event Action<IEntityData> DestroyRequest;
         public event Action<int> GrowRequest;
         public event Action DryRequest;
@@ -47,6 +52,10 @@ namespace Garden
         }
         
         public void GetCost() => _dataConfig.GetCost(_stage);
+
+        public void AddFruit(int fruitCount) => FruitCount += fruitCount;
+        public void AddBreed(int breedCount) => BreedCount += breedCount;
+            
 
         private void SetNextStage()
         {

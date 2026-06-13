@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -1299,9 +1299,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 0.53419805, y: -0.5764741, z: -0.037167862}
+    m_Target: {x: -3.703955, y: -0.33750185, z: -0.32251352}
     speed: 2
-    m_Value: {x: 0.53419805, y: -0.5764741, z: -0.037167862}
+    m_Value: {x: -3.703955, y: -0.33750185, z: -0.32251352}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1352,9 +1352,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 4.5828085
+    m_Target: 33.117393
     speed: 2
-    m_Value: 4.5828085
+    m_Value: 33.117393
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1527,7 +1527,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/NewCode
+    - Assets/Scripts/NewCode/Game/GameScene/Entities/Fruit
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1549,33 +1549,36 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 20688
-    - m_Data: 20690
-    - m_Data: 20694
-    - m_Data: 20698
-    - m_Data: 36792
-    - m_Data: 36794
-    - m_Data: 36796
-    - m_Data: 36798
-    - m_Data: 36800
-    - m_Data: 36802
-    - m_Data: 36804
-    - m_Data: 36806
-    - m_Data: 36808
-    - m_Data: 36810
-    - m_Data: 36812
-    - m_Data: 36814
-    - m_Data: 36816
-    - m_Data: 36818
-    - m_Data: 36820
-    - m_Data: 36822
-    - m_Data: 36824
-    - m_Data: 36826
-    - m_Data: 36828
-    - m_Data: 36830
-    - m_Data: 36832
-    - m_Data: 36834
-    - m_Data: 36836
+    - m_Data: 36032
+    - m_Data: 36034
+    - m_Data: 36036
+    - m_Data: 36038
+    - m_Data: 36040
+    - m_Data: 36042
+    - m_Data: 36044
+    - m_Data: 36046
+    - m_Data: 36048
+    - m_Data: 36050
+    - m_Data: 36052
+    - m_Data: 36054
+    - m_Data: 36056
+    - m_Data: 36058
+    - m_Data: 36060
+    - m_Data: 36062
+    - m_Data: 36064
+    - m_Data: 36066
+    - m_Data: 36068
+    - m_Data: 36070
+    - m_Data: 36072
+    - m_Data: 36074
+    - m_Data: 36076
+    - m_Data: 36078
+    - m_Data: 36080
+    - m_Data: 36082
+    - m_Data: 36084
+    - m_Data: 36086
+    - m_Data: 36088
+    - m_Data: 36090
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1603,40 +1606,43 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 743}
+    scrollPos: {x: 0, y: 720}
     m_SelectedIDs:
-    - m_Data: 29688
+    - m_Data: 29274
     m_LastClickedID:
-      m_Data: 29688
+      m_Data: 29274
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 20688
-    - m_Data: 20690
-    - m_Data: 20694
-    - m_Data: 20698
-    - m_Data: 36792
-    - m_Data: 36794
-    - m_Data: 36796
-    - m_Data: 36798
-    - m_Data: 36800
-    - m_Data: 36802
-    - m_Data: 36804
-    - m_Data: 36806
-    - m_Data: 36808
-    - m_Data: 36810
-    - m_Data: 36812
-    - m_Data: 36814
-    - m_Data: 36816
-    - m_Data: 36818
-    - m_Data: 36820
-    - m_Data: 36822
-    - m_Data: 36824
-    - m_Data: 36826
-    - m_Data: 36828
-    - m_Data: 36830
-    - m_Data: 36832
-    - m_Data: 36834
-    - m_Data: 36836
+    - m_Data: 36032
+    - m_Data: 36034
+    - m_Data: 36036
+    - m_Data: 36038
+    - m_Data: 36040
+    - m_Data: 36042
+    - m_Data: 36044
+    - m_Data: 36046
+    - m_Data: 36048
+    - m_Data: 36050
+    - m_Data: 36052
+    - m_Data: 36054
+    - m_Data: 36056
+    - m_Data: 36058
+    - m_Data: 36060
+    - m_Data: 36062
+    - m_Data: 36064
+    - m_Data: 36066
+    - m_Data: 36068
+    - m_Data: 36070
+    - m_Data: 36072
+    - m_Data: 36074
+    - m_Data: 36076
+    - m_Data: 36078
+    - m_Data: 36080
+    - m_Data: 36082
+    - m_Data: 36084
+    - m_Data: 36086
+    - m_Data: 36088
+    - m_Data: 36090
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1665,9 +1671,9 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: 29688
+    - m_Data: 29274
     m_LastClickedEntityId:
-      m_Data: 29688
+      m_Data: 29274
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:

@@ -47,17 +47,8 @@ namespace Garden
             
             _fruits = new();
         }
-
-        public void SetFruits(List<EntityView> fruits)
-        {
-            foreach (var fruitView in _fruits)
-            {
-                fruitView.gameObject.transform.SetParent(transform);
-                fruitView.gameObject.transform.localPosition = GetPosition();
-                _fruits.Add(fruitView);
-            }
-        }
-        private Vector2 GetPosition()
+        
+        protected override Vector2 GetPosition()
         {
             var rect = _crownSpriteRenderer.sprite.rect;
             
@@ -78,24 +69,6 @@ namespace Garden
                 float localY = (pos.y - rect.y - _crownSpriteRenderer.sprite.pivot.y) /
                                _crownSpriteRenderer.sprite.pixelsPerUnit;
                 Vector3 rLocal = new Vector3(localX, localY, 0);
-                
-                bool hasOverlap = false;
-                
-                foreach (var fruitView in _fruits)
-                {
-                    Vector3 fLocal = fruitView.gameObject.transform.localPosition;
-                    Vector3 vec = rLocal - fLocal;
-            
-                    float combinedRadius = fruitView.Radius * 2; 
-            
-                    if (vec.sqrMagnitude < combinedRadius * combinedRadius)
-                    {
-                        hasOverlap = true;
-                        break;
-                    }
-                }
-                if (hasOverlap)
-                    continue;
 
                 return rLocal;
             }

@@ -4,18 +4,13 @@ namespace Garden
 {
     public struct EntityCreationRequestSignal : ISignal
     {
-        public EntityType EntityType;
         public IEntityData EntityData;
-        public Vector2Int IntPosition;
-        public Vector2 Position;
+        public Vector2Int Position;
 
-        public EntityCreationRequestSignal(
-            EntityType entityType, IEntityData entityData, Vector2 position, Vector2Int intPosition)
+        public EntityCreationRequestSignal(IEntityData entityData, Vector2Int position)
         {
-            EntityType = entityType;
             EntityData = entityData;
             Position = position;
-            IntPosition = intPosition;
         }
     }
 }

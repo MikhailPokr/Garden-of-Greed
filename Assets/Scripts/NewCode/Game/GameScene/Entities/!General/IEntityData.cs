@@ -5,6 +5,7 @@ namespace Garden
 {
     public interface IEntityData
     {
+        EntityType EntityType { get; }
         event Action<IEntityData> DestroyRequest;
         public Vector2Int? Position { get; }
 
