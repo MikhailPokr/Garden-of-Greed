@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using UnityEngine;
 
 namespace Garden
 {
@@ -10,7 +11,7 @@ namespace Garden
         private readonly FruitGenerationOptions _options;
         private readonly Player _player;
         
-        private readonly MutationFactory _mutationFactory;
+        private readonly GenomeFactory _genomeFactory;
         
         private readonly int _seed;
         private int _seedUsages;
@@ -19,12 +20,12 @@ namespace Garden
             int globalSeed,
             IFruitPalette palette,
             FruitGenerationOptions options,
-            MutationFactory mutationFactory,
+            GenomeFactory genomeFactory,
             Player player)
         {
             _fruitPalette = palette;
             _options = options;
-            _mutationFactory = mutationFactory;
+            _genomeFactory = genomeFactory;
             _player = player;
             
             _seed = SeedUtils.GetNewSeed(globalSeed, SeedUserType.FruitFactory);
@@ -33,9 +34,9 @@ namespace Garden
         public List<FruitData> Create(TreeData treeData)
         {
             var config = treeData.TreeGenome;
-
-            int count = treeData.FruitCount + SeedUtils.GetRandom(config.Seed, ParamType.FruitCount,
-                _options.GetCountPerStageRange(config.TreeType));
+            
+            int newFruits = SeedUtils.GetRandom(config.Seed, ParamType.FruitCount, _options.GetCountPerStageRange(config.TreeType));
+            int count = treeData.FruitCount + newFruits;
             
             List<FruitData> newFruitData = new List<FruitData>();
 
@@ -43,7 +44,7 @@ namespace Garden
             {
                 newFruitData.Add(Create(treeData, i));
             }
-            treeData.AddFruit(count);
+            treeData.AddFruit(newFruits);
             
             return newFruitData;
         }
@@ -52,14 +53,26 @@ namespace Garden
 
         public FruitData Create(int seed)
         {
-            var config = new FruitDataConfig();
-            
-            return new FruitData(null, config);
+            var genome = _genomeFactory.Create(seed);
+
+            return Create(new TreeData(new TreeDataConfig() { TreeGenomeConfig = genome }), 0);
         }
 
         private FruitData Create(TreeData treeData, int childIndex)
         {
-            var config = new FruitDataConfig();
+            var genome = _genomeFactory.MutateWithQuality(treeData.TreeGenome, childIndex);
+            
+            var isGrowth = SeedUtils.GetRandom(genome.Seed, ParamType.GrowthChance, new Vector2(0, 1)) < _options.GetGrowUpChance(genome.TreeType);
+            var colorOffset =
+                SeedUtils.GetRandom(genome.Seed, ParamType.FruitColorOffset, _options.GetColorOffsetRange());
+            
+            var config = new FruitDataConfig()
+            {
+                TreeGenome = genome,
+                IsGrowth = isGrowth,
+                ColorOffset = colorOffset,
+                TimerStart = _player.Time,
+            };
             
             return new FruitData(treeData, config);
         }

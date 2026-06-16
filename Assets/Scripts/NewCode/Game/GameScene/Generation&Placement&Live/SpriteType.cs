@@ -4,6 +4,7 @@
     public enum SpriteType
     {
         Tree,
-		Crown
+		Crown,
+		Fruit
     }
 }

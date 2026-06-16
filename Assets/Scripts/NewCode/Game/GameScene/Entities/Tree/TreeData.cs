@@ -6,9 +6,8 @@ namespace Garden
 {
     public class TreeData : IEntityData
     {
-        
-        private readonly TreeDataConfig _dataConfig;
-        public TreeGenomeConfig TreeGenome => _dataConfig.TreeGenomeConfig;
+        public TreeDataConfig DataConfig;
+        public TreeGenomeConfig TreeGenome => DataConfig.TreeGenomeConfig;
         
         private int _stage;
         private bool _timerEnabled;
@@ -24,7 +23,7 @@ namespace Garden
         public event Action DryRequest;
         public TreeData(TreeDataConfig dataConfig)
         {
-            _dataConfig = dataConfig;
+            DataConfig = dataConfig;
             _stage = 0;
             _timerEnabled = false;
             Position = null;
@@ -45,13 +44,13 @@ namespace Garden
         {
             if (!_timerEnabled)
                 return;
-            if (currentTime >= _dataConfig.GetNextTimer(_stage))
+            if (currentTime >= DataConfig.GetNextTimer(_stage))
             {
                 SetNextStage();
             }
         }
         
-        public void GetCost() => _dataConfig.GetCost(_stage);
+        public void GetCost() => DataConfig.GetCost(_stage);
 
         public void AddFruit(int fruitCount) => FruitCount += fruitCount;
         public void AddBreed(int breedCount) => BreedCount += breedCount;
@@ -66,7 +65,7 @@ namespace Garden
                 GrowRequest?.Invoke(_stage < TreeGenome.LastGrowthStage ? _stage : -1);
             }
 
-            if (TreeGenome.TreeType.HasFlag(TreeType.Fruit) && _stage > TreeGenome.LastFruitStage + 1 && _stage <= TreeGenome.LastFruitStage)
+            if (TreeGenome.TreeType.HasFlag(TreeType.Fruit) && _stage > TreeGenome.LastGrowthStage && _stage <= TreeGenome.LastFruitStage)
             {
                 SignalBus<FruitProduceSignal>.Fire(new FruitProduceSignal(this));
             }

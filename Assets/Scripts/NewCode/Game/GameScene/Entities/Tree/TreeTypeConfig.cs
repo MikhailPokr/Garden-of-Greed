@@ -4,13 +4,13 @@
     {
         public TreeType TreeType;
         public ParamType ParamType;
-        public int ChanceInPercent;
+        public float Chance;
 
-        public TreeTypeConfig(TreeType treeType, ParamType paramType, int chanceInPercent)
+        public TreeTypeConfig(TreeType treeType, ParamType paramType, float chance)
         {
             TreeType = treeType;
             ParamType = paramType;
-            ChanceInPercent = chanceInPercent;
+            Chance = chance;
         }
     }
 }

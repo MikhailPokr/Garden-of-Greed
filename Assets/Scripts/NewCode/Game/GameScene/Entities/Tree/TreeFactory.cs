@@ -1,29 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Garden
 {
     public class TreeFactory : IFactory
     {
-        private readonly ITreePalette _treePalette;
         private readonly TreeGenerationOptions _options;
         private readonly Player _player;
         
-        private readonly MutationFactory _mutationFactory;
+        private readonly GenomeFactory _genomeFactory;
 
         private readonly int _seed;
         private int _seedUsages;
         
         public TreeFactory(
             int globalSeed,
-            ITreePalette palette,
             TreeGenerationOptions options,
-            MutationFactory mutationFactory,
+            GenomeFactory genomeFactory,
             Player player)
         {
-            _treePalette = palette;
             _options = options;
-            _mutationFactory = mutationFactory;
+            _genomeFactory = genomeFactory;
             _player = player;
             
             _seed = SeedUtils.GetNewSeed(globalSeed, SeedUserType.TreeFactory);
@@ -34,8 +32,8 @@ namespace Garden
         {
             var config = treeData.TreeGenome;
             
-            int count = treeData.BreedCount + SeedUtils.GetRandom(config.Seed, ParamType.AutoBreedCount,
-                _options.GetAutoBreedCountRange(config.TreeType));
+            int newTrees = SeedUtils.GetRandom(config.Seed, ParamType.AutoBreedCount, _options.GetAutoBreedCountRange(config.TreeType));
+            int count = treeData.BreedCount + newTrees;
             
             List<TreeData> newTreeData = new List<TreeData>();
             
@@ -43,62 +41,19 @@ namespace Garden
             {
                 newTreeData.Add(Create(config, i));
             }
-            treeData.AddBreed(count);
+            treeData.AddBreed(newTrees);
 
             return newTreeData;
         }
 
         public TreeData Create() => Create(SeedUtils.GetNewSeed(_seed, _seedUsages++));
-        
-        public TreeData Create(int seed)
-        {
-            TreeType treeType = GenerateType(seed);
-            
-            var lastGrowthStage = SeedUtils.GetRandom(seed, ParamType.LastGrowthStage, _options.GetGrowthLastStageRange(treeType));
-            lastGrowthStage = Math.Clamp(lastGrowthStage, 0, _treePalette.StageSpritesCount);
-            var sprite = treeType switch
-            {
-                _ when treeType.HasFlag(TreeType.Evil) => SeedUtils.GetRandom(seed, ParamType.TreeSprite,
-                    _treePalette.TreeEvilSpritesCount),
-                _ => SeedUtils.GetRandom(seed, ParamType.TreeSprite, _treePalette.TreeSpritesCount)
-            };
-            var greenOffset = SeedUtils.GetRandom(seed, ParamType.GreenColorOffset, _options.GetGreenOffsetRange());
-            
-            var stageTime = SeedUtils.GetRandom(seed, ParamType.StageTime, _options.GetStageTimeRange(treeType));
-            var woodCost = SeedUtils.GetRandom(seed, ParamType.WoodCost, _options.GetWoodCostRange(treeType));
-            var dryWoodCost = SeedUtils.GetRandom(seed, ParamType.DryWoodCost, _options.GetDryWoodCostRange());
-            var woodColor = SeedUtils.GetRandom(seed, ParamType.WoodColor, _treePalette.WoodColorsCount);
-            
-            var maxStage = lastGrowthStage + 1 + SeedUtils.GetRandom(seed, ParamType.MaxStage, _options.GetMaxStageRange(treeType));
-            
-            var lastFruitStage = 0;
-            
-            if (treeType.HasFlag(TreeType.Fruit))
-            {
-                lastFruitStage = SeedUtils.GetRandom(seed, ParamType.LastFruitStage, _options.GetLastFruitStageRange(treeType));
-            }
-            
-            var genome = new TreeGenomeConfig()
-            {
-                RootSeed = seed,
-                Seed = seed,
-                Indexes = new List<int>(),
-                
-                TreeType = treeType,
-                GrownSpriteIndex = sprite,
-                GreenOffset = greenOffset,
-                LastGrowthStage = lastGrowthStage,
-                WoodColorIndex = woodColor,
-                
-                LastFruitStage = lastFruitStage,
-                
-                StageTime = stageTime,
-                MaxStage = maxStage,
-                WoodCost = woodCost,
-                WoodCostDry = dryWoodCost,
-            };
+        public TreeData Create(int seed) => Create(_genomeFactory.Create(seed));
+        public TreeData Create(FruitData data) => Create(data.TreeGenome);
+        private TreeData Create(TreeGenomeConfig data, int childIndex) => Create(_genomeFactory.Mutate(data, childIndex));
 
-            var config = new TreeDataConfig()
+        private TreeData Create(TreeGenomeConfig genome)
+        {
+            var config = new TreeDataConfig
             {
                 TreeGenomeConfig = genome,
                 TimerStart = _player.Time,
@@ -106,41 +61,8 @@ namespace Garden
             
             return new TreeData(config);
         }
-        
-        public TreeData Create(FruitData data)
-        {
-            var config = new TreeDataConfig
-            {
-                TreeGenomeConfig = _mutationFactory.Create(data),
-                TimerStart = _player.Time,
-            };
-            
-            return new TreeData(config);
-        }
 
-        private TreeData Create(TreeGenomeConfig data, int childIndex)
-        {
-            var config = new TreeDataConfig
-            {
-                TreeGenomeConfig = _mutationFactory.Create(data, childIndex),
-                TimerStart = _player.Time,
-            };
-            
-            return new TreeData(config);
-        }
-
-        private TreeType GenerateType(int seed)
-        {
-            List<TreeTypeConfig> chances = _options.GetChances();
-            TreeType treeType = 0;
-            foreach (var treeTypeConfig in chances)
-            {
-                if (SeedUtils.GetRandom(seed, treeTypeConfig.ParamType, 100) < treeTypeConfig.ChanceInPercent)
-                    treeType |= treeTypeConfig.TreeType;
-            }
-            return treeType;
-        }
-        
+       
         
     }
 }

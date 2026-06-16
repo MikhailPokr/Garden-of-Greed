@@ -7,10 +7,12 @@ namespace Garden
     {
         [SerializeField] private Vector2Int _autoBreedMutationPercentRange;
         [SerializeField] private Vector2Int _evilBreedMutationPercentRange;
+        [SerializeField] private int FruitMutationPercent;
         public Vector2Int GetAutoBreedMutationPercentRange(TreeType treeType) =>  treeType switch
         {
             _ when (treeType & TreeType.Evil) != 0 => _evilBreedMutationPercentRange,
             _ => _autoBreedMutationPercentRange
         };
+        public int GetFruitMutationPercent() => FruitMutationPercent;
     }
 }

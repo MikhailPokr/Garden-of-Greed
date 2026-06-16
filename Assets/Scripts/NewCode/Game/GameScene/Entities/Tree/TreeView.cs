@@ -48,6 +48,12 @@ namespace Garden
             _fruits = new();
         }
         
+        public override void SetEntity(EntityView entity)
+        {
+            entity.gameObject.transform.SetParent(_crownSpriteRenderer.transform);
+            entity.gameObject.transform.localPosition = GetPosition();
+        }
+        
         protected override Vector2 GetPosition()
         {
             var rect = _crownSpriteRenderer.sprite.rect;

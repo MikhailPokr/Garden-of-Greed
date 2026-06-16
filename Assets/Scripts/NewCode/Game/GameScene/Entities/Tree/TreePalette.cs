@@ -10,10 +10,21 @@ namespace Garden
         [field: SerializeField] public List<Sprite> TreeSprites { get; private set; }
         [field: SerializeField] public List<Sprite> CrownSprites { get; set; }
         [field: SerializeField] public List<Sprite> TreeEvilSprites { get; private set; }
+        [field: SerializeField] public List<Sprite> EvilCrownSprites { get; set; }
         [field: SerializeField] public List<Color> WoodColors { get; private set; }
-        public int StageSpritesCount => StageSprites.Count;
-        public int TreeEvilSpritesCount => TreeSprites.Count;
-        public int TreeSpritesCount => TreeSprites.Count;
-        public int WoodColorsCount => WoodColors.Count;
+        [field: SerializeField] public List<Color> EvilWoodColors { get; private set; }
+        public int GetStageSpritesCount() => StageSprites.Count;
+
+        public int GetSpritesCount(TreeType treeType) => treeType switch
+        {
+            _ when (treeType & TreeType.Evil) != 0 => TreeEvilSprites.Count,
+            _ => TreeSprites.Count
+        };
+
+        public int GetWoodColorsCount(TreeType treeType) => treeType switch
+        {
+            _ when (treeType & TreeType.Evil) != 0 => EvilWoodColors.Count,
+            _ => WoodColors.Count
+        };
     }
 }

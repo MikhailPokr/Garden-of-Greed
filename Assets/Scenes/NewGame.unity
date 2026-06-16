@@ -529,11 +529,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Garden.CompositeRoot
   _gameConfig: {fileID: 11400000, guid: ea8703bedaeb3ce47982d620b2eff00c, type: 2}
   _shopUI: {fileID: 66778891}
-  _bounds:
-    x: -2
-    y: -5
-    width: 5
-    height: 12
 --- !u!4 &1963592108
 Transform:
   m_ObjectHideFlags: 0

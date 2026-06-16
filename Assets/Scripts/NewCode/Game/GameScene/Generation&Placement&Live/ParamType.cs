@@ -27,6 +27,12 @@
         //Fruit
         FruitCount = 401,
         LastFruitStage = 402,
-        BaseFruitCost = 403,
+        CostMultiplier = 403,
+        RotingTime = 404,
+        GrowthChance = 405,
+        FruitSprite = 406,
+        FruitColor = 407,
+        FruitColorOffset = 408,
+        StartQuality = 408,
     }
 }

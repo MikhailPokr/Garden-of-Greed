@@ -48,6 +48,7 @@ namespace Garden
         {
             _fieldOptions = fieldOptions;
             EntitiesMainCell = new Dictionary<Vector2Int, EntityType>();
+            EntitiesFreeCell = new  Dictionary<Vector2Int, Dictionary<EntityType, int>>();
         }
 
         public void OccupyTile(Vector2Int pos, EntityType entity)

@@ -21,5 +21,11 @@ namespace Garden
         public float StageTime;
         public float MaxStage;
         public float WoodCostDry;
+
+        public int Quality;
+        public int FruitSpriteIndex;
+        public int FruitColorIndex;
+        public float FruitCostMultiplier;
+        public float FruitRotingTime;
     }
 }

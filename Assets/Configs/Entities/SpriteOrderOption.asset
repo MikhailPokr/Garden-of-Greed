@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55906544523543e2b77c34960d7332be, type: 3}
   m_Name: SpriteOrderOption
   m_EditorClassIdentifier: Assembly-CSharp::Garden.SpriteOrderOptions
-  <SpriteTypes>k__BackingField: 0000000001000000
+  <SpriteTypes>k__BackingField: 000000000100000002000000

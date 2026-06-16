@@ -14,12 +14,12 @@ namespace Garden
             int seed,
             EntityBundle bundle,
             ISpatialMap spatialMap,
-            MutationFactory mutationFactory,
+            GenomeFactory genomeFactory,
             Player player)
         {
             _options = bundle.GenerationOptions as FruitGenerationOptions;
             _spatialMap = spatialMap;
-            _factory = new FruitFactory(seed, bundle.Palette as IFruitPalette, _options, mutationFactory, player);
+            _factory = new FruitFactory(seed, bundle.Palette as IFruitPalette, _options, genomeFactory, player);
             
             SignalBus<FruitProduceSignal>.OnEvent += OnFruitProduce;
         }
@@ -28,11 +28,8 @@ namespace Garden
         {
             Vector2Int tPos = signal.TreeData.Position.Value;
 
-            TreeGenomeConfig config = signal.TreeData.TreeGenome;
-
             List<FruitData> fruits = _factory.Create(signal.TreeData);
             
-            var fruitsView = new List<EntityView>();
             foreach (var fruit in fruits)
             {
                 SignalBus<EntityCreationRequestSignal>.Fire(new EntityCreationRequestSignal(fruit, tPos));

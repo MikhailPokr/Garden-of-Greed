@@ -14,12 +14,12 @@ namespace Garden
             int seed,
             EntityBundle bundle,
             ISpatialMap spatialMap,
-            MutationFactory mutationFactory,
+            GenomeFactory genomeFactory,
             Player player)
         {
             _options = bundle.GenerationOptions as TreeGenerationOptions;
             _spatialMap = spatialMap;
-            _factory = new TreeFactory(seed, bundle.Palette as ITreePalette, _options, mutationFactory, player);
+            _factory = new TreeFactory(seed, _options, genomeFactory, player);
 
             SignalBus<AutoBreedSignal>.OnEvent += (signal) => this.OnBreedRequest(signal.TreeData);
             SignalBus<ArmPlantTreeSignal>.OnEvent += (signal) =>

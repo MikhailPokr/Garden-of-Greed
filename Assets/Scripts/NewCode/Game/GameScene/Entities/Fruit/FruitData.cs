@@ -6,34 +6,46 @@ namespace Garden
     public class FruitData : IEntityData, IDependentEntity
     {
         public IEntityData HostEntity { get; }
-        public readonly FruitDataConfig DataConfig;
-        public event Action<Sprite> ChangeSpriteRequest;
-        public event Action<bool> SetColor;
+        
+        public FruitDataConfig DataConfig;
+        public TreeGenomeConfig TreeGenome => DataConfig.TreeGenome;
+        
+        private bool _timerEnabled;
+        public int DropCount { get; private set; }
+        
+        public Vector2Int? Position { get; private set; }
         public EntityType EntityType => EntityType.Fruit;
         public event Action<IEntityData> DestroyRequest;
+        public event Action DropRequest;
 
         public FruitData(TreeData treeData, FruitDataConfig dataConfig)
         {
             HostEntity = treeData;
             DataConfig = dataConfig;
+            if (HostEntity.Position != null)
+                Position = HostEntity.Position;
+            DropCount = 0;
         }
-
-
-        public Vector2Int? Position { get; }
 
         public void Start()
         {
-            throw new NotImplementedException();
+            _timerEnabled = true;
         }
 
         public void SetPosition(Vector2Int position)
         {
-            throw new NotImplementedException();
+            Position = position;
         }
 
-        public void Update(float deltaTime)
+        public void Update(float currentTime)
         {
-            throw new NotImplementedException();
+            if (!_timerEnabled)
+                return;
+            if (!DataConfig.IsRoting(currentTime)) return;
+            _timerEnabled = false;
+            DropCount++;
+            DropRequest?.Invoke();
+            DestroyRequest?.Invoke(this);
         }
 
     }

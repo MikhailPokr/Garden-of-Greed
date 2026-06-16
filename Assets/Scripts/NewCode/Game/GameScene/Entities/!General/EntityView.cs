@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Garden
 {
@@ -53,12 +51,13 @@ namespace Garden
             return Color.HSVToRGB(h, s, v);
         }
 
-        public void SetEntity(EntityView entity)
+        public virtual void SetEntity(EntityView entity)
         {
             entity.gameObject.transform.SetParent(transform);
             entity.gameObject.transform.localPosition = GetPosition();
         }
-        
-        protected abstract Vector2 GetPosition();
+
+        protected virtual Vector2 GetPosition() => 
+            _context.SpatialMap.GetPoint(EntityData.Position.Value);
     }
 }

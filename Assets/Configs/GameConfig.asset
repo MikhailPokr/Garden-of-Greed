@@ -31,5 +31,9 @@ MonoBehaviour:
     Palette: {fileID: 11400000, guid: 15b5b080858f8074abe9b2d11b78b993, type: 2}
     EntityView: {fileID: 2022535662318301625, guid: 6e8cd06ea66f5f7428774c72c536cf5b, type: 3}
     GenerationOptions: {fileID: 11400000, guid: 18b8c6af59454d749b319be520a5d4c3, type: 2}
+  - EntityType: 1
+    Palette: {fileID: 11400000, guid: 174fa29865113b54fb2d365a5cd3cbcc, type: 2}
+    EntityView: {fileID: 5641886067538917635, guid: 3c9b4ef3741fa2445af50db4b73cb67a, type: 3}
+    GenerationOptions: {fileID: 11400000, guid: d2b0a529fdf70334e9c09099345a4be0, type: 2}
   <UseSeed>k__BackingField: 0
   <Seed>k__BackingField: 0

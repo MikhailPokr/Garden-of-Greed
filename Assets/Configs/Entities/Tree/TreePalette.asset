@@ -22,10 +22,21 @@ MonoBehaviour:
   <CrownSprites>k__BackingField:
   - {fileID: 1025324256, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
   - {fileID: -807385931, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
-  <TreeEvilSprites>k__BackingField: []
+  <TreeEvilSprites>k__BackingField:
+  - {fileID: 8635903978712429406, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
+  - {fileID: -173562501, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
+  <EvilCrownSprites>k__BackingField:
+  - {fileID: 1025324256, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
+  - {fileID: -807385931, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
   <WoodColors>k__BackingField:
   - {r: 0.9150943, g: 0.6696389, b: 0.51366144, a: 1}
   - {r: 0.9622642, g: 0.6063546, b: 0.37673548, a: 1}
   - {r: 0.8113208, g: 0.6694222, b: 0.5778747, a: 1}
   - {r: 0.9339623, g: 0.7266745, b: 0.43614274, a: 1}
   - {r: 0.8679245, g: 0.6665668, b: 0.46262014, a: 1}
+  <EvilWoodColors>k__BackingField:
+  - {r: 1, g: 0.4198113, b: 0.4198113, a: 1}
+  - {r: 0.9528302, g: 0.25618547, b: 0.25618547, a: 1}
+  - {r: 1, g: 0.6650944, b: 0.6650944, a: 1}
+  - {r: 1, g: 0.71677405, b: 0.6666667, a: 1}
+  - {r: 1, g: 0.38068813, b: 0.2688679, a: 1}

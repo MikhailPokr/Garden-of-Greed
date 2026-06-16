@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90c877f68ce34c00b16e1f4fa0661c02, type: 3}
+  m_Name: FruitPalette
+  m_EditorClassIdentifier: Assembly-CSharp::Garden.FruitPalette
+  <FruitSprites>k__BackingField:
+  - {fileID: 146862101853992951, guid: 8bad25c5ebc473c47869187e490bf70a, type: 3}
+  - {fileID: 4291080265896786440, guid: 8bad25c5ebc473c47869187e490bf70a, type: 3}
+  <FruitEvilSprites>k__BackingField:
+  - {fileID: -3733764830613601850, guid: 8bad25c5ebc473c47869187e490bf70a, type: 3}
+  - {fileID: 204876654087227354, guid: 8bad25c5ebc473c47869187e490bf70a, type: 3}
+  <FruitColors>k__BackingField:
+  - {r: 1, g: 1, b: 1, a: 1}
+  <FruitEvilColors>k__BackingField:
+  - {r: 1, g: 0.4764151, b: 0.4764151, a: 1}

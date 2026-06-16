@@ -5,12 +5,19 @@ namespace Garden
     [CreateAssetMenu(fileName = "FruitGenerationOptions", menuName = "Garden/Options/Entities/FruitGenerationOptions")]
     public class FruitGenerationOptions : BaseGenerationOptions
     {
+        [SerializeField] private Vector2 _colorOffsetRange;
         [Header("Normal")]
-        [SerializeField] private Vector2Int _baseFruitCostRange;
+        [SerializeField] private Vector2 _fruitCostMultiplierRange;
         [SerializeField] private Vector2Int _fruitCountPerStageRange;
+        [SerializeField] private Vector2 _rottingTimeRange;
+        [SerializeField, Range(0,1)] private float _growUpChanceRange;
+        [SerializeField] private Vector2Int _startQualityRange;
         [Header("Evil")]
-        [SerializeField] private Vector2Int _evilBaseFruitCostRange;
+        [SerializeField] private Vector2 _evilFruitCostMultiplierRange;
         [SerializeField] private Vector2Int _evilFruitCountPerStageRange;
+        [SerializeField] private Vector2 _evilRottingTimeRange;
+        [SerializeField, Range(0,1)] private float _evilGrowUpChanceRange;
+        [SerializeField] private Vector2Int _evilStartQualityRange;
         
         public Vector2Int GetCountPerStageRange(TreeType treeType) => treeType switch
         {
@@ -18,10 +25,30 @@ namespace Garden
             _ => _evilFruitCountPerStageRange
         };
         
-        public Vector2Int GatFruitCostRange(TreeType treeType) => treeType switch
+        public Vector2 GatFruitCostMultiplierRange(TreeType treeType) => treeType switch
         {
-            _ when (treeType & TreeType.Evil) != 0 => _baseFruitCostRange,
-            _ => _evilBaseFruitCostRange
+            _ when (treeType & TreeType.Evil) != 0 => _fruitCostMultiplierRange,
+            _ => _evilFruitCostMultiplierRange
         };
+
+        public Vector2 GetRottingTimeRange(TreeType treeType) => treeType switch
+        {
+            _ when (treeType & TreeType.Evil) != 0 => _evilRottingTimeRange,
+            _ => _rottingTimeRange
+        };
+
+        public float GetGrowUpChance(TreeType treeType) => treeType switch
+        {
+            _ when (treeType & TreeType.Evil) != 0 => _evilGrowUpChanceRange,
+            _ => _growUpChanceRange
+        };
+        
+        public Vector2Int GetStartQualityRange(TreeType treeType) => treeType switch
+        {
+            _ when (treeType & TreeType.Evil) != 0 => _evilStartQualityRange,
+            _ => _startQualityRange
+        };
+        
+        public Vector2 GetColorOffsetRange() => _colorOffsetRange;
     }
 }

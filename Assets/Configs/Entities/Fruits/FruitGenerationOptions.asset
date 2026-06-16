@@ -12,3 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58cdfd1cea554925b7f6e664d92168ab, type: 3}
   m_Name: FruitGenerationOptions
   m_EditorClassIdentifier: Assembly-CSharp::Garden.FruitGenerationOptions
+  _colorOffsetRange: {x: 0.1, y: 0.2}
+  _fruitCostMultiplierRange: {x: 0.1, y: 0.4}
+  _fruitCountPerStageRange: {x: 1, y: 3}
+  _rottingTimeRange: {x: 4, y: 10}
+  _growUpChanceRange: 0.197
+  _startQualityRange: {x: 1, y: 5}
+  _evilFruitCostMultiplierRange: {x: 0.3, y: 0.6}
+  _evilFruitCountPerStageRange: {x: 2, y: 5}
+  _evilRottingTimeRange: {x: 5, y: 10}
+  _evilGrowUpChanceRange: 0.402
+  _evilStartQualityRange: {x: -4, y: 0}

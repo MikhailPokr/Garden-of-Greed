@@ -19,7 +19,7 @@ namespace Garden
         private Shop _shop;
         private InputManager _inputManager;
         private Arm _arm;
-        private MutationFactory _mutationFactory;
+        private GenomeFactory _genomeFactory;
         Dictionary<EntityType, IEntityCreationController> _entityControllers;
         
         private void Awake()
@@ -49,20 +49,26 @@ namespace Garden
             
             _arm = new Arm(_spatialMap);
 
-            _mutationFactory = new MutationFactory(_gameConfig.MutationOptions);
+            EntityBundle treeBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Tree);
+            EntityBundle fruitBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Fruit);
+            
+            _genomeFactory = new GenomeFactory(
+                treeBundle,
+                fruitBundle,
+                _gameConfig.MutationOptions);
 
             _entityControllers = new Dictionary<EntityType, IEntityCreationController>();
             _entityControllers.Add(EntityType.Tree, new TreeCreationController(
                 _gameConfig.Seed,
-                _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Tree),
+                treeBundle,
                 _spatialMap,
-                _mutationFactory,
+                _genomeFactory,
                 _player));
             _entityControllers.Add(EntityType.Fruit, new FruitCreationController(
                 _gameConfig.Seed,
-                _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Tree),
+                fruitBundle,
                 _spatialMap,
-                _mutationFactory,
+                _genomeFactory,
                 _player));
         }
 

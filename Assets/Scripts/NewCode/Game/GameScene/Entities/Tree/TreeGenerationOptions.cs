@@ -20,14 +20,14 @@ namespace Garden
         [SerializeField] private Vector2Int _woodCostRange;
 
         [Header("Fruit")]
-        [SerializeField, Range(0, 100)] private int _fruitChance;
+        [SerializeField, Range(0, 1)] private float _fruitChance;
         [SerializeField, Min(0)] private Vector2 _fruitStageTimeRange;
         [SerializeField, Min(0)] private Vector2Int _lastFruitStageRange;
         [SerializeField, Min(0)] private Vector2Int _fruitMaxStageRange;
         [SerializeField] private Vector2Int _fruitWoodCostRange;
 
         [Header("Evil")]
-        [SerializeField, Range(0, 100)] private int _evilChance;
+        [SerializeField, Range(0, 1)] private float _evilChance;
         [SerializeField] private Vector2Int _evilAutoBreedCountRange;
         
         [SerializeField, Min(0)] private Vector2 _evilStageTimeRange;
