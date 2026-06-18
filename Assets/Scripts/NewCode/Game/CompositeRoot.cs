@@ -1,6 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
+using PrimeTween;
 using UnityEngine;
 
 namespace Garden
@@ -24,6 +23,8 @@ namespace Garden
         
         private void Awake()
         {
+            PrimeTweenConfig.warnEndValueEqualsCurrent = false;
+            
             if (!_gameConfig.UseSeed)
                 _seed = _gameConfig.UseSeed ? _gameConfig.Seed : SeedUtils.GenerateSeed();
             
@@ -77,7 +78,6 @@ namespace Garden
             float time = Time.deltaTime;
             _player.Update(time);
             _creationManager.Update();
-            _field.UpdateLogic();
         }
     }
 }

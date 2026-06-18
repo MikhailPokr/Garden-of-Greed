@@ -15,7 +15,7 @@ namespace Garden
         public int FruitCount { get; private set; }
 
         
-        public bool IsSprout => _stage <= TreeGenome.LastGrowthStage;
+        public bool IsSprout => _stage < TreeGenome.LastGrowthStage;
         public Vector2Int? Position { get; private set; }
         public EntityType EntityType => EntityType.Tree;
         public event Action<IEntityData> DestroyRequest;
@@ -49,7 +49,12 @@ namespace Garden
                 SetNextStage();
             }
         }
-        
+
+        public void Destroy()
+        {
+            throw new NotImplementedException();
+        }
+
         public void GetCost() => DataConfig.GetCost(_stage);
 
         public void AddFruit(int fruitCount) => FruitCount += fruitCount;
@@ -58,8 +63,6 @@ namespace Garden
 
         private void SetNextStage()
         {
-            Debug.Log(_stage);
-            
             if (_stage <= TreeGenome.LastGrowthStage)
             {
                 GrowRequest?.Invoke(_stage < TreeGenome.LastGrowthStage ? _stage : -1);

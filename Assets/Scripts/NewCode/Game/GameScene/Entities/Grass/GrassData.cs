@@ -25,5 +25,10 @@ namespace Garden
         {
             throw new NotImplementedException();
         }
+
+        public void Destroy()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

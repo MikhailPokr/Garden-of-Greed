@@ -21,7 +21,7 @@ namespace Garden
 
         private void OnSpeedAction(InputAction.CallbackContext obj)
         {
-            Time.timeScale += obj.ReadValue<float>() * 0.1f;
+            Time.timeScale += obj.ReadValue<float>() * 1f;
             Debug.Log(Time.timeScale);
         }
 

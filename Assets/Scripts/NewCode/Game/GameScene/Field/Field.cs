@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 
 namespace Garden
 {
-    public class Field : MonoBehaviour, IPointerClickHandler
+    public class Field : MonoBehaviour, IPointerMoveHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
         
@@ -20,9 +20,11 @@ namespace Garden
         
         private Sequence _colorSequence;
 
-        private InputAction _pointer;
-
         private Vector2Int _lastPosition;
+        public Vector2Int CurrentHoverPosition => _lastPosition;
+        
+        private bool _isPointerOverField;
+        private readonly Vector2Int _invalidPosition = new Vector2Int(int.MinValue, int.MinValue);
 
         public void Init(IGridMath gridMath, GeneralPalette palette, FieldOptions fieldOptions)
         {
@@ -32,20 +34,9 @@ namespace Garden
             _generalPalette = palette;
             _gridMath = gridMath;
             
-            _pointer = InputSystem.actions.FindAction("Point");
-            
             SignalBus<ColorModeChangedSignal>.OnEvent += OnColorChanged;
-        }
-
-        public void UpdateLogic()
-        {
-            Vector2Int position = _gridMath.GetPosition(_mainCamera.ScreenToWorldPoint(_pointer.ReadValue<Vector2>()));
-            if (position != _lastPosition)
-            {
-                SignalBus<FieldClickSignal>.Fire(new FieldClickSignal(InteractionType.HoverEnd, _lastPosition));
-                SignalBus<FieldClickSignal>.Fire(new FieldClickSignal(InteractionType.HoverStart, position));
-            }
-            _lastPosition = position;
+            
+            _lastPosition = _invalidPosition;
         }
 
         private void OnColorChanged(ColorModeChangedSignal signal)
@@ -91,6 +82,45 @@ namespace Garden
                     UnityEditor.Handles.Label( _gridMath.GetPoint(pos), pos.ToString());
                 }
             }
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            _isPointerOverField = true;
+            ProcessPointerPosition(eventData);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            _isPointerOverField = false;
+    
+            if (_lastPosition != _invalidPosition)
+            {
+                SignalBus<FieldClickSignal>.Fire(new FieldClickSignal(InteractionType.HoverEnd, _lastPosition));
+                _lastPosition = _invalidPosition; 
+            }
+        }
+
+        public void OnPointerMove(PointerEventData eventData)
+        {
+            if (!_isPointerOverField) return;
+            ProcessPointerPosition(eventData);
+        }
+        
+        private void ProcessPointerPosition(PointerEventData eventData)
+        {
+            Vector2Int position = _gridMath.GetPosition(eventData.pointerCurrentRaycast.worldPosition);
+    
+            if (position != _lastPosition)
+            {
+                if (_lastPosition != _invalidPosition)
+                {
+                    SignalBus<FieldClickSignal>.Fire(new FieldClickSignal(InteractionType.HoverEnd, _lastPosition));
+                }
+        
+                SignalBus<FieldClickSignal>.Fire(new FieldClickSignal(InteractionType.HoverStart, position));
+            }
+            _lastPosition = position;
         }
     }
 }

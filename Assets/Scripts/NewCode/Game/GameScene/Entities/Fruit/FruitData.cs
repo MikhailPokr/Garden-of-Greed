@@ -25,6 +25,8 @@ namespace Garden
             if (HostEntity.Position != null)
                 Position = HostEntity.Position;
             DropCount = 0;
+            
+            treeData.DryRequest += Destroy;
         }
 
         public void Start()
@@ -42,11 +44,16 @@ namespace Garden
             if (!_timerEnabled)
                 return;
             if (!DataConfig.IsRoting(currentTime)) return;
-            _timerEnabled = false;
             DropCount++;
-            DropRequest?.Invoke();
-            DestroyRequest?.Invoke(this);
+            Destroy();
         }
 
+        public void Destroy()
+        {
+            _timerEnabled = false;
+            DropRequest?.Invoke();
+            DestroyRequest?.Invoke(this);
+            ((TreeData)HostEntity).DryRequest -= Destroy;
+        }
     }
 }

@@ -10,8 +10,9 @@ namespace Garden
         public Vector2Int? Position { get; }
 
         void Start();
-        void SetPosition(Vector2Int position);
 
         void Update(float currentTime);
+
+        public void Destroy();
     }
 }

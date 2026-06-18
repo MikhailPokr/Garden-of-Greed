@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using PrimeTween;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,15 +11,12 @@ namespace Garden
         [SerializeField] private SpriteRenderer _treeSpriteRenderer;
         [SerializeField] private SpriteRenderer _crownSpriteRenderer;
         [SerializeField] private BoxCollider2D _collider;
+        
         private TreeData _treeData;
         public override IEntityData EntityData => _treeData;
         public override EntityType EntityType => EntityType.Tree;
 
         private TreePalette _treePalette;
-        private Sequence _colorSequence;
-        private bool _selected;
-        private bool _colored;
-        private bool IsColored => _colored || _selected;
         private Color _woodColor;
         private Color _greenColor;
         
@@ -30,19 +26,18 @@ namespace Garden
         {
             _treePalette = (TreePalette)context.SpecialPalette;
             _treeData = (TreeData)entityData;
+            
             base.Init(entityData, context);
             
             _treeData.DryRequest += OnDryRequest;
             _treeData.GrowRequest += OnGrowRequest;
-            SignalBus<ColorModeChangedSignal>.OnEvent += OnColorModeChanged;
             
             _crownSpriteRenderer.enabled = false;
             
             _treeSpriteRenderer.sortingOrder = _context.SpriteOrder.GetOrder(entityData.Position.Value.y, SpriteType.Tree);
             _crownSpriteRenderer.sortingOrder =  _context.SpriteOrder.GetOrder(entityData.Position.Value.y, SpriteType.Crown);
             
-            _colored = context.Color;
-            _woodColor = _treePalette.WoodColors[_treeData.TreeGenome.WoodColorIndex];
+            _woodColor = _treePalette.GetWoodColor(_treeData.TreeGenome.TreeType, _treeData.TreeGenome.WoodColorIndex);
             _greenColor = ApplyDeviation(_context.GeneralPalette.NormalColor, _treeData.TreeGenome.GreenOffset);
             
             _fruits = new();
@@ -74,34 +69,10 @@ namespace Garden
                                _crownSpriteRenderer.sprite.pixelsPerUnit;
                 float localY = (pos.y - rect.y - _crownSpriteRenderer.sprite.pivot.y) /
                                _crownSpriteRenderer.sprite.pixelsPerUnit;
-                Vector3 rLocal = new Vector3(localX, localY, 0);
 
-                return rLocal;
+                return new Vector3(localX, localY, 0);
             }
             return Vector2.zero;
-        }
-        
-        private void OnColorModeChanged(ColorModeChangedSignal signal)
-        {
-            _colored = signal.IsColored;
-    
-            if (_colorSequence.isAlive)
-                _colorSequence.Stop();
-        
-            PlayColorSequence(signal.IsColored);
-        }
-
-        protected override void OnInteract(InteractionType type)
-        {
-            _selected = type switch
-            {
-                InteractionType.HoverStart => true,
-                InteractionType.HoverEnd => false,
-                _ => _selected
-            };
-            PlayColorSequence(IsColored);
-            
-            base.OnInteract(type);
         }
 
         private void OnGrowRequest(int stage)
@@ -109,25 +80,20 @@ namespace Garden
             if (_colorSequence.isAlive)
                 _colorSequence.Stop();
             
-            
             if (stage == -1)
             {
                 _crownSpriteRenderer.enabled = true;
-                _treeSpriteRenderer.sprite = _treePalette.TreeSprites[_treeData.TreeGenome.GrownSpriteIndex];
-                _crownSpriteRenderer.sprite = _treePalette.CrownSprites[_treeData.TreeGenome.GrownSpriteIndex];
+                var sprites = _treePalette.GetTreeSprites(_treeData.TreeGenome.TreeType, _treeData.TreeGenome.GrownSpriteIndex);
+                _treeSpriteRenderer.color = _woodColor;
+                _crownSpriteRenderer.color = _greenColor;
+                _treeSpriteRenderer.sprite = sprites.tree;
+                _crownSpriteRenderer.sprite = sprites.crown;
                 
                 _collider.size = _treeSpriteRenderer.sprite.bounds.size;
                 _collider.offset = _treeSpriteRenderer.sprite.bounds.center;
 
-                if (IsColored)
-                {
-                    _treeSpriteRenderer.color = _woodColor;
-                    _crownSpriteRenderer.color = _greenColor;
-                }
-                else
-                {
+                if (!IsColored)
                     PlayBlinkSequence();
-                }
             }
             else
             {
@@ -138,13 +104,11 @@ namespace Garden
                 else
                     PlayBlinkSequence();
             }
-
         }
 
-        private void PlayBlinkSequence()
+        protected override void PlayBlinkSequence()
         {
-            if (IsColored)
-                return;
+            if (IsColored) return;
             
             _colorSequence = Sequence.Create();
             float duration = 0.15f; 
@@ -161,7 +125,7 @@ namespace Garden
                 _colorSequence.Group(Tween.Color(_crownSpriteRenderer, _context.GeneralPalette.NoColor, duration));
         }
         
-        private void PlayColorSequence(bool toFullColor)
+        protected override void PlayColorSequence(bool toFullColor)
         {
             _colorSequence = Sequence.Create();
             float duration = 0.15f;
@@ -185,7 +149,14 @@ namespace Garden
             
             if (!IsColored) 
                 PlayBlinkSequence();
-                
+        }
+
+        protected override void OnDestroy()
+        {
+            _treeData.DryRequest -= OnDryRequest;
+            _treeData.GrowRequest -= OnGrowRequest;
+            
+            base.OnDestroy();
         }
     }
 }

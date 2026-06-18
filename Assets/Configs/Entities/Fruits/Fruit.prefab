@@ -184,3 +184,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Garden.FruitView
   _fruitSpriteRenderer: {fileID: 125061498153238395}
+  _fruitBoxCollider: {fileID: 7111477568380197181}

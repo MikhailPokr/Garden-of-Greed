@@ -1,64 +1,65 @@
 ﻿using PrimeTween;
-using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Garden
 {
-    public class FruitView : EntityView
+    public class FruitView : EntityView, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] private SpriteRenderer _fruitSpriteRenderer;
+        [SerializeField] private BoxCollider2D _fruitBoxCollider;
+        
         private FruitData _fruitData;
         public override IEntityData EntityData => _fruitData;
         public override EntityType EntityType => EntityType.Fruit;
         
         private FruitPalette _fruitPalette;
-        private Sequence _colorSequence;
-        private bool _selected;
-        private bool _colored;
-        private bool IsColored => _colored || _selected;
         private Color _color;
 
         public override void Init(IEntityData entityData, VisualContext context)
         {
             _fruitPalette = (FruitPalette)context.SpecialPalette;
             _fruitData = (FruitData)entityData;
-            base.Init(entityData, context);
             
-            SignalBus<ColorModeChangedSignal>.OnEvent += OnColorModeChanged;
+            base.Init(entityData, context);
             
             _fruitSpriteRenderer.sortingOrder = _context.SpriteOrder.GetOrder(entityData.Position.Value.y, SpriteType.Fruit);
 
-            _colored = context.Color;
+            _selected = _context.Field.CurrentHoverPosition == entityData.Position;
             _color = ApplyDeviation(_fruitPalette.GetColor(_fruitData.TreeGenome.TreeType, _fruitData.TreeGenome.FruitColorIndex),
                 _fruitData.DataConfig.ColorOffset);
+                
             _fruitSpriteRenderer.sprite = _fruitPalette.GetSprite(_fruitData.TreeGenome.TreeType, _fruitData.TreeGenome.FruitSpriteIndex);
             _fruitSpriteRenderer.color = _color;
+            _fruitBoxCollider.size = _fruitSpriteRenderer.sprite.bounds.size;
+            _fruitBoxCollider.offset = _fruitSpriteRenderer.sprite.bounds.center;
+            
+            if (IsColored)
+                PlayColorSequence(true);
+            else
+                PlayBlinkSequence();
         }
         
         protected override void OnInteract(InteractionType type)
         {
-            _selected = type switch
-            {
-                InteractionType.HoverStart => true,
-                InteractionType.HoverEnd => false,
-                _ => _selected
-            };
-            PlayColorSequence(IsColored);
+            if (type == InteractionType.Click)
+                return;
             
-            base.OnInteract(type);
+            base.OnInteract(type); 
         }
 
-        private void OnColorModeChanged(ColorModeChangedSignal signal)
+        protected override void PlayBlinkSequence()
         {
-            _colored = signal.IsColored;
-    
-            if (_colorSequence.isAlive)
-                _colorSequence.Stop();
-        
-            PlayColorSequence(signal.IsColored);
+            if (IsColored) return;
+            
+            _colorSequence = Sequence.Create();
+            float duration = 0.15f;
+
+            _colorSequence.Group(Tween.Color(_fruitSpriteRenderer, _color, duration));
+            _colorSequence.Chain(Tween.Color(_fruitSpriteRenderer, _context.GeneralPalette.NoColor, duration));
         }
         
-        private void PlayColorSequence(bool toFullColor)
+        protected override void PlayColorSequence(bool toFullColor)
         {
             _colorSequence = Sequence.Create();
             float duration = 0.15f;
@@ -71,7 +72,10 @@ namespace Garden
 
         private void OnDrop()
         {
-            
         }
+
+        public void OnPointerClick(PointerEventData eventData) => base.OnInteract(InteractionType.Click);
+        public void OnPointerEnter(PointerEventData eventData) => OnInteract(InteractionType.HoverStart);
+        public void OnPointerExit(PointerEventData eventData) => OnInteract(InteractionType.HoverEnd);
     }
 }
