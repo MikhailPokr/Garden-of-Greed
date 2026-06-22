@@ -27,6 +27,8 @@ namespace Garden
             throw new NotImplementedException();
         }
 
+        public int Cost { get; }
+
         public void Destroy()
         {
             throw new NotImplementedException();

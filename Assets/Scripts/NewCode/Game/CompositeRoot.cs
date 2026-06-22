@@ -7,18 +7,21 @@ namespace Garden
     public class CompositeRoot : MonoBehaviour
     {
         [SerializeField] private GameConfig _gameConfig;
-        [SerializeField] private ShopUI _shopUI;
+        [SerializeField] private ToolSelectionUI[] _toolSelectionUIs;
+        [SerializeField] private UIMoneyCounter _moneyCounter;
         
         private int _seed;
         private Player _player;
         private SpatialMap _spatialMap;
         private Field _field;
         private EntityCreationManager _creationManager;
-        private OperationManager _operationManager;
-        private Shop _shop;
+        private ToolManager _toolManager;
         private InputManager _inputManager;
-        private Arm _arm;
         private GenomeFactory _genomeFactory;
+        private TreeShop _treeShop;
+        private Arm _arm;
+        private SaleTool _saleTool;
+        
         Dictionary<EntityType, IEntityCreationController> _entityControllers;
         
         private void Awake()
@@ -30,9 +33,9 @@ namespace Garden
             
             _player = new Player(_gameConfig.StartOptions);
             
-            _operationManager = new OperationManager();
-            
             _spatialMap = new SpatialMap(_gameConfig.FieldOptions);
+            
+            
 
             _field = Instantiate(_gameConfig.FieldPrefab);
             _field.Init(_spatialMap, _gameConfig.GeneralPalette, _gameConfig.FieldOptions);
@@ -42,13 +45,29 @@ namespace Garden
             _creationManager = new EntityCreationManager(
                 new VisualContext(_gameConfig, _field, _spatialMap, _inputManager),
                 _gameConfig.EntityBundles,
-                _operationManager,
+                _toolManager,
                 _player);
 
-            _shop = new Shop(_seed, 1);
-            _shopUI.Init(_shop);
             
-            _arm = new Arm(_spatialMap);
+            
+            _arm = new Arm();
+            _treeShop = new TreeShop(_seed,  _player, 10);
+            _saleTool = new SaleTool(_player);
+            List<ITool> tools = new List<ITool>()
+            {
+                _arm,
+                _treeShop,
+                _saleTool
+            };
+            
+            _toolManager = new ToolManager(_spatialMap, tools);
+            
+            foreach (var selectionUI in _toolSelectionUIs)
+            {
+                selectionUI.Init(_toolManager);
+            }
+            _moneyCounter.Init(_player);
+            
 
             EntityBundle treeBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Tree);
             EntityBundle fruitBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Fruit);

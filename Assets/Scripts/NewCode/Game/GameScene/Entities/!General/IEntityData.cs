@@ -12,6 +12,7 @@ namespace Garden
         void Start();
 
         void Update(float currentTime);
+        int Cost { get; }
 
         public void Destroy();
     }

@@ -7,7 +7,7 @@ namespace Garden
     {
         public IEntityData HostEntity { get; }
         
-        public FruitDataConfig DataConfig;
+        public readonly FruitDataConfig DataConfig;
         public TreeGenomeConfig TreeGenome => DataConfig.TreeGenome;
         
         private bool _timerEnabled;
@@ -17,6 +17,8 @@ namespace Garden
         public EntityType EntityType => EntityType.Fruit;
         public event Action<IEntityData> DestroyRequest;
         public event Action DropRequest;
+        
+        public int Cost => Mathf.RoundToInt(DataConfig.GetCost());
 
         public FruitData(TreeData treeData, FruitDataConfig dataConfig)
         {
@@ -32,11 +34,6 @@ namespace Garden
         public void Start()
         {
             _timerEnabled = true;
-        }
-
-        public void SetPosition(Vector2Int position)
-        {
-            Position = position;
         }
 
         public void Update(float currentTime)

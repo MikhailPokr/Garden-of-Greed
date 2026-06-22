@@ -21,6 +21,9 @@ namespace Garden
         public event Action<IEntityData> DestroyRequest;
         public event Action<int> GrowRequest;
         public event Action DryRequest;
+        
+        public int Cost => Mathf.RoundToInt(DataConfig.GetCost(_stage));
+        
         public TreeData(TreeDataConfig dataConfig)
         {
             DataConfig = dataConfig;
@@ -54,8 +57,6 @@ namespace Garden
         {
             throw new NotImplementedException();
         }
-
-        public void GetCost() => DataConfig.GetCost(_stage);
 
         public void AddFruit(int fruitCount) => FruitCount += fruitCount;
         public void AddBreed(int breedCount) => BreedCount += breedCount;

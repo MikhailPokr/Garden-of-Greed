@@ -6,8 +6,6 @@ namespace Garden
 {
     public abstract class EntityView : MonoBehaviour
     {
-        public event Action<EntityView, InteractionType> ClickAction;
-        
         protected VisualContext _context;
         protected Sequence _colorSequence;
 
@@ -50,7 +48,7 @@ namespace Garden
             };
             
             PlayColorSequence(IsColored);
-            ClickAction?.Invoke(this, type);
+            SignalBus<EntityClickSignal>.Fire(new EntityClickSignal(this, type)); 
         }
 
         private void OnColorModeChanged(ColorModeChangedSignal signal)

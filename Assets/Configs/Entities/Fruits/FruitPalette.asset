@@ -13,12 +13,21 @@ MonoBehaviour:
   m_Name: FruitPalette
   m_EditorClassIdentifier: Assembly-CSharp::Garden.FruitPalette
   <FruitSprites>k__BackingField:
-  - {fileID: 146862101853992951, guid: 8bad25c5ebc473c47869187e490bf70a, type: 3}
-  - {fileID: 4291080265896786440, guid: 8bad25c5ebc473c47869187e490bf70a, type: 3}
+  - {fileID: 713815981, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
+  - {fileID: -1456474120, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
+  - {fileID: 346682839, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
   <FruitEvilSprites>k__BackingField:
-  - {fileID: -3733764830613601850, guid: 8bad25c5ebc473c47869187e490bf70a, type: 3}
-  - {fileID: 204876654087227354, guid: 8bad25c5ebc473c47869187e490bf70a, type: 3}
+  - {fileID: 713815981, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
+  - {fileID: -1456474120, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
+  - {fileID: 346682839, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
   <FruitColors>k__BackingField:
-  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.8867924, g: 0.32208967, b: 0.32208967, a: 1}
+  - {r: 0.8867924, g: 0.6385898, b: 0.31372374, a: 1}
+  - {r: 0.61472464, g: 0.9150943, b: 0.5395603, a: 1}
+  - {r: 0.5411765, g: 0.6251939, b: 0.9137255, a: 1}
+  - {r: 0.7972873, g: 0.5411765, b: 0.9137255, a: 1}
+  - {r: 0.5411765, g: 0.9099197, b: 0.9137255, a: 1}
   <FruitEvilColors>k__BackingField:
-  - {r: 1, g: 0.4764151, b: 0.4764151, a: 1}
+  - {r: 0.38679248, g: 0.034665354, b: 0.034665354, a: 1}
+  - {r: 0.509434, g: 0.11774654, b: 0.2809343, a: 1}
+  - {r: 0.40234935, g: 0.11764706, b: 0.50980395, a: 1}

@@ -22,12 +22,7 @@ namespace Garden
             _factory = new TreeFactory(seed, _options, genomeFactory, player);
 
             SignalBus<AutoBreedSignal>.OnEvent += (signal) => this.OnBreedRequest(signal.TreeData);
-            SignalBus<ArmPlantTreeSignal>.OnEvent += (signal) =>
-            {
-                if (signal.Type != EntityType.Tree)
-                    return;
-                CreateViaSeed(signal.Seed, signal.Position);
-            };
+            SignalBus<ArmPlantTreeSignal>.OnEvent += (signal) => CreateViaSeed(signal.Seed, signal.Position);
         }
 
         private void CreateViaSeed(int seed, Vector2Int position)

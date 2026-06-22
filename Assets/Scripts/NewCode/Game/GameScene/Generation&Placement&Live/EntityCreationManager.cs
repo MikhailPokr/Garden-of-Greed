@@ -6,7 +6,7 @@ namespace Garden
 {
     public class EntityCreationManager
     {
-        private readonly OperationManager _operationManager;
+        private readonly ToolManager _toolManager;
         private readonly Player _player;
         
         private readonly Dictionary<EntityType, EntityBundle> _entityBundleLookup;
@@ -18,10 +18,10 @@ namespace Garden
         public EntityCreationManager(
             VisualContext visualContext,
             List<EntityBundle> entityBundles,
-            OperationManager operationManager,
+            ToolManager toolManager,
             Player player)
         {
-            _operationManager = operationManager;
+            _toolManager = toolManager;
             _player = player;
             _entityBundleLookup = new Dictionary<EntityType, EntityBundle>();
             foreach (var entityBundle in entityBundles)
@@ -54,7 +54,6 @@ namespace Garden
             _createdViews[signal.EntityData] = entityView;
             entityView.EntityData.DestroyRequest += OnEntityDestroyRequest;
             _context.SpatialMap.OccupyTile(signal.Position, signal.EntityData.EntityType);
-            _operationManager.RegisterEntity(entityView);
             
             signal.EntityData.Start();
             
