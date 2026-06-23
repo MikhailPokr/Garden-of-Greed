@@ -29,6 +29,7 @@ namespace Garden
             DropCount = 0;
             
             treeData.DryRequest += Destroy;
+            HostEntity.DestroyRequest += (_) => Destroy();
         }
 
         public void Start()

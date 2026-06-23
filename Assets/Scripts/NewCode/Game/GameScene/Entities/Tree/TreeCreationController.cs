@@ -21,8 +21,9 @@ namespace Garden
             _spatialMap = spatialMap;
             _factory = new TreeFactory(seed, _options, genomeFactory, player);
 
-            SignalBus<AutoBreedSignal>.OnEvent += (signal) => this.OnBreedRequest(signal.TreeData);
             SignalBus<ArmPlantTreeSignal>.OnEvent += (signal) => CreateViaSeed(signal.Seed, signal.Position);
+            SignalBus<ArmPlantFruitSignal>.OnEvent += (signal) => CreateViaFruit(signal.FruitData, signal.Position);
+            SignalBus<AutoBreedSignal>.OnEvent += (signal) => OnBreedRequest(signal.TreeData);
         }
 
         private void CreateViaSeed(int seed, Vector2Int position)
@@ -30,12 +31,20 @@ namespace Garden
             TreeData treeData = _factory.Create(seed);
             treeData.SetPosition(position);
             
-            
             SignalBus<EntityCreationRequestSignal>.Fire(new EntityCreationRequestSignal(
                 treeData,
                 position));
         }
 
+        private void CreateViaFruit(FruitData fruitData, Vector2Int position)
+        {
+            var tree = _factory.Create(fruitData);
+            tree.SetPosition(position);
+            SignalBus<EntityCreationRequestSignal>.Fire(new EntityCreationRequestSignal(
+                tree,
+                position));
+        }
+        
         private void OnBreedRequest(TreeData treeData)
         {
             List<Vector2Int> placesRaw = _spatialMap.GetNeighbors((Vector2Int)treeData.Position)

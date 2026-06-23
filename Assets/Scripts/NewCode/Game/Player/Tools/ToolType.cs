@@ -4,6 +4,6 @@
     {
         Arm = 0,
         TreeShop = 1,
-        Sell = 2,
+        Sale = 2,
     }
 }

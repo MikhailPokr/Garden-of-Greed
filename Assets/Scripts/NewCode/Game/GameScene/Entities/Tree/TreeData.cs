@@ -53,10 +53,7 @@ namespace Garden
             }
         }
 
-        public void Destroy()
-        {
-            throw new NotImplementedException();
-        }
+        public void Destroy() => DestroyRequest?.Invoke(this);
 
         public void AddFruit(int fruitCount) => FruitCount += fruitCount;
         public void AddBreed(int breedCount) => BreedCount += breedCount;

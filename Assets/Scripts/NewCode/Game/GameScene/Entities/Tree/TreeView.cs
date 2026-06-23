@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using PrimeTween;
+﻿using PrimeTween;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -19,8 +17,6 @@ namespace Garden
         private TreePalette _treePalette;
         private Color _woodColor;
         private Color _greenColor;
-        
-        private List<FruitView> _fruits;
 
         public override void Init(IEntityData entityData, VisualContext context)
         {
@@ -39,8 +35,6 @@ namespace Garden
             
             _woodColor = _treePalette.GetWoodColor(_treeData.TreeGenome.TreeType, _treeData.TreeGenome.WoodColorIndex);
             _greenColor = ApplyDeviation(_context.GeneralPalette.NormalColor, _treeData.TreeGenome.GreenOffset);
-            
-            _fruits = new();
         }
         
         public override void SetEntity(EntityView entity)

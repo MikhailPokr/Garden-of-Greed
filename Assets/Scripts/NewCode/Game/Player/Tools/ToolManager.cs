@@ -9,7 +9,7 @@ namespace Garden
     {
         private readonly ISpatialMap _spatialMap;
         private readonly Dictionary<ToolType, ITool> _toolList;
-        private ToolType _currentTool;
+        public ToolType CurrentTool {get; private set;}
 
         public ToolManager(ISpatialMap spatialMap, List<ITool> toolList)
         {
@@ -26,20 +26,21 @@ namespace Garden
         
         public void SwithTool(ToolType toolType)
         {
-            _currentTool = toolType;
-            _toolList[_currentTool].Activate();
+            CurrentTool = toolType;
+            _toolList[CurrentTool].Activate();
         }
 
         private void OnFieldInteract(FieldClickSignal signal)
         {
-            switch (_currentTool)
+            switch (CurrentTool)
             {
                 case ToolType.TreeShop:
+                case ToolType.Arm:
                 {
                     if (signal.InteractionType == InteractionType.Click &&
                         _spatialMap.IsTileFreeAndValid(signal.Position))
                     {
-                        _toolList[_currentTool].Process(signal);
+                        _toolList[CurrentTool].Process(signal);
                     }
                     break;
                 }
@@ -48,17 +49,20 @@ namespace Garden
 
         private void OnEntityClick(EntityClickSignal signal)
         {
-            switch (_currentTool)
+            switch (CurrentTool)
             {
-                case ToolType.Sell:
+                case ToolType.Arm:
+                    if (signal.Entity.EntityType == EntityType.Fruit)
+                        goto case ToolType.Sale;
+                    break;
+                case ToolType.Sale:
                 {
-                    if (signal.InteractionType == InteractionType.Click &&
-                        signal.Entity.EntityData.EntityType == EntityType.Fruit)
-                    {
-                        _toolList[_currentTool].Process(signal);
-                    }
+                    if (signal.InteractionType == InteractionType.Click)
+                        _toolList[CurrentTool].Process(signal);
                     break;
                 }
+                
+                    
             }
         }
     }

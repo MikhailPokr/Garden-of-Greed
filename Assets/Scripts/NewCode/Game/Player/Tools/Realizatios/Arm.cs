@@ -6,13 +6,11 @@ namespace Garden
     {
         public ToolType Type => ToolType.Arm;
 
-        private bool _active;
-        private EntityType _type;
-        private int _seedInArm;
+        private bool _isHandBusy;
+        private FruitData _fruitData;
         
         public Arm()
         {
-            SignalBus<SetInArmSignal>.OnEvent += SetInArm;
         }
         
         
@@ -22,18 +20,37 @@ namespace Garden
 
         public void Process(IClickSignal signal)
         {
+            if (signal is EntityClickSignal entityClickSignal)
+            {
+                SetInArm(entityClickSignal);
+            }
+
+            if (signal is FieldClickSignal fieldClickSignal)
+            {
+                PlaceFruit(fieldClickSignal);
+            }
+        }
             
-        }
 
-        public void SetInArm(SetInArmSignal signal)
+        private void SetInArm(EntityClickSignal signal)
         {
-            _active = true;
-            _type = signal.Type;
-            _seedInArm = signal.Seed;
+            if (_isHandBusy)
+                return;
+            if (signal.Entity.EntityType == EntityType.Fruit)
+            {
+                _isHandBusy = true;
+                _fruitData = signal.Entity.EntityData as FruitData;
+                signal.Entity.EntityData.Destroy();
+            }
         }
 
-        
-
-        
+        private void PlaceFruit(FieldClickSignal signal)
+        {
+            if (!_isHandBusy)
+                return;
+            SignalBus<ArmPlantFruitSignal>.Fire(new ArmPlantFruitSignal(_fruitData, signal.Position));
+            _isHandBusy = false;
+            _fruitData = null;
+        }
     }
 }

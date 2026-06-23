@@ -2,7 +2,7 @@
 {
     public class SaleTool : ITool
     {
-        public ToolType Type => ToolType.Sell;
+        public ToolType Type => ToolType.Sale;
         private readonly Player _player;
         
         public SaleTool(Player player)

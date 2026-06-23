@@ -7,7 +7,7 @@ namespace Garden
     public class CompositeRoot : MonoBehaviour
     {
         [SerializeField] private GameConfig _gameConfig;
-        [SerializeField] private ToolSelectionUI[] _toolSelectionUIs;
+        [SerializeField] private ToolSelectorsController _toolSelectorsController;
         [SerializeField] private UIMoneyCounter _moneyCounter;
         
         private int _seed;
@@ -62,10 +62,7 @@ namespace Garden
             
             _toolManager = new ToolManager(_spatialMap, tools);
             
-            foreach (var selectionUI in _toolSelectionUIs)
-            {
-                selectionUI.Init(_toolManager);
-            }
+            _toolSelectorsController.Init(_toolManager);
             _moneyCounter.Init(_player);
             
 

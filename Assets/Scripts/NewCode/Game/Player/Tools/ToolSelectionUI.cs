@@ -1,22 +1,17 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Garden
 {
     public class ToolSelectionUI : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] private ToolType _toolType;
+        [field: SerializeField] public ToolType ToolType { get; private set; }
+        [field: SerializeField] public Image Image { get; private set; }
+
+        public event Action<ToolType> OnClick;
         
-        private ToolManager _toolManager;
-
-        public void Init(ToolManager toolManager)
-        {
-            _toolManager = toolManager;
-        }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            _toolManager.SwithTool(_toolType);
-        }
+        public void OnPointerClick(PointerEventData eventData) => OnClick?.Invoke(ToolType);
     }
 }
