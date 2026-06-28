@@ -109,15 +109,16 @@ namespace Garden
         
         private void ProcessPointerPosition(PointerEventData eventData)
         {
-            Vector2Int position = _gridMath.GetPosition(eventData.pointerCurrentRaycast.worldPosition);
-    
+            Vector3 worldPosition = _mainCamera.ScreenToWorldPoint(eventData.position);
+            Vector2Int position = _gridMath.GetPosition(worldPosition);
+
             if (position != _lastPosition)
             {
                 if (_lastPosition != _invalidPosition)
                 {
                     SignalBus<FieldClickSignal>.Fire(new FieldClickSignal(InteractionType.HoverEnd, _lastPosition));
                 }
-        
+
                 SignalBus<FieldClickSignal>.Fire(new FieldClickSignal(InteractionType.HoverStart, position));
             }
             _lastPosition = position;

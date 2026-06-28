@@ -10,6 +10,7 @@ namespace Garden
         public EntityType EntityType => EntityType.Grass;
         public event Action<IEntityData> DestroyRequest;
         public Vector2Int? Position { get; }
+        public event Action<ICommand[]> CommandRequest;
 
         public void Start()
         {
@@ -27,6 +28,10 @@ namespace Garden
         }
 
         public int Cost { get; }
+        public void ForceUseCommands(params ICommand[] commands)
+        {
+            throw new NotImplementedException();
+        }
 
         public void Destroy()
         {

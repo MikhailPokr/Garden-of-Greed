@@ -13,8 +13,7 @@ namespace Garden
         public void Init(Player player)
         {
             _player = player;
-            _player.OnChangeMoney += OnMoneyChangeSignal;
-            OnMoneyChangeSignal();
+            SignalBus<ChangeMoneySignal>.OnEvent += (_) => OnMoneyChangeSignal();
         }
         
         private void OnMoneyChangeSignal()

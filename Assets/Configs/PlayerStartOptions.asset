@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd781840d90d44beba74041d6e296000, type: 3}
   m_Name: PlayerStartOptions
   m_EditorClassIdentifier: Assembly-CSharp::Garden.PlayerStartOptions
-  <StartMoney>k__BackingField: 50
+  <StartMoney>k__BackingField: 2000
   <MaxStamina>k__BackingField: 10
   <MaxFire>k__BackingField: 10

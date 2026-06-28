@@ -25,7 +25,6 @@ namespace Garden
             
             _fruitSpriteRenderer.sortingOrder = _context.SpriteOrder.GetOrder(entityData.Position.Value.y, SpriteType.Fruit);
 
-            _selected = _context.Field.CurrentHoverPosition == entityData.Position;
             _color = ApplyDeviation(_fruitPalette.GetColor(_fruitData.TreeGenome.TreeType, _fruitData.TreeGenome.FruitColorIndex),
                 _fruitData.DataConfig.ColorOffset);
                 
@@ -33,13 +32,25 @@ namespace Garden
             _fruitSpriteRenderer.color = _color;
             _fruitBoxCollider.size = _fruitSpriteRenderer.sprite.bounds.size;
             _fruitBoxCollider.offset = _fruitSpriteRenderer.sprite.bounds.center;
-            
-            if (IsColored)
-                PlayColorSequence(true);
-            else
-                PlayBlinkSequence();
         }
-        
+
+        protected override void OnCommand(ICommand[] commands)
+        {
+            foreach (var command in commands)
+                switch (command)
+                {
+                    case MarkChangesCommand:
+                        if (IsColored)
+                            PlayColorSequence(true);
+                        else
+                            PlayBlinkSequence();
+                        break;
+                    case DestroyCommand:
+                        Destroy(gameObject);
+                        break;
+                }
+        }
+
         protected override void OnInteract(InteractionType type)
         {
             if (type == InteractionType.Click)
@@ -68,10 +79,6 @@ namespace Garden
 
             if (_fruitSpriteRenderer.color != targetColor)
                 _colorSequence.Group(Tween.Color(_fruitSpriteRenderer, targetColor, duration));
-        }
-
-        private void OnDrop()
-        {
         }
 
         public void OnPointerClick(PointerEventData eventData) => base.OnInteract(InteractionType.Click);

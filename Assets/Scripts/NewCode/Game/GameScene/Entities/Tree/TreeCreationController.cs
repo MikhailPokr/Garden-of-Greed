@@ -39,10 +39,21 @@ namespace Garden
         private void CreateViaFruit(FruitData fruitData, Vector2Int position)
         {
             var tree = _factory.Create(fruitData);
-            tree.SetPosition(position);
-            SignalBus<EntityCreationRequestSignal>.Fire(new EntityCreationRequestSignal(
-                tree,
-                position));
+            if (fruitData.DataConfig.IsGrowth)
+            {
+                tree.SetPosition(position);
+                SignalBus<EntityCreationRequestSignal>.Fire(new EntityCreationRequestSignal(
+                    tree,
+                    position));
+            }
+            else
+            {
+                DeadShootData deadShoot = new DeadShootData(tree.DataConfig);
+                deadShoot.SetPosition(position);
+                SignalBus<EntityCreationRequestSignal>.Fire(new EntityCreationRequestSignal(
+                    deadShoot,
+                    position));
+            }
         }
         
         private void OnBreedRequest(TreeData treeData)

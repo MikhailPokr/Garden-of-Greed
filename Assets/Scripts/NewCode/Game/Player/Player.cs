@@ -9,13 +9,13 @@ namespace Garden
         //public int Stamina { get; private set; }
         public float Time { get; private set; }
         private ITool _currentTool;
-        public event Action OnChangeMoney;
 
         public Player(PlayerStartOptions startOptions)
         {
             StartOptions = startOptions;
             //Stamina = StartOptions.MaxStamina;
-            TryChangeMoney(StartOptions.StartMoney);
+            SignalBus<ChangeMoneySignal>.OnEvent += OnChangeMoney;
+            SignalBus<ChangeMoneySignal>.Fire(new ChangeMoneySignal(StartOptions.StartMoney));
         }
 
         public void Update(float deltaTime)
@@ -23,13 +23,6 @@ namespace Garden
             Time += deltaTime;
         }
         
-        public bool TryChangeMoney(int delta)
-        {
-            if (Money + delta < 0)
-                return false; 
-            Money += delta;
-            OnChangeMoney?.Invoke();
-            return true;
-        }
+        public void OnChangeMoney(ChangeMoneySignal signal) => Money += signal.Delta;
     }
 }

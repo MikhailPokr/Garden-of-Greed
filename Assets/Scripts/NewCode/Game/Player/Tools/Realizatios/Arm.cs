@@ -40,7 +40,7 @@ namespace Garden
             {
                 _isHandBusy = true;
                 _fruitData = signal.Entity.EntityData as FruitData;
-                signal.Entity.EntityData.Destroy();
+                signal.Entity.EntityData.ForceUseCommands(new DestroyCommand(signal.Entity.EntityData));
             }
         }
 

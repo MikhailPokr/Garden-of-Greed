@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84799b787913405cb3eb574600e5784c, type: 3}
   m_Name: TreePalette
   m_EditorClassIdentifier: Assembly-CSharp::Garden.TreePalette
+  <Pit>k__BackingField: {fileID: -5584790868116176147, guid: f092a72c7999e0444a4b82e466ecced0, type: 3}
+  <PitColor>k__BackingField: {r: 0.4716981, g: 0.23671368, b: 0.024474904, a: 1}
+  <DeadShoot>k__BackingField: {fileID: 6069141005272056167, guid: e351771798e2de942972fe91dd033114, type: 3}
   <StageSprites>k__BackingField:
   - {fileID: -7391759607893831176, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
   - {fileID: 1352955200029874055, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}

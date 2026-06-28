@@ -28,12 +28,12 @@ namespace Garden
 
         public bool Get(out int seed)
         {
-            if (!_player.TryChangeMoney(-_cost))
+            if (_player.Money < _cost)
             {
                 seed = -1;
                 return false;
             }
-
+            SignalBus<ChangeMoneySignal>.Fire(new ChangeMoneySignal(_cost));
             seed = SeedUtils.GetNewSeed(_seed, _count++);
             return true;
         }

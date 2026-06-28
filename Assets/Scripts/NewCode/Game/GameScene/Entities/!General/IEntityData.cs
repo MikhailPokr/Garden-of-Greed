@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Garden
@@ -6,14 +7,13 @@ namespace Garden
     public interface IEntityData
     {
         EntityType EntityType { get; }
-        event Action<IEntityData> DestroyRequest;
         public Vector2Int? Position { get; }
 
+        event Action<ICommand[]> CommandRequest;
         void Start();
 
         void Update(float currentTime);
         int Cost { get; }
-
-        public void Destroy();
+        void ForceUseCommands(params ICommand[] commands);
     }
 }

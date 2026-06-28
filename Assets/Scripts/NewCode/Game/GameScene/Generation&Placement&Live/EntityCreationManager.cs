@@ -52,7 +52,7 @@ namespace Garden
             
             _updatableEntities.Add(entityView.EntityData);
             _createdViews[signal.EntityData] = entityView;
-            entityView.EntityData.DestroyRequest += OnEntityDestroyRequest;
+            entityView.EntityData.CommandRequest += OnEntityDestroyRequest;
             _context.SpatialMap.OccupyTile(signal.Position, signal.EntityData.EntityType);
             
             signal.EntityData.Start();
@@ -66,12 +66,22 @@ namespace Garden
             }
         }
         
-        private void OnEntityDestroyRequest(IEntityData data)
+        private void OnEntityDestroyRequest(ICommand[] commands)
         {
-            data.DestroyRequest -= OnEntityDestroyRequest;
-            _context.SpatialMap.FreeTile(data.Position.Value, data.EntityType);
-            _updatableEntities.Remove(data);
-            _createdViews.Remove(data);
+            foreach (var command in commands)
+            {
+                switch (command)
+                {
+                    case DestroyCommand destroyCommand:
+                        var data = destroyCommand.EntityData;
+                        data.CommandRequest -= OnEntityDestroyRequest;
+                        _context.SpatialMap.FreeTile(data.Position.Value, data.EntityType);
+                        _updatableEntities.Remove(data);
+                        _createdViews.Remove(data);
+                        return;
+                }
+            }
+            
         }
     }
 }

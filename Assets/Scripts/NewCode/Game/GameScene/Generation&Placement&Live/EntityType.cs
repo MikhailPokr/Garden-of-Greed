@@ -6,5 +6,6 @@
         Fruit,
         Berry,
         Grass,
+        DeadShoot
     }
 }

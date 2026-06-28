@@ -18,7 +18,7 @@ namespace Garden
         
         public virtual void Init(IEntityData entityData, VisualContext context)
         {
-            EntityData.DestroyRequest += OnDestroyRequest;
+            EntityData.CommandRequest += OnCommand;
             _context = context;
 
             if (entityData.Position == null)
@@ -27,6 +27,7 @@ namespace Garden
             transform.position = context.SpatialMap.GetPoint((Vector2Int)entityData.Position);
             
             _colored = context.Color;
+            _selected = context.Field.CurrentHoverPosition == entityData.Position;
 
             SignalBus<FieldClickSignal>.OnEvent += OnFieldClickSignal;
             SignalBus<ColorModeChangedSignal>.OnEvent += OnColorModeChanged;
@@ -64,9 +65,15 @@ namespace Garden
         protected abstract void PlayColorSequence(bool toFullColor);
         protected abstract void PlayBlinkSequence();
 
-        protected virtual void OnDestroyRequest(IEntityData data)
+        protected virtual void OnCommand(ICommand[] commands)
         {
-            Destroy(gameObject);
+            foreach (var command in commands)
+                switch (command)
+                {
+                    case DestroyCommand:
+                        Destroy(gameObject);
+                        break;
+                }
         }
         
         protected static Color ApplyDeviation(Color baseColor, float offset)
@@ -88,6 +95,7 @@ namespace Garden
 
         protected virtual void OnDestroy()
         {
+            EntityData.CommandRequest -= OnCommand;
             SignalBus<FieldClickSignal>.OnEvent -= OnFieldClickSignal;
             SignalBus<ColorModeChangedSignal>.OnEvent -= OnColorModeChanged;
         }

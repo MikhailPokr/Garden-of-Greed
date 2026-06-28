@@ -14,11 +14,10 @@ namespace Garden
         public int DropCount { get; private set; }
         
         public Vector2Int? Position { get; private set; }
+        public event Action<ICommand[]> CommandRequest;
         public EntityType EntityType => EntityType.Fruit;
-        public event Action<IEntityData> DestroyRequest;
-        public event Action DropRequest;
         
-        public int Cost => Mathf.RoundToInt(DataConfig.GetCost());
+        public int Cost { get; private set; }
 
         public FruitData(TreeData treeData, FruitDataConfig dataConfig)
         {
@@ -27,14 +26,17 @@ namespace Garden
             if (HostEntity.Position != null)
                 Position = HostEntity.Position;
             DropCount = 0;
-            
-            treeData.DryRequest += Destroy;
-            HostEntity.DestroyRequest += (_) => Destroy();
+
+            treeData.CommandRequest += OnHostCommand;
         }
 
         public void Start()
         {
             _timerEnabled = true;
+
+            ProcessCommands(
+                new ChangeCostCommand(Mathf.RoundToInt(DataConfig.GetCost())),
+                new MarkChangesCommand());
         }
 
         public void Update(float currentTime)
@@ -43,15 +45,53 @@ namespace Garden
                 return;
             if (!DataConfig.IsRoting(currentTime)) return;
             DropCount++;
-            Destroy();
+            ProcessCommands(new DestroyCommand(this));
         }
-
-        public void Destroy()
+        
+        public void ForceUseCommands(params ICommand[] commands)
         {
-            _timerEnabled = false;
-            DropRequest?.Invoke();
-            DestroyRequest?.Invoke(this);
-            ((TreeData)HostEntity).DryRequest -= Destroy;
+            ProcessCommands(commands);
+        }
+        
+        protected virtual void ProcessCommands(params ICommand[] commands)
+        {
+            foreach (var command in commands)
+            {
+                switch (command)
+                {
+                    case ChangeCostCommand changeCostCommand:
+                        Cost = changeCostCommand.Value;
+                        break;
+                    case SaleCommand saleCommand:
+                        saleCommand.Use();
+                        HostEntity.CommandRequest -= OnHostCommand;
+                        _timerEnabled = false;
+                        break;
+                    case DestroyCommand:
+                        HostEntity.CommandRequest -= OnHostCommand;
+                        _timerEnabled = false;
+                        break;
+                }
+            }
+
+            CommandRequest?.Invoke(commands);
+        }
+        
+        private void OnHostCommand(ICommand[] commands)
+        {
+            foreach (var command in commands)
+            {
+                switch (command)
+                {
+                    case SaleCommand saleCommand:
+                        ProcessCommands(new SaleCommand(this));
+                        break;
+                    case DryCommand:
+                    case DestroyCommand:
+                        ProcessCommands(new DestroyCommand(this));
+                        break;
+                }
+            }
         }
     }
 }

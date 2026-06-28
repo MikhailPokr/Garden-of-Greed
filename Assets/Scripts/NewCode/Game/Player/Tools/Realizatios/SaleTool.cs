@@ -18,9 +18,9 @@
 
         private void OnEntityClicked(EntityClickSignal signal)
         {
-            if (_player.TryChangeMoney(signal.Entity.EntityData.Cost))
+            if (_player.Money >= signal.Entity.EntityData.Cost)
             {
-                signal.Entity.EntityData.Destroy();
+                signal.Entity.EntityData.ForceUseCommands(new SaleCommand(signal.Entity.EntityData));
             }
         }
     }

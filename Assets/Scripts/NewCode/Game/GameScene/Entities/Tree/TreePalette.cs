@@ -6,6 +6,9 @@ namespace Garden
     [CreateAssetMenu(fileName = "TreePalette", menuName = "Garden/Palette/TreePalette")]
     public class TreePalette : BasePalette, ITreePalette
     {
+        [field: SerializeField] public Sprite Pit { get; private set; }
+        [field: SerializeField] public Color PitColor { get; private set; }
+        [field: SerializeField] public Sprite DeadShoot { get; private set; }
         [field: SerializeField] public List<Sprite> StageSprites { get; private set; }
         [field: SerializeField] public List<Sprite> TreeSprites { get; private set; }
         [field: SerializeField] public List<Sprite> CrownSprites { get; set; }
