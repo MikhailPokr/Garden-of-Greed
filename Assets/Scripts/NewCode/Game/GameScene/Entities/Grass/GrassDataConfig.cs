@@ -1,7 +1,8 @@
 ﻿namespace Garden
 {
-    public class GrassDataConfig
+    public struct GrassDataConfig
     {
-        
+        public int Seed;
+        public float GrowTime;
     }
 }

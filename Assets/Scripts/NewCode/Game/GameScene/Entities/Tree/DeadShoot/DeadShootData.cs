@@ -8,7 +8,7 @@ namespace Garden
     {
         public new EntityType EntityType => EntityType.DeadShoot;
         
-        public DeadShootData(TreeDataConfig dataConfig) : base(dataConfig)
+        public DeadShootData(TreeDataConfig dataConfig, Vector2Int position) : base(dataConfig, position)
         {
         }
 

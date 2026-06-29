@@ -15,6 +15,7 @@ namespace Garden
         private SpatialMap _spatialMap;
         private Field _field;
         private EntityCreationManager _creationManager;
+        private GrassGenerator _grassGenerator;
         private ToolManager _toolManager;
         private InputManager _inputManager;
         private GenomeFactory _genomeFactory;
@@ -34,8 +35,6 @@ namespace Garden
             _player = new Player(_gameConfig.StartOptions);
             
             _spatialMap = new SpatialMap(_gameConfig.FieldOptions);
-            
-            
 
             _field = Instantiate(_gameConfig.FieldPrefab);
             _field.Init(_spatialMap, _gameConfig.GeneralPalette, _gameConfig.FieldOptions);
@@ -44,11 +43,7 @@ namespace Garden
             
             _creationManager = new EntityCreationManager(
                 new VisualContext(_gameConfig, _field, _spatialMap, _inputManager),
-                _gameConfig.EntityBundles,
-                _toolManager,
-                _player);
-
-            
+                _gameConfig.EntityBundles);
             
             _arm = new Arm();
             _treeShop = new TreeShop(_seed,  _player, 10);
@@ -68,6 +63,9 @@ namespace Garden
 
             EntityBundle treeBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Tree);
             EntityBundle fruitBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Fruit);
+            EntityBundle grassBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Grass);
+            
+            _grassGenerator = new GrassGenerator(_seed, grassBundle, _spatialMap);
             
             _genomeFactory = new GenomeFactory(
                 treeBundle,
@@ -93,7 +91,8 @@ namespace Garden
         {
             float time = Time.deltaTime;
             _player.Update(time);
-            _creationManager.Update();
+            _creationManager.Update(_player.Time);
+            _grassGenerator.Update(_player.Time);
         }
     }
 }

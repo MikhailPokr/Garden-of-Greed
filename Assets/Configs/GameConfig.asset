@@ -26,14 +26,20 @@ MonoBehaviour:
       y: -6
       width: 5
       height: 14
+    SubCellCoefficient: 13
+    SubCellOffsetY: -0.19
   <EntityBundles>k__BackingField:
-  - EntityType: 0
+  - EntityType: 1
     Palette: {fileID: 11400000, guid: 15b5b080858f8074abe9b2d11b78b993, type: 2}
     EntityView: {fileID: 2022535662318301625, guid: 6e8cd06ea66f5f7428774c72c536cf5b, type: 3}
     GenerationOptions: {fileID: 11400000, guid: 18b8c6af59454d749b319be520a5d4c3, type: 2}
-  - EntityType: 1
+  - EntityType: 2
     Palette: {fileID: 11400000, guid: 174fa29865113b54fb2d365a5cd3cbcc, type: 2}
     EntityView: {fileID: 5641886067538917635, guid: 3c9b4ef3741fa2445af50db4b73cb67a, type: 3}
     GenerationOptions: {fileID: 11400000, guid: d2b0a529fdf70334e9c09099345a4be0, type: 2}
+  - EntityType: 4
+    Palette: {fileID: 11400000, guid: c5c0b89f68b27c34eae46dbfc0f9b4d9, type: 2}
+    EntityView: {fileID: 8001074566422498788, guid: cc1959c77937c5b49a4237d6904336f8, type: 3}
+    GenerationOptions: {fileID: 11400000, guid: 2419a402ce18a0048a55154d2a1b2cc8, type: 2}
   <UseSeed>k__BackingField: 0
   <Seed>k__BackingField: 0

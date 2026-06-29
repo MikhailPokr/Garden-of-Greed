@@ -9,5 +9,7 @@ namespace Garden
         public float RowHeight;
         public Vector3 Center;
         public RectInt Bounds;
+        public float SubCellCoefficient;
+        public float SubCellOffsetY;
     }
 }

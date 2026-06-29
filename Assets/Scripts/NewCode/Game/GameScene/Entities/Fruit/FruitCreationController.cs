@@ -26,13 +26,13 @@ namespace Garden
 
         private void OnFruitProduce(FruitProduceSignal signal)
         {
-            Vector2Int tPos = signal.TreeData.Position.Value;
+            Vector2Int tPos = signal.TreeData.Position;
 
             List<FruitData> fruits = _factory.Create(signal.TreeData);
             
             foreach (var fruit in fruits)
             {
-                SignalBus<EntityCreationRequestSignal>.Fire(new EntityCreationRequestSignal(fruit, tPos));
+                SignalBus<EntityCreationSignal>.Fire(new EntityCreationSignal(fruit));
             }
         }
     }

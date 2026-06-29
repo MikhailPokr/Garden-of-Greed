@@ -7,7 +7,7 @@ namespace Garden
     public interface IEntityData
     {
         EntityType EntityType { get; }
-        public Vector2Int? Position { get; }
+        public Vector2Int Position { get; }
 
         event Action<ICommand[]> CommandRequest;
         void Start();

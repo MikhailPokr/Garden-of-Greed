@@ -6,23 +6,17 @@ namespace Garden
 {
     public class EntityCreationManager
     {
-        private readonly ToolManager _toolManager;
-        private readonly Player _player;
-        
         private readonly Dictionary<EntityType, EntityBundle> _entityBundleLookup;
         private VisualContext _context;
         
         private List<IEntityData> _updatableEntities;
         private Dictionary<IEntityData, EntityView> _createdViews;
+        private Dictionary<(Vector2Int position, int subPosition), IStackingSubEntity> _stackingSubEntities;
         
         public EntityCreationManager(
             VisualContext visualContext,
-            List<EntityBundle> entityBundles,
-            ToolManager toolManager,
-            Player player)
+            List<EntityBundle> entityBundles)
         {
-            _toolManager = toolManager;
-            _player = player;
             _entityBundleLookup = new Dictionary<EntityType, EntityBundle>();
             foreach (var entityBundle in entityBundles)
                 _entityBundleLookup[entityBundle.EntityType] = entityBundle;
@@ -31,39 +25,78 @@ namespace Garden
             _updatableEntities = new List<IEntityData>();
             _createdViews = new Dictionary<IEntityData, EntityView>();
 
-            SignalBus<EntityCreationRequestSignal>.OnEvent += OnCreateEntity;
+            SignalBus<EntityCreationSignal>.OnEvent += OnCreateEntity;
         }
-
-        public void Update()
+        
+        public void Update(float currentTime)
         {
             for (var i = 0; i < _updatableEntities.Count; i++)
             {
-                _updatableEntities[i].Update(_player.Time);
+                _updatableEntities[i].Update(currentTime);
             }
         }
 
-        private void OnCreateEntity(EntityCreationRequestSignal signal)
+        private void OnCreateEntity(EntityCreationSignal signal)
         {
+            if (signal.EntityData is IStackingSubEntity stackingSubEntity)
+            {
+                if (_stackingSubEntities
+                    .TryGetValue((stackingSubEntity.Position, stackingSubEntity.SubPosition),
+                        out var stackingSubEntityData))
+                {
+                    stackingSubEntityData.Grow();
+                    return;
+                }
+            }
+            
             var entityView = Object.Instantiate(_entityBundleLookup[signal.EntityData.EntityType].EntityView);
             
             _context.SpecialPalette = _entityBundleLookup[signal.EntityData.EntityType].Palette;
             
             entityView.Init(signal.EntityData, _context);
             
-            _updatableEntities.Add(entityView.EntityData);
-            _createdViews[signal.EntityData] = entityView;
+            Add(entityView);
+
+            switch (signal.EntityData)
+            {
+                case ISubEntity subEntity:
+                    _context.SpatialMap.OccupySubTile(subEntity.Position, subEntity.SubPosition, signal.EntityData.EntityType);
+                    entityView.gameObject.name = signal.EntityData.EntityType + $" ({subEntity.Position.x}:{subEntity.Position.y}|{subEntity.SubPosition})";
+                    break;
+                case { } entityData:
+                    _context.SpatialMap.OccupyTile(entityData.Position, signal.EntityData.EntityType);
+                    entityView.gameObject.name = signal.EntityData.EntityType + $" ({entityData.Position.x}:{entityData.Position.y})";
+                    break;
+            }
+            
             entityView.EntityData.CommandRequest += OnEntityDestroyRequest;
-            _context.SpatialMap.OccupyTile(signal.Position, signal.EntityData.EntityType);
             
             signal.EntityData.Start();
             
-            entityView.gameObject.name = signal.EntityData.EntityType + $" ({signal.Position.x}:{signal.Position.y})";
-
             if (signal.EntityData is IDependentEntity entity)
             {
                 var host = _createdViews[entity.HostEntity];
                 host.SetEntity(entityView);
             }
+        }
+        
+        private void Add(EntityView entityView)
+        {
+            var data = entityView.EntityData;
+            
+            _updatableEntities.Add(data);
+            _createdViews[data] = entityView;
+            
+            if (data is IStackingSubEntity stackingSubEntity)
+                _stackingSubEntities[(stackingSubEntity.Position, stackingSubEntity.SubPosition)] = stackingSubEntity;
+        }
+
+        private void Remove(IEntityData entityData)
+        {
+            _updatableEntities.Remove(entityData);
+            _createdViews.Remove(entityData);
+            if (entityData is IStackingSubEntity stackingSubEntity)
+                _stackingSubEntities.Remove((stackingSubEntity.Position, stackingSubEntity.SubPosition));
         }
         
         private void OnEntityDestroyRequest(ICommand[] commands)
@@ -75,9 +108,8 @@ namespace Garden
                     case DestroyCommand destroyCommand:
                         var data = destroyCommand.EntityData;
                         data.CommandRequest -= OnEntityDestroyRequest;
-                        _context.SpatialMap.FreeTile(data.Position.Value, data.EntityType);
-                        _updatableEntities.Remove(data);
-                        _createdViews.Remove(data);
+                        _context.SpatialMap.FreeTile(data.Position, data.EntityType);
+                        Remove(data);
                         return;
                 }
             }

@@ -20,11 +20,8 @@ namespace Garden
         {
             EntityData.CommandRequest += OnCommand;
             _context = context;
-
-            if (entityData.Position == null)
-                throw new Exception("Incorrect creation order");
                 
-            transform.position = context.SpatialMap.GetPoint((Vector2Int)entityData.Position);
+            transform.position = context.SpatialMap.GetPoint(entityData);
             
             _colored = context.Color;
             _selected = context.Field.CurrentHoverPosition == entityData.Position;
@@ -91,7 +88,7 @@ namespace Garden
         }
 
         protected virtual Vector2 GetPosition() => 
-            _context.SpatialMap.GetPoint(EntityData.Position.Value);
+            _context.SpatialMap.GetPoint(EntityData.Position);
 
         protected virtual void OnDestroy()
         {

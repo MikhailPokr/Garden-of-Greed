@@ -65,24 +65,6 @@ namespace Garden
         public void OnPointerClick(PointerEventData eventData) => 
             SignalBus<FieldClickSignal>.Fire(new FieldClickSignal(InteractionType.Click, 
                 _gridMath.GetPosition(_mainCamera.ScreenToWorldPoint(eventData.position))));
-        
-        private void OnDrawGizmos()
-        {
-            if (_gridMath == null)
-                return;
-            
-            
-            Gizmos.color = Color.yellow;
-            for (int i = _fieldOptions.Bounds.xMin; i < _fieldOptions.Bounds.xMax; i++)
-            {
-                for (int j = _fieldOptions.Bounds.yMin; j < _fieldOptions.Bounds.yMax; j++)
-                {
-                    var pos = new Vector2Int(i, j);
-                    Gizmos.DrawWireSphere(_gridMath.GetPoint(pos), 0.15f);
-                    UnityEditor.Handles.Label( _gridMath.GetPoint(pos), pos.ToString());
-                }
-            }
-        }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -122,6 +104,50 @@ namespace Garden
                 SignalBus<FieldClickSignal>.Fire(new FieldClickSignal(InteractionType.HoverStart, position));
             }
             _lastPosition = position;
+        }
+        
+        private void OnDrawGizmos()
+        {
+            if (_gridMath == null)
+                return;
+            
+            
+            for (int i = _fieldOptions.Bounds.xMin; i < _fieldOptions.Bounds.xMax; i++)
+            {
+                for (int j = _fieldOptions.Bounds.yMin; j < _fieldOptions.Bounds.yMax; j++)
+                {
+                    var pos = new Vector2Int(i, j);
+                    Gizmos.color = Color.yellow;
+                    Gizmos.DrawWireSphere(_gridMath.GetPoint(pos), 0.15f);
+                    UnityEditor.Handles.Label( _gridMath.GetPoint(pos), pos.ToString());
+                    
+                    for (int s = 0; s < 6; s++)
+                    {
+                        switch (s)
+                        {
+                            case 0:
+                                Gizmos.color = Color.red;
+                                break;
+                            case 1:
+                                Gizmos.color = Color.orange;
+                                break;
+                            case 2:
+                                Gizmos.color = Color.yellow;
+                                break;
+                            case 3:
+                                Gizmos.color = Color.green;
+                                break;
+                            case 4:
+                                Gizmos.color = Color.blue;
+                                break;
+                            case 5:
+                                Gizmos.color = Color.blueViolet;
+                                break;
+                        }
+                        Gizmos.DrawWireSphere(_gridMath.GetPoint(pos, s), 0.1f);
+                    }
+                }
+            }
         }
     }
 }

@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 112}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 775
+  controlID: 6060
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 112}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 695
+  controlID: 6009
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 696
+  controlID: 6010
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -612,7 +612,7 @@ MonoBehaviour:
   m_SerializedViewNames: []
   m_SerializedViewValues: []
   m_PlayModeViewName: GameView
-  m_ShowGizmos: 0
+  m_ShowGizmos: 1
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
   m_TargetSize: {x: 1920, y: 1080}
@@ -622,7 +622,7 @@ MonoBehaviour:
   m_EnterPlayModeBehavior: 0
   m_UseMipMap: 0
   m_VSyncEnabled: 0
-  m_Gizmos: 0
+  m_Gizmos: 1
   m_Stats: 0
   m_SelectedSizes: 03000000000000000000000006000000000000000000000000000000000000000000000000000000
   m_ZoomArea:
@@ -715,15 +715,11 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: []
+      m_SelectedIDs:
+      - m_Data: 35824
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -13544
-      - m_Data: -3598
-      - m_Data: -3576
-      - m_Data: -3554
-      - m_Data: -3532
       - m_Data: -1382
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -1304,9 +1300,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 0.23283339, y: 0.7353748, z: -0.0126688015}
+    m_Target: {x: 0.02133131, y: 0.35003984, z: -0.0036122552}
     speed: 2
-    m_Value: {x: 0.23283339, y: 0.7353748, z: -0.0126688015}
+    m_Value: {x: 0.02133131, y: 0.35003984, z: -0.0036122552}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1357,9 +1353,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 2.432772
+    m_Target: 1.5271163
     speed: 2
-    m_Value: 2.432772
+    m_Value: 1.5271163
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1532,7 +1528,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Configs/Entities/Tree
+    - Assets/Configs
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1554,20 +1550,7 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 36286
-    - m_Data: 36288
-    - m_Data: 36364
-    - m_Data: 36366
-    - m_Data: 36368
-    - m_Data: 36370
-    - m_Data: 36372
-    - m_Data: 36374
-    - m_Data: 36376
-    - m_Data: 36378
-    - m_Data: 36380
-    - m_Data: 36382
-    - m_Data: 36384
-    - m_Data: 36386
+    - m_Data: 36312
     - m_Data: 36388
     - m_Data: 36390
     - m_Data: 36392
@@ -1595,6 +1578,21 @@ MonoBehaviour:
     - m_Data: 36436
     - m_Data: 36438
     - m_Data: 36440
+    - m_Data: 36442
+    - m_Data: 36444
+    - m_Data: 36446
+    - m_Data: 36448
+    - m_Data: 36450
+    - m_Data: 36452
+    - m_Data: 36454
+    - m_Data: 36456
+    - m_Data: 36458
+    - m_Data: 36460
+    - m_Data: 36462
+    - m_Data: 36464
+    - m_Data: 36594
+    - m_Data: 36626
+    - m_Data: 36628
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1622,26 +1620,14 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: []
+    scrollPos: {x: 0, y: 1635}
+    m_SelectedIDs:
+    - m_Data: 35824
     m_LastClickedID:
-      m_Data: 0
+      m_Data: 35824
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 36286
-    - m_Data: 36288
-    - m_Data: 36364
-    - m_Data: 36366
-    - m_Data: 36368
-    - m_Data: 36370
-    - m_Data: 36372
-    - m_Data: 36374
-    - m_Data: 36376
-    - m_Data: 36378
-    - m_Data: 36380
-    - m_Data: 36382
-    - m_Data: 36384
-    - m_Data: 36386
+    - m_Data: 36312
     - m_Data: 36388
     - m_Data: 36390
     - m_Data: 36392
@@ -1669,10 +1655,25 @@ MonoBehaviour:
     - m_Data: 36436
     - m_Data: 36438
     - m_Data: 36440
+    - m_Data: 36442
+    - m_Data: 36444
+    - m_Data: 36446
+    - m_Data: 36448
+    - m_Data: 36450
+    - m_Data: 36452
+    - m_Data: 36454
+    - m_Data: 36456
+    - m_Data: 36458
+    - m_Data: 36460
+    - m_Data: 36462
+    - m_Data: 36464
+    - m_Data: 36594
+    - m_Data: 36626
+    - m_Data: 36628
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Tree
-      m_OriginalName: Tree
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
@@ -1680,10 +1681,10 @@ MonoBehaviour:
         width: 0
         height: 0
       m_UserData:
-        m_Data: 36246
+        m_Data: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
       m_ClientGUIView: {fileID: 12}
@@ -1696,9 +1697,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: []
+    m_SelectedInstanceIDs:
+    - m_Data: 35824
     m_LastClickedEntityId:
-      m_Data: 0
+      m_Data: 35824
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:

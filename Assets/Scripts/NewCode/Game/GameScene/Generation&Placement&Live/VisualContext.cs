@@ -2,12 +2,14 @@
 {
     public struct VisualContext
     {
-        public GeneralPalette GeneralPalette;
-        public SpriteOrderOptions SpriteOrder;
-        public Field Field;
-        public ISpatialMap SpatialMap;
+        public readonly GeneralPalette GeneralPalette;
+        public readonly SpriteOrderOptions SpriteOrder;
+        public readonly  Field Field;
+        public readonly ISpatialMap SpatialMap;
+        
+        private readonly InputManager _inputManager;
+        
         public IPalette SpecialPalette;
-        private InputManager _inputManager;
         public bool Color => _inputManager.Color;
         
         public VisualContext(GameConfig config, Field field, ISpatialMap spatialMap, InputManager inputManager)

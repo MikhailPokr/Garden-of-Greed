@@ -2,6 +2,7 @@
 {
     public enum EntityType
     {
+        None,
         Tree,
         Fruit,
         Berry,

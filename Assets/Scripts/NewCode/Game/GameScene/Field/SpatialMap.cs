@@ -8,8 +8,13 @@ namespace Garden
     {
         private readonly FieldOptions _fieldOptions;
 
+        public (Vector2Int boundsX, Vector2Int boundsY) Bounds =>
+            (new Vector2Int(_fieldOptions.Bounds.xMin, _fieldOptions.Bounds.xMax),
+                new Vector2Int(_fieldOptions.Bounds.yMin, _fieldOptions.Bounds.yMax));
+        
         public Dictionary<Vector2Int, EntityType> EntitiesMainCell { get; }
         public Dictionary<Vector2Int, Dictionary<EntityType, int>> EntitiesFreeCell { get; }
+        public Dictionary<Vector2Int, EntityType[]> EntitiesSubCell { get; }
 
         private static readonly Vector2Int[][] NeighborDirections = new Vector2Int[][]
         {
@@ -35,12 +40,19 @@ namespace Garden
 
         private List<EntityType> _mainCellEntity = new List<EntityType>()
         {
-            EntityType.Tree
+            EntityType.Tree,
+            EntityType.DeadShoot
         };
 
         private List<EntityType> _freeCellEntity = new List<EntityType>()
         {
             EntityType.Fruit,
+        };
+
+        private List<EntityType> _subCellEntity = new List<EntityType>()
+        {
+            EntityType.Grass,
+            EntityType.Berry
         };
         
         public SpatialMap(
@@ -64,6 +76,16 @@ namespace Garden
                 if (!EntitiesFreeCell[pos].ContainsKey(entity))
                     EntitiesFreeCell[pos][entity] = 0;
                 EntitiesFreeCell[pos][entity]++;
+            }
+        }
+
+        public void OccupySubTile(Vector2Int pos, int subCell, EntityType entity)
+        {
+            if (_subCellEntity.Contains(entity))
+            {
+                if (!EntitiesSubCell.ContainsKey(pos))
+                    EntitiesSubCell[pos] = new EntityType[6];
+                EntitiesSubCell[pos][subCell] = entity;
             }
         }
 
@@ -102,15 +124,12 @@ namespace Garden
 
             return list;
         }
-        
-        public Vector3 GetPoint(Vector2Int position)
+
+        public Vector3 GetPoint(IEntityData data)
         {
-            float xOffset = (position.y & 1) * (_fieldOptions.CellWidth / 2f);
-
-            float worldX = (position.x * _fieldOptions.CellWidth) + xOffset;
-            float worldY = -position.y * _fieldOptions.RowHeight;
-
-            return _fieldOptions.Center + new Vector3(worldX, worldY, 0);
+            if (data is ISubEntity subEntity)
+                return GetPoint(subEntity.Position, subEntity.SubPosition);
+            return GetPoint(data.Position);
         }
 
         public Vector2Int GetPosition(Vector3 worldPosition)
@@ -144,5 +163,63 @@ namespace Garden
 
             return bestCell;
         }
+        
+        public Vector3 GetPoint(Vector2Int position)
+        {
+            float xOffset = (position.y & 1) * (_fieldOptions.CellWidth / 2f);
+
+            float worldX = (position.x * _fieldOptions.CellWidth) + xOffset;
+            float worldY = -position.y * _fieldOptions.RowHeight;
+
+            return _fieldOptions.Center + new Vector3(worldX, worldY, 0);
+        }
+
+        public Vector3 GetPoint(Vector2Int position, int subPosition)
+        {
+            /*if (position != Vector2Int.zero)
+                return new Vector3(int.MaxValue, int.MaxValue, int.MaxValue);*/
+            
+            Vector3 center = GetPoint(position);
+            float cw = _fieldOptions.CellWidth;
+            float rh = _fieldOptions.RowHeight;
+
+            Vector3 offset = Vector3.zero;
+            
+            int yBit = position.y & 1;
+
+            switch (subPosition)
+            {
+                case 0:
+                    offset = (center - GetPoint(new Vector2Int(position.x - 2 + yBit, position.y + 3))) / _fieldOptions.SubCellCoefficient;
+                    offset.y -= _fieldOptions.SubCellOffsetY;
+                    break;
+        
+                case 1: 
+                    offset = (center - GetPoint(new Vector2Int(position.x - 3, position.y))) / _fieldOptions.SubCellCoefficient;
+                    break;
+        
+                case 2:
+                    offset = (center - GetPoint(new Vector2Int(position.x - 2 + yBit, position.y - 3))) / _fieldOptions.SubCellCoefficient;
+                    offset.y += _fieldOptions.SubCellOffsetY;
+                    break;
+        
+                case 3: 
+                    offset = (center - GetPoint(new Vector2Int(position.x + 1 + yBit, position.y - 3))) / _fieldOptions.SubCellCoefficient;
+                    offset.y += _fieldOptions.SubCellOffsetY;
+                    break;
+        
+                case 4: 
+                    offset = (center - GetPoint(new Vector2Int(position.x + 3, position.y))) / _fieldOptions.SubCellCoefficient;
+                    break;
+        
+                case 5: 
+                    offset = (center - GetPoint(new Vector2Int(position.x + 1 + yBit, position.y + 3))) / _fieldOptions.SubCellCoefficient;
+                    offset.y -= _fieldOptions.SubCellOffsetY;
+                    break;
+            }
+
+            return center + offset;
+        }
+
     }
 }

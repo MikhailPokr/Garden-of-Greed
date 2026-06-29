@@ -16,10 +16,10 @@ namespace Garden
 
         public GenomeFactory(EntityBundle treeBundle, EntityBundle fruitBundle, MutationOptions mutationOptions)
         {
-            _treeOptions = (TreeGenerationOptions)treeBundle.GenerationOptions;;
-            _fruitOptions = (FruitGenerationOptions)fruitBundle.GenerationOptions;;
+            _treeOptions = (TreeGenerationOptions)treeBundle.GenerationOptions;
+            _fruitOptions = (FruitGenerationOptions)fruitBundle.GenerationOptions;
             _treePalette = (ITreePalette)treeBundle.Palette;
-            _fruitPalette = (IFruitPalette)fruitBundle.Palette;;
+            _fruitPalette = (IFruitPalette)fruitBundle.Palette;
             _mutationOptions = mutationOptions;
         }
 
@@ -81,9 +81,11 @@ namespace Garden
             return genome;
         }
 
+        public int GetSeed(int seed, int index) => SeedUtils.GetNewSeed(seed, index);
+
         public TreeGenomeConfig Mutate(TreeGenomeConfig treeGenomeConfig, int childIndex)
         {
-            int childSeed = SeedUtils.GetNewSeed(treeGenomeConfig.Seed, childIndex);
+            int childSeed = GetSeed(treeGenomeConfig.Seed, childIndex);
             List<int> Indexes = new List<int>(treeGenomeConfig.Indexes);
             Indexes.Add(childIndex);
             
@@ -119,7 +121,7 @@ namespace Garden
         
         public TreeGenomeConfig MutateWithQuality(TreeGenomeConfig treeGenomeConfig, int fruitIndex)
         {
-            int childSeed = SeedUtils.GetNewSeed(treeGenomeConfig.Seed, fruitIndex);
+            int childSeed = GetSeed(treeGenomeConfig.Seed, fruitIndex);
             List<int> Indexes = new List<int>(treeGenomeConfig.Indexes);
             Indexes.Add(fruitIndex);
 

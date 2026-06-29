@@ -48,15 +48,6 @@ namespace Garden
             
             return newFruitData;
         }
-        
-        public FruitData Create() => Create(SeedUtils.GetNewSeed(_seed, _seedUsages++));
-
-        public FruitData Create(int seed)
-        {
-            var genome = _genomeFactory.Create(seed);
-
-            return Create(new TreeData(new TreeDataConfig() { TreeGenomeConfig = genome }), 0);
-        }
 
         private FruitData Create(TreeData treeData, int childIndex)
         {

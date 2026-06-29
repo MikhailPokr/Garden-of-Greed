@@ -23,7 +23,6 @@
         AutoBreedMutation = 301,
         AutoBreedLocation = 302,
         
-        
         //Fruit
         FruitCount = 401,
         LastFruitStage = 402,
@@ -34,5 +33,8 @@
         FruitColor = 407,
         FruitColorOffset = 408,
         StartQuality = 408,
+        
+        //Grass
+        SubCell = 500,
     }
 }

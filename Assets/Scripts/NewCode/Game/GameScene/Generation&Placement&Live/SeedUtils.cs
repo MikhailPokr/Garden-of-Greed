@@ -27,6 +27,7 @@ namespace Garden
         
         public static int GetRandom(int seed, ParamType salt, int max) => GetRandom(seed, (int)salt, 0, max);
         public static int GetRandom(int seed, ParamType salt, Vector2Int range) => GetRandom(seed, (int)salt, range.x, range.y);
+        public static int GetRandom(int seed, int salt, Vector2Int range) => GetRandom(seed, salt, range.x, range.y);
         public static int GetRandom(int seed, int salt, int min, int max)
         {
             seed = (seed ^ salt) * FNV;
@@ -39,7 +40,7 @@ namespace Garden
             return num;
         }
         public static float GetRandom(int seed, ParamType salt, Vector2 range) => GetRandom(seed, (int)salt, range.x, range.y);
-
+        public static float GetRandom(int seed, int salt, Vector2 range) => GetRandom(seed, salt, range.x, range.y);
         public static float GetRandom(int seed, int salt, float min, float max)
         {
             seed = (seed ^ salt) * FNV;

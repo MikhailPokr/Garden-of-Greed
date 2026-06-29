@@ -30,8 +30,8 @@ namespace Garden
             
             _crownSpriteRenderer.enabled = false;
             
-            _treeSpriteRenderer.sortingOrder = _context.SpriteOrder.GetOrder(entityData.Position.Value.y, SpriteType.Tree);
-            _crownSpriteRenderer.sortingOrder =  _context.SpriteOrder.GetOrder(entityData.Position.Value.y, SpriteType.Crown);
+            _treeSpriteRenderer.sortingOrder = _context.SpriteOrder.GetOrder(entityData.Position.y, SpriteType.Tree);
+            _crownSpriteRenderer.sortingOrder =  _context.SpriteOrder.GetOrder(entityData.Position.y, SpriteType.Crown);
         }
 
         protected override void OnCommand(ICommand[] commands)
@@ -146,7 +146,6 @@ namespace Garden
 
             _colorSequence.Chain(Tween.Color(_treeSpriteRenderer, _context.GeneralPalette.NoColor, duration));
             _colorSequence.Group(Tween.Color(_crownSpriteRenderer, _context.GeneralPalette.NoColor, duration));
-                
         }
         
         protected override void PlayColorSequence(bool toFullColor)

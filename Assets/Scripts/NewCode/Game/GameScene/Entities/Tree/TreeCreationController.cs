@@ -28,31 +28,25 @@ namespace Garden
 
         private void CreateViaSeed(int seed, Vector2Int position)
         {
-            TreeData treeData = _factory.Create(seed);
-            treeData.SetPosition(position);
+            TreeData treeData = _factory.Create(seed, position);
             
-            SignalBus<EntityCreationRequestSignal>.Fire(new EntityCreationRequestSignal(
-                treeData,
-                position));
+            SignalBus<EntityCreationSignal>.Fire(new EntityCreationSignal(
+                treeData));
         }
 
         private void CreateViaFruit(FruitData fruitData, Vector2Int position)
         {
-            var tree = _factory.Create(fruitData);
+            var tree = _factory.Create(fruitData, position);
             if (fruitData.DataConfig.IsGrowth)
             {
-                tree.SetPosition(position);
-                SignalBus<EntityCreationRequestSignal>.Fire(new EntityCreationRequestSignal(
-                    tree,
-                    position));
+                SignalBus<EntityCreationSignal>.Fire(new EntityCreationSignal(
+                    tree));
             }
             else
             {
-                DeadShootData deadShoot = new DeadShootData(tree.DataConfig);
-                deadShoot.SetPosition(position);
-                SignalBus<EntityCreationRequestSignal>.Fire(new EntityCreationRequestSignal(
-                    deadShoot,
-                    position));
+                DeadShootData deadShoot = new DeadShootData(tree.DataConfig, position);
+                SignalBus<EntityCreationSignal>.Fire(new EntityCreationSignal(
+                    deadShoot));
             }
         }
         
@@ -62,18 +56,12 @@ namespace Garden
                 .Where(_spatialMap.IsTileFreeAndValid)
                 .ToList();
 
-            List<TreeData> newTreeData = _factory.Create(treeData);
+            List<TreeData> newTreeData = _factory.Create(treeData, placesRaw);
             
             foreach (var tree in newTreeData)
             {
-                if (placesRaw.Count == 0)
-                    break;
-                Vector2Int place = placesRaw[SeedUtils.GetRandom(tree.TreeGenome.Seed, ParamType.AutoBreedLocation, placesRaw.Count)];
-                placesRaw.Remove(place);
-                tree.SetPosition(place);
-                SignalBus<EntityCreationRequestSignal>.Fire(new EntityCreationRequestSignal(
-                    tree,
-                    place));
+                SignalBus<EntityCreationSignal>.Fire(new EntityCreationSignal(
+                    tree));
             }
             
         }

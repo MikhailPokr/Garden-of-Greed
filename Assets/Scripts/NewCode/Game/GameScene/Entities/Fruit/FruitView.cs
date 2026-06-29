@@ -23,7 +23,7 @@ namespace Garden
             
             base.Init(entityData, context);
             
-            _fruitSpriteRenderer.sortingOrder = _context.SpriteOrder.GetOrder(entityData.Position.Value.y, SpriteType.Fruit);
+            _fruitSpriteRenderer.sortingOrder = _context.SpriteOrder.GetOrder(entityData.Position.y, SpriteType.Fruit);
 
             _color = ApplyDeviation(_fruitPalette.GetColor(_fruitData.TreeGenome.TreeType, _fruitData.TreeGenome.FruitColorIndex),
                 _fruitData.DataConfig.ColorOffset);

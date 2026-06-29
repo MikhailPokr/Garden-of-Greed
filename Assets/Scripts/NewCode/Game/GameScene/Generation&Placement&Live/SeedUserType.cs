@@ -2,9 +2,10 @@
 {
     public enum SeedUserType
     {
-        Field,
         TreeFactory,
         FruitFactory,
+        GrassFactory,
         Shop,
+        GrassGenerator,
     }
 }

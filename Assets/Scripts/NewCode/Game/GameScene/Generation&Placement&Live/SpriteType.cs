@@ -5,6 +5,9 @@
     {
         Tree,
 		Crown,
-		Fruit
+		Fruit,
+		GrassLine1,
+		GrassLine2,
+		GrassLine3
     }
 }

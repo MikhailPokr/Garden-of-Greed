@@ -6,40 +6,34 @@ namespace Garden
 {
     public class TreeData : IEntityData
     {
-        public TreeDataConfig DataConfig;
+        public EntityType EntityType => EntityType.Tree;
+        public Vector2Int Position { get; private set; }
+        public int Cost {get; private set;}
+        public event Action<ICommand[]> CommandRequest;
+
+        public TreeDataConfig DataConfig { get; }
         public TreeGenomeConfig TreeGenome => DataConfig.TreeGenomeConfig;
         
-        protected int _stage;
-        protected bool _timerEnabled;
         public int BreedCount { get; private set; }
         public int FruitCount { get; private set; }
-        public bool IsPit { get; protected set; }
-        public bool IsSprout => _stage < TreeGenome.LastGrowthStage;
-        public Vector2Int? Position { get; private set; }
-        public int Cost {get; private set;}
-        public EntityType EntityType => EntityType.Tree;
-        public event Action<ICommand[]> CommandRequest;
+        
+        private int _stage;
+        private bool _timerEnabled;
         private Queue<ICommand[]> _commandList;
 
-        public TreeData(TreeDataConfig dataConfig)
+        public TreeData(TreeDataConfig dataConfig, Vector2Int position)
         {
             DataConfig = dataConfig;
             _stage = 0;
             _timerEnabled = false;
-            Position = null;
+            Position = position;
         }
         
         public void Start()
         {
             _timerEnabled = true;
-            IsPit = true;
             _commandList = CreateList();
             ProcessCommands(_commandList.Dequeue());
-        }
-
-        public void SetPosition(Vector2Int position)
-        {
-            Position = position;
         }
 
         public void Update(float currentTime)
@@ -54,10 +48,7 @@ namespace Garden
         public void AddFruit(int fruitCount) => FruitCount += fruitCount;
         public void AddBreed(int breedCount) => BreedCount += breedCount;
         
-        public void ForceUseCommands(params ICommand[] commands)
-        {
-            ProcessCommands(commands);
-        }
+        public void ForceUseCommands(params ICommand[] commands) => ProcessCommands(commands);
 
         protected virtual Queue<ICommand[]> CreateList()
         {

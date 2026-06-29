@@ -13,7 +13,7 @@ namespace Garden
         private bool _timerEnabled;
         public int DropCount { get; private set; }
         
-        public Vector2Int? Position { get; private set; }
+        public Vector2Int Position { get; private set; }
         public event Action<ICommand[]> CommandRequest;
         public EntityType EntityType => EntityType.Fruit;
         
@@ -23,8 +23,7 @@ namespace Garden
         {
             HostEntity = treeData;
             DataConfig = dataConfig;
-            if (HostEntity.Position != null)
-                Position = HostEntity.Position;
+            Position = HostEntity.Position;
             DropCount = 0;
 
             treeData.CommandRequest += OnHostCommand;
@@ -48,10 +47,7 @@ namespace Garden
             ProcessCommands(new DestroyCommand(this));
         }
         
-        public void ForceUseCommands(params ICommand[] commands)
-        {
-            ProcessCommands(commands);
-        }
+        public void ForceUseCommands(params ICommand[] commands) => ProcessCommands(commands);
         
         protected virtual void ProcessCommands(params ICommand[] commands)
         {
