@@ -21,7 +21,7 @@ namespace Garden
 
         private void OnClick(ToolType type)
         {
-            _toolManager.SwithTool(type);
+            _toolManager.SwitchTool(type);
             
             foreach (var toolSelectionUI in _toolSelectionUIs)
             {

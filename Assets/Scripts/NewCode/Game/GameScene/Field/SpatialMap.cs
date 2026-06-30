@@ -61,6 +61,7 @@ namespace Garden
             _fieldOptions = fieldOptions;
             EntitiesMainCell = new Dictionary<Vector2Int, EntityType>();
             EntitiesFreeCell = new  Dictionary<Vector2Int, Dictionary<EntityType, int>>();
+            EntitiesSubCell = new  Dictionary<Vector2Int, EntityType[]>();
         }
 
         public void OccupyTile(Vector2Int pos, EntityType entity)
@@ -176,9 +177,6 @@ namespace Garden
 
         public Vector3 GetPoint(Vector2Int position, int subPosition)
         {
-            /*if (position != Vector2Int.zero)
-                return new Vector3(int.MaxValue, int.MaxValue, int.MaxValue);*/
-            
             Vector3 center = GetPoint(position);
             float cw = _fieldOptions.CellWidth;
             float rh = _fieldOptions.RowHeight;

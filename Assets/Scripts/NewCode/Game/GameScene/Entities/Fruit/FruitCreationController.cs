@@ -11,7 +11,6 @@ namespace Garden
         private FruitFactory _factory;
         
         public FruitCreationController(
-            int seed,
             EntityBundle bundle,
             ISpatialMap spatialMap,
             GenomeFactory genomeFactory,
@@ -19,7 +18,7 @@ namespace Garden
         {
             _options = bundle.GenerationOptions as FruitGenerationOptions;
             _spatialMap = spatialMap;
-            _factory = new FruitFactory(seed, bundle.Palette as IFruitPalette, _options, genomeFactory, player);
+            _factory = new FruitFactory(bundle.Palette as IFruitPalette, _options, genomeFactory, player);
             
             SignalBus<FruitProduceSignal>.OnEvent += OnFruitProduce;
         }

@@ -22,6 +22,7 @@ namespace Garden
         private TreeShop _treeShop;
         private Arm _arm;
         private SaleTool _saleTool;
+        private Scythe _scythe;
         
         Dictionary<EntityType, IEntityCreationController> _entityControllers;
         
@@ -48,18 +49,20 @@ namespace Garden
             _arm = new Arm();
             _treeShop = new TreeShop(_seed,  _player, 10);
             _saleTool = new SaleTool(_player);
+            _scythe = new Scythe();
+            
             List<ITool> tools = new List<ITool>()
             {
                 _arm,
                 _treeShop,
-                _saleTool
+                _saleTool,
+                _scythe
             };
             
             _toolManager = new ToolManager(_spatialMap, tools);
             
             _toolSelectorsController.Init(_toolManager);
             _moneyCounter.Init(_player);
-            
 
             EntityBundle treeBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Tree);
             EntityBundle fruitBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Fruit);
@@ -80,11 +83,15 @@ namespace Garden
                 _genomeFactory,
                 _player));
             _entityControllers.Add(EntityType.Fruit, new FruitCreationController(
-                _gameConfig.Seed,
                 fruitBundle,
                 _spatialMap,
                 _genomeFactory,
                 _player));
+            _entityControllers.Add(EntityType.Grass, new GrassCreationController(
+                _gameConfig.Seed,
+                grassBundle));
+            
+            _player.Start();
         }
 
         private void Update()

@@ -24,7 +24,7 @@ namespace Garden
             SignalBus<FieldClickSignal>.OnEvent += OnFieldInteract;
         }
         
-        public void SwithTool(ToolType toolType)
+        public void SwitchTool(ToolType toolType)
         {
             CurrentTool = toolType;
             _toolList[CurrentTool].Activate();
@@ -44,6 +44,12 @@ namespace Garden
                     }
                     break;
                 }
+                case ToolType.Scythe:
+                    if (signal.InteractionType == InteractionType.Click)
+                    {
+                        _toolList[CurrentTool].Process(signal);
+                    }
+                    break;
             }
         }
 
@@ -55,6 +61,7 @@ namespace Garden
                     if (signal.Entity.EntityType == EntityType.Fruit)
                         goto case ToolType.Sale;
                     break;
+                case ToolType.Scythe:
                 case ToolType.Sale:
                 {
                     if (signal.InteractionType == InteractionType.Click)

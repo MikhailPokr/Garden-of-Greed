@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676ad407f32c4fcb94334093105e9284, type: 3}
   m_Name: GrassPalette
   m_EditorClassIdentifier: Assembly-CSharp::Garden.GrassPalette
-  <GrassSprites>k__BackingField: []
+  <GrassSprites>k__BackingField:
+  - {fileID: 5001313014596697494, guid: 7510fcc826ce5b14a8f68e92d1016225, type: 3}
+  - {fileID: 6626789566203449431, guid: 7510fcc826ce5b14a8f68e92d1016225, type: 3}
+  - {fileID: -3323135026486930811, guid: 7510fcc826ce5b14a8f68e92d1016225, type: 3}

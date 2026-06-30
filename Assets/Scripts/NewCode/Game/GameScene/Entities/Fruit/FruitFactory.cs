@@ -13,11 +13,7 @@ namespace Garden
         
         private readonly GenomeFactory _genomeFactory;
         
-        private readonly int _seed;
-        private int _seedUsages;
-        
         public FruitFactory(
-            int globalSeed,
             IFruitPalette palette,
             FruitGenerationOptions options,
             GenomeFactory genomeFactory,
@@ -27,9 +23,6 @@ namespace Garden
             _options = options;
             _genomeFactory = genomeFactory;
             _player = player;
-            
-            _seed = SeedUtils.GetNewSeed(globalSeed, SeedUserType.FruitFactory);
-            _seedUsages = 0;
         }
         public List<FruitData> Create(TreeData treeData)
         {

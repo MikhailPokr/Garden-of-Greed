@@ -20,14 +20,14 @@ namespace Garden
 
         public void Process(IClickSignal signal)
         {
-            if (signal is EntityClickSignal entityClickSignal)
+            switch (signal)
             {
-                SetInArm(entityClickSignal);
-            }
-
-            if (signal is FieldClickSignal fieldClickSignal)
-            {
-                PlaceFruit(fieldClickSignal);
+                case FieldClickSignal fieldClickSignal:
+                    PlaceFruit(fieldClickSignal);
+                    break;
+                case EntityClickSignal entityClickSignal:
+                    SetInArm(entityClickSignal);
+                    break;
             }
         }
             

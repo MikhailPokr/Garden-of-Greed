@@ -5,5 +5,6 @@
         Arm = 0,
         TreeShop = 1,
         Sale = 2,
+        Scythe = 3
     }
 }

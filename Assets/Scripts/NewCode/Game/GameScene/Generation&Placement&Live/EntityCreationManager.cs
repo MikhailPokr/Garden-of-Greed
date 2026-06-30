@@ -24,6 +24,7 @@ namespace Garden
             
             _updatableEntities = new List<IEntityData>();
             _createdViews = new Dictionary<IEntityData, EntityView>();
+            _stackingSubEntities = new Dictionary<(Vector2Int position, int subPosition), IStackingSubEntity>();
 
             SignalBus<EntityCreationSignal>.OnEvent += OnCreateEntity;
         }

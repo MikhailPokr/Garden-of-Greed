@@ -36,5 +36,6 @@
         
         //Grass
         SubCell = 500,
+        GrowTime = 501
     }
 }

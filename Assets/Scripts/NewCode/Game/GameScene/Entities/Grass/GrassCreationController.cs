@@ -10,12 +10,12 @@ namespace Garden
         
         private readonly GrassFactory _grassFactory;
 
-        public GrassCreationController(int globalSeed, GrassGenerationOptions options, GrassPalette palette)
+        public GrassCreationController(int globalSeed, EntityBundle bundle)
         {
-            _options = options;
-            _palette = palette;
+            _options = bundle.GenerationOptions as GrassGenerationOptions;
+            _palette = bundle.Palette as GrassPalette;
 
-            _grassFactory = new GrassFactory(globalSeed, options);
+            _grassFactory = new GrassFactory(globalSeed, _options, _palette);
             
             SignalBus<GrassGrowingSignal>.OnEvent += OnGrassGrowing;
         }

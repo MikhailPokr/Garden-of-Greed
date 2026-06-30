@@ -91,12 +91,17 @@ namespace Garden
 
         protected virtual void ProcessCommands(ICommand[] commands)
         {
-            foreach (var command in commands)
+            for (var i = 0; i < commands.Length; i++)
             {
+                var command = commands[i];
                 switch (command)
                 {
                     case ChangeCostCommand changeCostCommand:
                         Cost = changeCostCommand.Value;
+                        break;
+                    case MowCommand mowCommand:
+                        if (_stage > TreeGenome.LastGrowthStage)
+                            commands[Array.IndexOf(commands, mowCommand)] = null;
                         break;
                     case SaleCommand saleCommand:
                         saleCommand.Use();

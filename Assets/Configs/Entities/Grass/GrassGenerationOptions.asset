@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d8b0f207d7d4210aacce7a3f6d3ad2f, type: 3}
   m_Name: GrassGenerationOptions
   m_EditorClassIdentifier: Assembly-CSharp::Garden.GrassGenerationOptions
+  _generationTimeRange: {x: 1, y: 3}
+  _countPerUseRange: {x: 1, y: 3}
+  _growTimeRange: {x: 20, y: 100}

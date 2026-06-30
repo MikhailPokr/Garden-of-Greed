@@ -25,7 +25,7 @@ namespace Garden
         {
             if (currentTime < _timer)
                 return;
-            _timer += SeedUtils.GetRandom(_seed, _useCount, _options.GetGenerationTimeRange());
+            _timer += SeedUtils.GetRandom(_seed, _useCount, _options.GenerationTimeRange());
             var count = SeedUtils.GetRandom(_seed, _useCount, _options.CountPerUseRange());
             
             var bounds = _spatialMap.Bounds;
@@ -34,7 +34,7 @@ namespace Garden
             {
                 positions[i] = new Vector2Int(
                     SeedUtils.GetRandom(_seed, _useCount + i, bounds.boundsX), 
-                    SeedUtils.GetRandom(_seed, _useCount + i, bounds.boundsY));
+                    SeedUtils.GetRandom(_seed, _useCount + i*2, bounds.boundsY));
             }
             
             _useCount += count;

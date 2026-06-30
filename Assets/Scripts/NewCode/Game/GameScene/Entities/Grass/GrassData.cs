@@ -21,6 +21,8 @@ namespace Garden
             DataConfig = dataConfig;
             Position = position;
             SubPosition = subPosition;
+            
+            _stage = 0;
         }
 
         public void Start()
@@ -33,13 +35,16 @@ namespace Garden
             _timer += deltaTime;
             if (_timer < DataConfig.GrowTime)
                 return;
-            _timer = _timer - DataConfig.GrowTime;
+            _timer -= DataConfig.GrowTime;
             Grow();
         }
         public void Grow()
         {
+            if (DataConfig.MaxStage <= _stage)
+                return;
             ProcessCommand(
                 new ChangeSpriteCommand(_stage),
+                new ChangeColorCommand(0),
                 new MarkChangesCommand(),
                 new CounterUpCommand());
         }

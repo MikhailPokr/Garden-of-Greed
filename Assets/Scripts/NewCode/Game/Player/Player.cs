@@ -15,6 +15,11 @@ namespace Garden
             StartOptions = startOptions;
             //Stamina = StartOptions.MaxStamina;
             SignalBus<ChangeMoneySignal>.OnEvent += OnChangeMoney;
+            
+        }
+
+        public void Start()
+        {
             SignalBus<ChangeMoneySignal>.Fire(new ChangeMoneySignal(StartOptions.StartMoney));
         }
 
