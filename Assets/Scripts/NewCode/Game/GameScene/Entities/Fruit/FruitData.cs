@@ -15,6 +15,7 @@ namespace Garden
         
         public Vector2Int Position { get; private set; }
         public event Action<ICommand[]> CommandRequest;
+        public CellType CellType => CellType.Free;
         public EntityType EntityType => EntityType.Fruit;
         
         public int Cost { get; private set; }

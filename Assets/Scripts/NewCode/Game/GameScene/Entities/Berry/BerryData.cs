@@ -5,6 +5,7 @@ namespace Garden
 {
     public class BerryData : IEntityData
     {
+        public CellType CellType { get; }
         public EntityType EntityType => EntityType.Berry;
 
         public Vector2Int Position { get; }

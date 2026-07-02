@@ -5,6 +5,7 @@ namespace Garden
 {
     public class GrassData : IStackingSubEntity
     {
+        public CellType CellType => CellType.Sub;
         public EntityType EntityType => EntityType.Grass;
         public GrassDataConfig DataConfig { get; }
         public Vector2Int Position { get; private set; }
@@ -46,22 +47,26 @@ namespace Garden
                 new ChangeSpriteCommand(_stage),
                 new ChangeColorCommand(0),
                 new MarkChangesCommand(),
-                new CounterUpCommand());
+                new CounterUpCommand(new CellData(CellType.Sub, EntityType.Grass, Position, SubPosition)));
         }
         public void ForceUseCommands(params ICommand[] commands) => ProcessCommand(commands);
 
         private void ProcessCommand(params ICommand[] commands)
         {
-            foreach (var command in commands)
+            for (var i = 0; i < commands.Length; i++)
             {
+                var command = commands[i];
                 switch (command)
                 {
                     case CounterUpCommand:
                         _stage++;
                         break;
+                    case SaleCommand:
+                        commands[i] = null;
+                        break;
                 }
             }
-            
+
             CommandRequest?.Invoke(commands);
         }
 

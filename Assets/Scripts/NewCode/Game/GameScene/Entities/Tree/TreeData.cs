@@ -6,6 +6,7 @@ namespace Garden
 {
     public class TreeData : IEntityData
     {
+        public CellType CellType => CellType.Main;
         public EntityType EntityType => EntityType.Tree;
         public Vector2Int Position { get; private set; }
         public int Cost {get; private set;}
@@ -20,6 +21,7 @@ namespace Garden
         private int _stage;
         private bool _timerEnabled;
         private Queue<ICommand[]> _commandList;
+        private GeoMap _geoMap;
 
         public TreeData(TreeDataConfig dataConfig, Vector2Int position)
         {
@@ -40,7 +42,7 @@ namespace Garden
         {
             if (!_timerEnabled)
                 return;
-            if (currentTime >= DataConfig.GetNextTimer(_stage))
+            if (currentTime >= DataConfig.GetNextTimer(_stage, Position))
             {
                 ProcessCommands(_commandList.Dequeue());
             }
@@ -72,7 +74,7 @@ namespace Garden
                 new ChangeColorCommand(TreeColorCommandsLegend.Sprout));
             commandConfigurator.AddInPosition(Mathf.RoundToInt(TreeGenome.LastGrowthStage));
             if (TreeGenome.TreeType.HasFlag(TreeType.Fruit))
-                commandConfigurator.AddInRange(Mathf.RoundToInt(TreeGenome.LastGrowthStage) + 1, Mathf.RoundToInt(TreeGenome.MaxStage),
+                commandConfigurator.AddInRange(Mathf.RoundToInt(TreeGenome.LastGrowthStage) + 1, Mathf.RoundToInt(TreeGenome.LastFruitStage),
                     new FruitProduceCommand(this));
             if (!TreeGenome.TreeType.HasFlag(TreeType.Fruit))
                 commandConfigurator.AddInPosition(Mathf.RoundToInt(TreeGenome.MaxStage) - 1, 
@@ -118,6 +120,9 @@ namespace Garden
                         break;
                     case FruitProduceCommand fruitProduceCommand:
                         fruitProduceCommand.Use();
+                        break;
+                    case BreedCommand autoBreedSignal:
+                        autoBreedSignal.Use();
                         break;
                 }
             }

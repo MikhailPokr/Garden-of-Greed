@@ -23,6 +23,7 @@ namespace Garden
         private Arm _arm;
         private SaleTool _saleTool;
         private Scythe _scythe;
+        private GeoMap _geoMap;
         
         Dictionary<EntityType, IEntityCreationController> _entityControllers;
         
@@ -36,15 +37,20 @@ namespace Garden
             _player = new Player(_gameConfig.StartOptions);
             
             _spatialMap = new SpatialMap(_gameConfig.FieldOptions);
+            
 
             _field = Instantiate(_gameConfig.FieldPrefab);
             _field.Init(_spatialMap, _gameConfig.GeneralPalette, _gameConfig.FieldOptions);
             
             _inputManager = new InputManager();
             
+            VisualContext visualContext = new VisualContext(_gameConfig, _field, _spatialMap, _inputManager); 
+            
             _creationManager = new EntityCreationManager(
-                new VisualContext(_gameConfig, _field, _spatialMap, _inputManager),
+                visualContext,
                 _gameConfig.EntityBundles);
+            
+            _geoMap = new GeoMap(visualContext);
             
             _arm = new Arm();
             _treeShop = new TreeShop(_seed,  _player, 10);
@@ -81,6 +87,7 @@ namespace Garden
                 treeBundle,
                 _spatialMap,
                 _genomeFactory,
+                _geoMap,
                 _player));
             _entityControllers.Add(EntityType.Fruit, new FruitCreationController(
                 fruitBundle,

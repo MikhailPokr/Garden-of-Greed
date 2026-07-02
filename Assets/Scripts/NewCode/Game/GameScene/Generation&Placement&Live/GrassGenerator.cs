@@ -7,7 +7,7 @@ namespace Garden
     {
         private readonly GrassGenerationOptions _options;
         private readonly GrassPalette _palette;
-        private readonly SpatialMap _spatialMap;
+        private readonly ISpatialMap _spatialMap;
 
         private readonly int _seed;
         private float _timer;

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Garden
@@ -12,13 +13,11 @@ namespace Garden
             (new Vector2Int(_fieldOptions.Bounds.xMin, _fieldOptions.Bounds.xMax),
                 new Vector2Int(_fieldOptions.Bounds.yMin, _fieldOptions.Bounds.yMax));
         
-        public Dictionary<Vector2Int, EntityType> EntitiesMainCell { get; }
-        public Dictionary<Vector2Int, Dictionary<EntityType, int>> EntitiesFreeCell { get; }
-        public Dictionary<Vector2Int, EntityType[]> EntitiesSubCell { get; }
+        public event Action<Vector2Int> MapUpdated;
+        public List<CellData> CellDataList { get; }
 
-        private static readonly Vector2Int[][] NeighborDirections = new Vector2Int[][]
-        {
-            new Vector2Int[]
+        private static readonly Vector2Int[][] NeighborDirections = {
+            new[]
             {
                 new Vector2Int(0, -1),
                 new Vector2Int(0, 1),
@@ -27,7 +26,7 @@ namespace Garden
                 new Vector2Int(-1, -1),
                 new Vector2Int(0, -2)
             },
-            new Vector2Int[]
+            new[]
             {
                 new Vector2Int(1, -1),
                 new Vector2Int(1, 1),
@@ -37,74 +36,42 @@ namespace Garden
                 new Vector2Int(0, -2)
             }
         };
-
-        private List<EntityType> _mainCellEntity = new List<EntityType>()
-        {
-            EntityType.Tree,
-            EntityType.DeadShoot
-        };
-
-        private List<EntityType> _freeCellEntity = new List<EntityType>()
-        {
-            EntityType.Fruit,
-        };
-
-        private List<EntityType> _subCellEntity = new List<EntityType>()
-        {
-            EntityType.Grass,
-            EntityType.Berry
-        };
         
         public SpatialMap(
             FieldOptions fieldOptions)
         {
             _fieldOptions = fieldOptions;
-            EntitiesMainCell = new Dictionary<Vector2Int, EntityType>();
-            EntitiesFreeCell = new  Dictionary<Vector2Int, Dictionary<EntityType, int>>();
-            EntitiesSubCell = new  Dictionary<Vector2Int, EntityType[]>();
+            CellDataList = new List<CellData>();
         }
 
-        public void OccupyTile(Vector2Int pos, EntityType entity)
+        public void OccupyTile(CellData data)
         {
-            if (_mainCellEntity.Contains(entity))
+            var cell = CellDataList.Find(x => x.Compare(data));
+            if (cell == null)
             {
-                EntitiesMainCell[pos] = entity;
+                CellDataList.Add(data);
+                MapUpdated?.Invoke(data.Position);
+                return;
             }
-            if (_freeCellEntity.Contains(entity))
+
+            if (cell.CellType == CellType.Main)
             {
-                if (!EntitiesFreeCell.ContainsKey(pos))
-                    EntitiesFreeCell[pos] = new Dictionary<EntityType, int>();
-                if (!EntitiesFreeCell[pos].ContainsKey(entity))
-                    EntitiesFreeCell[pos][entity] = 0;
-                EntitiesFreeCell[pos][entity]++;
+                throw new Exception($"Incorrect cell {cell.Position}");
             }
+            
+            cell.Value++;
+            MapUpdated?.Invoke(cell.Position);
         }
 
-        public void OccupySubTile(Vector2Int pos, int subCell, EntityType entity)
+        public void FreeTile(CellData data)
         {
-            if (_subCellEntity.Contains(entity))
-            {
-                if (!EntitiesSubCell.ContainsKey(pos))
-                    EntitiesSubCell[pos] = new EntityType[6];
-                EntitiesSubCell[pos][subCell] = entity;
-            }
-        }
-
-        public void FreeTile(Vector2Int pos, EntityType entity)
-        {
-            if (_mainCellEntity.Contains(entity))
-            {
-                EntitiesMainCell.Remove(pos);
-            }
-            if (_freeCellEntity.Contains(entity))
-            {
-                EntitiesFreeCell[pos][entity]--;
-            }
+            CellDataList.RemoveAll(x => x.Compare(data, true));
+            MapUpdated?.Invoke(data.Position);
         }
 
         public bool IsTileFreeAndValid(Vector2Int pos)
         {
-            return !EntitiesMainCell.ContainsKey(pos) && _fieldOptions.Bounds.Contains(pos);
+            return !CellDataList.Any(x => x.Position == pos && x.CellType == CellType.Main) && _fieldOptions.Bounds.Contains(pos);
         }
         
         public List<Vector2Int> GetNeighbors(Vector2Int position)

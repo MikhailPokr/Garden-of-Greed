@@ -12,6 +12,7 @@
         StageTime = 102,
         MaxStage = 103,
         GreenColorOffset = 104,
+        PenaltyPerPoint = 105,
         
         //Wood
         WoodCost = 200,
@@ -36,6 +37,6 @@
         
         //Grass
         SubCell = 500,
-        GrowTime = 501
+        GrowTime = 501,
     }
 }

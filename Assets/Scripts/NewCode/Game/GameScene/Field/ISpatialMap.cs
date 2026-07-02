@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Garden
@@ -6,8 +7,10 @@ namespace Garden
     public interface ISpatialMap : IGridMath
     {
         bool IsTileFreeAndValid(Vector2Int pos);
-        void OccupyTile(Vector2Int pos, EntityType entity);
-        void FreeTile(Vector2Int pos, EntityType entity);
-        void OccupySubTile(Vector2Int pos, int subCell, EntityType entity);
+        void OccupyTile(CellData data);
+        void FreeTile(CellData data);
+        event Action<Vector2Int> MapUpdated;
+        List<CellData> CellDataList { get; }
+        (Vector2Int boundsX, Vector2Int boundsY) Bounds { get; }
     }
 }

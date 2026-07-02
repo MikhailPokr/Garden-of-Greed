@@ -11,7 +11,7 @@
 
         public void Use()
         {
-            SignalBus<FruitProduceSignal>.Fire(new FruitProduceSignal(_treeData));
+            SignalBus<AutoBreedSignal>.Fire(new AutoBreedSignal(_treeData));
         }
     }
 }

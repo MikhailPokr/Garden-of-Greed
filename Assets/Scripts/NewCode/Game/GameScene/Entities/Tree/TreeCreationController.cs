@@ -9,17 +9,20 @@ namespace Garden
         private ISpatialMap _spatialMap;
         private TreeGenerationOptions _options;
         private TreeFactory _factory;
+        private GeoMap _geoMap;
         
         public TreeCreationController(
             int seed,
             EntityBundle bundle,
             ISpatialMap spatialMap,
             GenomeFactory genomeFactory,
+            GeoMap geoMap,
             Player player)
         {
             _options = bundle.GenerationOptions as TreeGenerationOptions;
             _spatialMap = spatialMap;
-            _factory = new TreeFactory(seed, _options, genomeFactory, player);
+            _geoMap = geoMap;
+            _factory = new TreeFactory(seed, _options, genomeFactory, _geoMap, player);
 
             SignalBus<ArmPlantTreeSignal>.OnEvent += (signal) => CreateViaSeed(signal.Seed, signal.Position);
             SignalBus<ArmPlantFruitSignal>.OnEvent += (signal) => CreateViaFruit(signal.FruitData, signal.Position);
@@ -52,7 +55,7 @@ namespace Garden
         
         private void OnBreedRequest(TreeData treeData)
         {
-            List<Vector2Int> placesRaw = _spatialMap.GetNeighbors((Vector2Int)treeData.Position)
+            List<Vector2Int> placesRaw = _spatialMap.GetNeighbors(treeData.Position)
                 .Where(_spatialMap.IsTileFreeAndValid)
                 .ToList();
 

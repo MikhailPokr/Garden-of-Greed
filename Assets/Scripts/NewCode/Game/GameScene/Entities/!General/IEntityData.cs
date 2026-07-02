@@ -6,6 +6,7 @@ namespace Garden
 {
     public interface IEntityData
     {
+        CellType CellType { get; }
         EntityType EntityType { get; }
         public Vector2Int Position { get; }
 

@@ -9,7 +9,7 @@ namespace Garden
         private readonly Dictionary<EntityType, EntityBundle> _entityBundleLookup;
         private VisualContext _context;
         
-        private List<IEntityData> _updatableEntities;
+        public List<IEntityData> CreatedEntities { get; private set; }
         private Dictionary<IEntityData, EntityView> _createdViews;
         private Dictionary<(Vector2Int position, int subPosition), IStackingSubEntity> _stackingSubEntities;
         
@@ -22,7 +22,7 @@ namespace Garden
                 _entityBundleLookup[entityBundle.EntityType] = entityBundle;
             _context = visualContext;
             
-            _updatableEntities = new List<IEntityData>();
+            CreatedEntities = new List<IEntityData>();
             _createdViews = new Dictionary<IEntityData, EntityView>();
             _stackingSubEntities = new Dictionary<(Vector2Int position, int subPosition), IStackingSubEntity>();
 
@@ -31,14 +31,15 @@ namespace Garden
         
         public void Update(float currentTime)
         {
-            for (var i = 0; i < _updatableEntities.Count; i++)
+            for (var i = 0; i < CreatedEntities.Count; i++)
             {
-                _updatableEntities[i].Update(currentTime);
+                CreatedEntities[i].Update(currentTime);
             }
         }
 
         private void OnCreateEntity(EntityCreationSignal signal)
         {
+            CellData cell;
             if (signal.EntityData is IStackingSubEntity stackingSubEntity)
             {
                 if (_stackingSubEntities
@@ -57,18 +58,22 @@ namespace Garden
             entityView.Init(signal.EntityData, _context);
             
             Add(entityView);
-
+            
             switch (signal.EntityData)
             {
                 case ISubEntity subEntity:
-                    _context.SpatialMap.OccupySubTile(subEntity.Position, subEntity.SubPosition, signal.EntityData.EntityType);
+                    cell = new CellData(subEntity.CellType, subEntity.EntityType, subEntity.Position, subEntity.SubPosition);
                     entityView.gameObject.name = signal.EntityData.EntityType + $" ({subEntity.Position.x}:{subEntity.Position.y}|{subEntity.SubPosition})";
                     break;
                 case { } entityData:
-                    _context.SpatialMap.OccupyTile(entityData.Position, signal.EntityData.EntityType);
+                    cell = new CellData(entityData.CellType, entityData.EntityType, entityData.Position);
                     entityView.gameObject.name = signal.EntityData.EntityType + $" ({entityData.Position.x}:{entityData.Position.y})";
                     break;
+                default:
+                    cell = null;
+                    break;
             }
+            _context.SpatialMap.OccupyTile(cell);
             
             entityView.EntityData.CommandRequest += OnEntityDestroyRequest;
             
@@ -85,7 +90,7 @@ namespace Garden
         {
             var data = entityView.EntityData;
             
-            _updatableEntities.Add(data);
+            CreatedEntities.Add(data);
             _createdViews[data] = entityView;
             
             if (data is IStackingSubEntity stackingSubEntity)
@@ -94,7 +99,7 @@ namespace Garden
 
         private void Remove(IEntityData entityData)
         {
-            _updatableEntities.Remove(entityData);
+            CreatedEntities.Remove(entityData);
             _createdViews.Remove(entityData);
             if (entityData is IStackingSubEntity stackingSubEntity)
                 _stackingSubEntities.Remove((stackingSubEntity.Position, stackingSubEntity.SubPosition));
@@ -109,8 +114,22 @@ namespace Garden
                     case DestroyCommand destroyCommand:
                         var data = destroyCommand.EntityData;
                         data.CommandRequest -= OnEntityDestroyRequest;
-                        _context.SpatialMap.FreeTile(data.Position, data.EntityType);
+                        CellData cell;
+                        switch (data)
+                        {
+                            case ISubEntity subEntity:
+                                cell = new CellData(CellType.Null, data.EntityType, data.Position, subEntity.SubPosition);
+                                break;
+                            default:
+                                cell = new CellData(CellType.Null, data.EntityType, data.Position);
+                                break;
+                        }
+                        _context.SpatialMap.FreeTile(cell);
                         Remove(data);
+                        return;
+                    case CounterUpCommand upCommand:
+                        if (upCommand.CellData != null)
+                            _context.SpatialMap.OccupyTile(upCommand.CellData);
                         return;
                 }
             }

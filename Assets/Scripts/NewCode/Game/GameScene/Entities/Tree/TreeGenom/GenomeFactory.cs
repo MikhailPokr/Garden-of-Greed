@@ -33,6 +33,7 @@ namespace Garden
             var greenOffset = SeedUtils.GetRandom(seed, ParamType.GreenColorOffset, _treeOptions.GetGreenOffsetRange());
             
             var stageTime = SeedUtils.GetRandom(seed, ParamType.StageTime, _treeOptions.GetStageTimeRange(treeType));
+            var penaltyPerPoint = SeedUtils.GetRandom(seed, ParamType.PenaltyPerPoint, _treeOptions.GetPenaltyPerPointRange());
             var woodCost = SeedUtils.GetRandom(seed, ParamType.WoodCost, _treeOptions.GetWoodCostRange(treeType));
             var dryWoodCost = SeedUtils.GetRandom(seed, ParamType.DryWoodCost, _treeOptions.GetDryWoodCostRange());
             var woodColor = SeedUtils.GetRandom(seed, ParamType.WoodColor, _treePalette.GetWoodColorsCount(treeType));
@@ -50,6 +51,7 @@ namespace Garden
             if (treeType.HasFlag(TreeType.Fruit))
             {
                 lastFruitStage = SeedUtils.GetRandom(seed, ParamType.LastFruitStage, _treeOptions.GetLastFruitStageRange(treeType));
+                lastFruitStage = Math.Clamp(lastFruitStage, lastGrowthStage + 1, maxStage - 1);
             }
             
             var genome = new TreeGenomeConfig()
@@ -67,6 +69,7 @@ namespace Garden
                 LastFruitStage = lastFruitStage,
                 
                 StageTime = stageTime,
+                PenaltyPerPoint = penaltyPerPoint,
                 MaxStage = maxStage,
                 WoodCost = woodCost,
                 WoodCostDry = dryWoodCost,
@@ -102,6 +105,7 @@ namespace Garden
                 GrownSpriteIndex = treeGenomeConfig.GrownSpriteIndex,
                 GreenOffset = treeGenomeConfig.GreenOffset,
                 LastGrowthStage = treeGenomeConfig.LastGrowthStage,
+                PenaltyPerPoint =treeGenomeConfig.PenaltyPerPoint,
                 WoodColorIndex =  treeGenomeConfig.WoodColorIndex,
                 WoodCostDry = treeGenomeConfig.WoodCostDry,
                 Quality = treeGenomeConfig.Quality,

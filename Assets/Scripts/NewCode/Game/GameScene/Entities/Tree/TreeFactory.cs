@@ -10,6 +10,7 @@ namespace Garden
         private readonly Player _player;
         
         private readonly GenomeFactory _genomeFactory;
+        private readonly GeoMap _geoMap;
 
         private readonly int _seed;
         private int _seedUsages;
@@ -18,11 +19,13 @@ namespace Garden
             int globalSeed,
             TreeGenerationOptions options,
             GenomeFactory genomeFactory,
+            GeoMap geoMap,
             Player player)
         {
             _options = options;
             _genomeFactory = genomeFactory;
             _player = player;
+            _geoMap = geoMap;
             
             _seed = SeedUtils.GetNewSeed(globalSeed, SeedUserType.TreeFactory);
             _seedUsages = 0;
@@ -43,7 +46,7 @@ namespace Garden
                     break;
                 int seed = _genomeFactory.GetSeed(treeData.TreeGenome.Seed, i);
                 Vector2Int place = posRaw[SeedUtils.GetRandom(seed, ParamType.AutoBreedLocation, posRaw.Count)];
-                newTreeData.Add(Create(config, i, posRaw[i]));
+                newTreeData.Add(Create(config, i, place));
                 posRaw.Remove(place);
             }
             treeData.AddBreed(newTrees);
@@ -62,6 +65,7 @@ namespace Garden
             {
                 TreeGenomeConfig = genome,
                 TimerStart = _player.Time,
+                GeoMap = _geoMap,
             };
             
             return new TreeData(config, pos);

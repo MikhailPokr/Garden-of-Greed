@@ -6,8 +6,6 @@ namespace Garden
 {
     public static class SeedUtils
     {
-        private const int FNV = 16777619;
-        
         public static int GenerateSeed() => Random.Range(int.MinValue, int.MaxValue);
 
         public static int GetNewSeed(int seed, SeedUserType userType) => GetNewSeed(seed, (int)userType);
@@ -30,23 +28,30 @@ namespace Garden
         public static int GetRandom(int seed, int salt, Vector2Int range) => GetRandom(seed, salt, range.x, range.y);
         public static int GetRandom(int seed, int salt, int min, int max)
         {
-            seed = (seed ^ salt) * FNV;
-            
             var range = max - min;
             if (range == 0)
                 return min;
-            var num = (seed % range + range) % range + min;
-            
-            return num;
+
+            uint state = (uint)seed + (uint)salt * 0x9E3779B9;
+
+            state ^= state << 13;
+            state ^= state >> 17;
+            state ^= state << 5;
+
+            return min + (int)(state % (uint)range);
         }
         public static float GetRandom(int seed, ParamType salt, Vector2 range) => GetRandom(seed, (int)salt, range.x, range.y);
         public static float GetRandom(int seed, int salt, Vector2 range) => GetRandom(seed, salt, range.x, range.y);
         public static float GetRandom(int seed, int salt, float min, float max)
         {
-            seed = (seed ^ salt) * FNV;
+            uint state = (uint)seed + (uint)salt * 0x9E3779B9;
+
+            state ^= state << 13;
+            state ^= state >> 17;
+            state ^= state << 5;
+
+            var normalized = state / (float)uint.MaxValue;
     
-            var normalized = (uint)seed / (float)uint.MaxValue;
-            
             return min + normalized * (max - min);
         }
 

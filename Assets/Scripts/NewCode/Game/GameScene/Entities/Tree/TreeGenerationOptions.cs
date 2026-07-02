@@ -11,6 +11,7 @@ namespace Garden
         [SerializeField] private Vector2Int _dryWoodCostRange;
         [SerializeField, Min(1)] private Vector2Int _growthLastStageRange;
         [SerializeField] private Vector2 _greenOffsetRange;
+        [SerializeField] private Vector2 _penaltyPerPointRange;
 
         [Header("Normal")]
         [SerializeField] private Vector2Int _autoBreedCountRange;
@@ -37,6 +38,7 @@ namespace Garden
 
         public Vector2Int GetGrowthLastStageRange(TreeType treeType) => _growthLastStageRange;
         public Vector2 GetGreenOffsetRange() => _greenOffsetRange;
+        public Vector2 GetPenaltyPerPointRange() => _penaltyPerPointRange;
         public Vector2 GetStageTimeRange(TreeType treeType) => treeType switch
         {
             _ when (treeType & TreeType.Evil) != 0 => _evilStageTimeRange,
