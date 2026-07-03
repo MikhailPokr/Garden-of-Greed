@@ -59,14 +59,20 @@ namespace Garden
                     case ChangeCostCommand changeCostCommand:
                         Cost = changeCostCommand.Value;
                         break;
+                    case GrabCommand grabCommand:
+                        grabCommand.Use();
+                        Destroy();
+                        break;
                     case SaleCommand saleCommand:
                         saleCommand.Use();
-                        HostEntity.CommandRequest -= OnHostCommand;
-                        _timerEnabled = false;
+                        Destroy();
+                        break;
+                    case EatCommand eatCommand:
+                        eatCommand.Use();
+                        Destroy();
                         break;
                     case DestroyCommand:
-                        HostEntity.CommandRequest -= OnHostCommand;
-                        _timerEnabled = false;
+                        Destroy();
                         break;
                 }
             }
@@ -89,6 +95,12 @@ namespace Garden
                         break;
                 }
             }
+        }
+        
+        private void Destroy()
+        {
+            HostEntity.CommandRequest -= OnHostCommand;
+            _timerEnabled = false;
         }
     }
 }

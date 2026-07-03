@@ -12,12 +12,14 @@ namespace Garden
         [SerializeField] private Vector2 _rottingTimeRange;
         [SerializeField, Range(0,1)] private float _growUpChanceRange;
         [SerializeField] private Vector2Int _startQualityRange;
+        [SerializeField] private Vector2Int _lifeRegenerationRange;
         [Header("Evil")]
         [SerializeField] private Vector2 _evilFruitCostMultiplierRange;
         [SerializeField] private Vector2Int _evilFruitCountPerStageRange;
         [SerializeField] private Vector2 _evilRottingTimeRange;
         [SerializeField, Range(0,1)] private float _evilGrowUpChanceRange;
         [SerializeField] private Vector2Int _evilStartQualityRange;
+        [SerializeField] private Vector2Int _evilLifeRegenerationRange;
         
         public Vector2Int GetCountPerStageRange(TreeType treeType) => treeType switch
         {
@@ -47,6 +49,12 @@ namespace Garden
         {
             _ when (treeType & TreeType.Evil) != 0 => _evilStartQualityRange,
             _ => _startQualityRange
+        };
+
+        public Vector2Int GetLifeRegenerationRange(TreeType treeType) => treeType switch
+        {
+            _ when (treeType & TreeType.Evil) != 0 => _evilLifeRegenerationRange,
+            _ => _lifeRegenerationRange
         };
         
         public Vector2 GetColorOffsetRange() => _colorOffsetRange;

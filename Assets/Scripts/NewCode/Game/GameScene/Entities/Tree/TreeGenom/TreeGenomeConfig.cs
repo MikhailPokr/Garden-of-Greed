@@ -28,5 +28,6 @@ namespace Garden
         public int FruitColorIndex;
         public float FruitCostMultiplier;
         public float FruitRotingTime;
+        public float FruitLifeRegeneration;
     }
 }

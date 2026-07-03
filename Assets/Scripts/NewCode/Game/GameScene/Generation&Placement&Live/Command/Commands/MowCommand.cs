@@ -1,4 +1,6 @@
-﻿namespace Garden
+﻿using UnityEngine;
+
+namespace Garden
 {
     public class MowCommand : DestroyCommand
     {

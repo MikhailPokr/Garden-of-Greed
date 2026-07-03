@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PlayerStartOptions
   m_EditorClassIdentifier: Assembly-CSharp::Garden.PlayerStartOptions
   <StartMoney>k__BackingField: 2000
-  <MaxStamina>k__BackingField: 10
+  <MaxHp>k__BackingField: 10
   <MaxFire>k__BackingField: 10

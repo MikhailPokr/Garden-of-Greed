@@ -47,6 +47,7 @@ namespace Garden
             var fruitRotingTime = SeedUtils.GetRandom(seed, ParamType.RotingTime, _fruitOptions.GetRottingTimeRange(treeType));
             var fruitSpriteIndex = SeedUtils.GetRandom(seed, ParamType.FruitSprite, _fruitPalette.GetSpritesCount(treeType));
             var fruitColor = SeedUtils.GetRandom(seed, ParamType.FruitColor, _fruitPalette.GetColorsCount(treeType));
+            var regeneration = SeedUtils.GetRandom(seed, ParamType.FruitLifeRegeneration, _fruitOptions.GetLifeRegenerationRange(treeType));
             
             if (treeType.HasFlag(TreeType.Fruit))
             {
@@ -79,6 +80,7 @@ namespace Garden
                 FruitRotingTime = fruitRotingTime,
                 FruitSpriteIndex = fruitSpriteIndex,
                 FruitColorIndex = fruitColor,
+                FruitLifeRegeneration = regeneration,
             };
             
             return genome;
@@ -113,6 +115,7 @@ namespace Garden
                 FruitCostMultiplier = treeGenomeConfig.FruitCostMultiplier,
                 FruitSpriteIndex = treeGenomeConfig.FruitSpriteIndex,
                 FruitColorIndex = treeGenomeConfig.FruitColorIndex,
+                FruitLifeRegeneration = treeGenomeConfig.FruitLifeRegeneration,
                 
                 StageTime = GetRandomMutation(childSeed, treeGenomeConfig.TreeType, ParamType.StageTime, treeGenomeConfig.StageTime),
                 MaxStage = treeGenomeConfig.LastGrowthStage + Mathf.Max(mutatedAdultPeriod, 2),
@@ -153,6 +156,7 @@ namespace Garden
                 WoodCostDry = treeGenomeConfig.WoodCostDry,
                 FruitSpriteIndex =  treeGenomeConfig.FruitSpriteIndex,
                 FruitColorIndex = treeGenomeConfig.FruitColorIndex,
+                FruitLifeRegeneration =  treeGenomeConfig.FruitLifeRegeneration,
                 
                 FruitCostMultiplier = fruitCostMultiplier,
                 FruitRotingTime =  fruitRotingTime,

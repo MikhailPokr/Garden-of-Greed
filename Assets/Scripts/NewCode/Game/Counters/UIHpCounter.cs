@@ -1,10 +1,9 @@
-﻿using System;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace Garden
 {
-    public class UIMoneyCounter : MonoBehaviour
+    public class UIHpCounter : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI moneyText;
         
@@ -13,10 +12,10 @@ namespace Garden
         public void Init(Player player)
         {
             _player = player;
-            _player.MoneyChanged += OnMoneyChangeSignal;
+            _player.HpChanged += OnHpChangeSignal;
         }
         
-        private void OnMoneyChangeSignal(int value)
+        private void OnHpChangeSignal(int value)
         {
             moneyText.text = value.ToString();
         }

@@ -6,7 +6,7 @@ namespace Garden
     public class PlayerStartOptions : ScriptableObject
     {
         [field: SerializeField] public int StartMoney { get; set; }
-        [field: SerializeField] public int MaxStamina { get; set; }
+        [field: SerializeField] public int MaxHp { get; set; }
         [field: SerializeField] public int MaxFire { get; set; }
     }
 }

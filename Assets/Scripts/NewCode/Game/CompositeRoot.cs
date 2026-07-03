@@ -9,6 +9,7 @@ namespace Garden
         [SerializeField] private GameConfig _gameConfig;
         [SerializeField] private ToolSelectorsController _toolSelectorsController;
         [SerializeField] private UIMoneyCounter _moneyCounter;
+        [SerializeField] private UIHpCounter _hpCounter;
         
         private int _seed;
         private Player _player;
@@ -24,6 +25,7 @@ namespace Garden
         private SaleTool _saleTool;
         private Scythe _scythe;
         private GeoMap _geoMap;
+        private Mouth _mouth;
         
         Dictionary<EntityType, IEntityCreationController> _entityControllers;
         
@@ -52,23 +54,26 @@ namespace Garden
             
             _geoMap = new GeoMap(visualContext);
             
-            _arm = new Arm();
-            _treeShop = new TreeShop(_seed,  _player, 10);
+            _arm = new Arm(0.5f);
+            _treeShop = new TreeShop(_seed,  _player, -10);
             _saleTool = new SaleTool(_player);
-            _scythe = new Scythe();
+            _scythe = new Scythe(1);
+            _mouth = new Mouth();
             
             List<ITool> tools = new List<ITool>()
             {
                 _arm,
                 _treeShop,
                 _saleTool,
-                _scythe
+                _scythe,
+                _mouth
             };
             
             _toolManager = new ToolManager(_spatialMap, tools);
             
             _toolSelectorsController.Init(_toolManager);
             _moneyCounter.Init(_player);
+            _hpCounter.Init(_player);
 
             EntityBundle treeBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Tree);
             EntityBundle fruitBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Fruit);

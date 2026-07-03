@@ -57,6 +57,7 @@ namespace Garden
         {
             switch (CurrentTool)
             {
+                case ToolType.Mouth:
                 case ToolType.Arm:
                     if (signal.Entity.EntityType == EntityType.Fruit)
                         goto case ToolType.Sale;
@@ -68,8 +69,6 @@ namespace Garden
                         _toolList[CurrentTool].Process(signal);
                     break;
                 }
-                
-                    
             }
         }
     }

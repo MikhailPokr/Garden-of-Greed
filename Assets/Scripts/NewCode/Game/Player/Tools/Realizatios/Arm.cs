@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Garden
+﻿namespace Garden
 {
     public class Arm : ITool
     {
@@ -8,9 +6,11 @@ namespace Garden
 
         private bool _isHandBusy;
         private FruitData _fruitData;
-        
-        public Arm()
+        private float _poisonMult;
+
+        public Arm(float poisonMult)
         {
+            _poisonMult = poisonMult;
         }
         
         
@@ -40,7 +40,7 @@ namespace Garden
             {
                 _isHandBusy = true;
                 _fruitData = signal.Entity.EntityData as FruitData;
-                signal.Entity.EntityData.ForceUseCommands(new DestroyCommand(signal.Entity.EntityData));
+                signal.Entity.EntityData.ForceUseCommands(new GrabCommand(signal.Entity.EntityData,  _poisonMult));
             }
         }
 
