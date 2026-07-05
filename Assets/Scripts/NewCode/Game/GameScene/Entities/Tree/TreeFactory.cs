@@ -66,6 +66,7 @@ namespace Garden
                 TreeGenomeConfig = genome,
                 TimerStart = _player.Time,
                 GeoMap = _geoMap,
+                DeadValue = _options.GetDeadValue()
             };
             
             return new TreeData(config, pos);

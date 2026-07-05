@@ -14,13 +14,11 @@
         {
         }
 
-        public void Process(IClickSignal signal) => OnEntityClicked((EntityClickSignal)signal);
-
-        private void OnEntityClicked(EntityClickSignal signal)
+        public void Process(InteractionData data)
         {
-            if (_player.Money >= signal.Entity.EntityData.Cost)
+            if (_player.Money >= data.EntityView.EntityData.Cost)
             {
-                signal.Entity.EntityData.ForceUseCommands(new SaleCommand(signal.Entity.EntityData));
+                data.EntityView.EntityData.ForceUseCommands(new SaleCommand(data.EntityView.EntityData));
             }
         }
     }

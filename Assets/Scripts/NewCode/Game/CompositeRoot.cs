@@ -16,7 +16,7 @@ namespace Garden
         private SpatialMap _spatialMap;
         private Field _field;
         private EntityCreationManager _creationManager;
-        private GrassGenerator _grassGenerator;
+        private SubCellContentGenerator _subCellContentGenerator;
         private ToolManager _toolManager;
         private InputManager _inputManager;
         private GenomeFactory _genomeFactory;
@@ -78,8 +78,9 @@ namespace Garden
             EntityBundle treeBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Tree);
             EntityBundle fruitBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Fruit);
             EntityBundle grassBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Grass);
+            EntityBundle berryBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Berry);
             
-            _grassGenerator = new GrassGenerator(_seed, grassBundle, _spatialMap);
+            _subCellContentGenerator = new SubCellContentGenerator(_seed, grassBundle, berryBundle, _spatialMap);
             
             _genomeFactory = new GenomeFactory(
                 treeBundle,
@@ -102,6 +103,10 @@ namespace Garden
             _entityControllers.Add(EntityType.Grass, new GrassCreationController(
                 _gameConfig.Seed,
                 grassBundle));
+            _entityControllers.Add(EntityType.Berry, new BerryCreationManager(
+                _gameConfig.Seed,
+                berryBundle,
+                _spatialMap));
             
             _player.Start();
         }
@@ -111,7 +116,7 @@ namespace Garden
             float time = Time.deltaTime;
             _player.Update(time);
             _creationManager.Update(_player.Time);
-            _grassGenerator.Update(_player.Time);
+            _subCellContentGenerator.Update(_player.Time);
         }
     }
 }

@@ -7,8 +7,12 @@ namespace Garden
         public readonly int Hp;
         public EatCommand(IEntityData entityData) : base(entityData)
         {
-            if (EntityData is FruitData fruitData)
-                Hp = Mathf.RoundToInt(fruitData.DataConfig.TreeGenome.FruitLifeRegeneration);
+            Hp = EntityData switch
+            {
+                FruitData fruitData => Mathf.RoundToInt(fruitData.DataConfig.TreeGenome.FruitLifeRegeneration),
+                BerryData berryData => Mathf.RoundToInt(berryData.DataConfig.Regeneration),
+                _ => Hp
+            };
         }
 
         public void Use()

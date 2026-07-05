@@ -40,6 +40,8 @@ namespace Garden
 
             return min + (int)(state % (uint)range);
         }
+        public static float GetRandom(int seed, ParamType salt) => GetRandom(seed, (int)salt, 0f, 1f);
+        public static float GetRandom(int seed, int salt) => GetRandom(seed, salt, 0f, 1f);
         public static float GetRandom(int seed, ParamType salt, Vector2 range) => GetRandom(seed, (int)salt, range.x, range.y);
         public static float GetRandom(int seed, int salt, Vector2 range) => GetRandom(seed, salt, range.x, range.y);
         public static float GetRandom(int seed, int salt, float min, float max)

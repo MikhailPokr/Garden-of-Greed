@@ -51,12 +51,12 @@ namespace Garden
                 }
         }
 
-        protected override void OnInteract(InteractionType type)
+        protected override void OnInteract(InteractionType type, bool fieldSource)
         {
-            if (type == InteractionType.Click)
+            if (type == InteractionType.Click && fieldSource)
                 return;
             
-            base.OnInteract(type); 
+            base.OnInteract(type, fieldSource); 
         }
 
         protected override void PlayBlinkSequence()
@@ -81,8 +81,8 @@ namespace Garden
                 _colorSequence.Group(Tween.Color(_fruitSpriteRenderer, targetColor, duration));
         }
 
-        public void OnPointerClick(PointerEventData eventData) => base.OnInteract(InteractionType.Click);
-        public void OnPointerEnter(PointerEventData eventData) => OnInteract(InteractionType.HoverStart);
-        public void OnPointerExit(PointerEventData eventData) => OnInteract(InteractionType.HoverEnd);
+        public void OnPointerClick(PointerEventData eventData) => OnInteract(InteractionType.Click, false);
+        public void OnPointerEnter(PointerEventData eventData) => OnInteract(InteractionType.HoverStart, false);
+        public void OnPointerExit(PointerEventData eventData) => OnInteract(InteractionType.HoverEnd, false);
     }
 }

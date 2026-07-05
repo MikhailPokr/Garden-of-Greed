@@ -19,22 +19,20 @@ public class Scythe : ITool
         
     }
 
-    public void Process(IClickSignal signal)
+    public void Process(InteractionData data)
     {
-        switch (signal)
+        if (data.EntityTarget)
         {
-            case FieldClickSignal fieldSignal:
-                _targetPosition = fieldSignal.Position;
-                SignalBus<ChangeHpSignal>.Fire(new ChangeHpSignal(-_hpCost));
-                break;
-            case EntityClickSignal entitySignal:
-                if (entitySignal.Entity.EntityData.Position != _targetPosition)
-                {
-                    return;
-                }
-                entitySignal.Entity.EntityData.ForceUseCommands(new MowCommand(entitySignal.Entity.EntityData));
-                break;
+            if (data.EntityView.EntityData.Position != _targetPosition)
+            {
+                return;
+            }
+            data.EntityView.EntityData.ForceUseCommands(new MowCommand(data.EntityView.EntityData));
         }
-        
+        else
+        {
+            _targetPosition = data.Position;
+            SignalBus<ChangeHpSignal>.Fire(new ChangeHpSignal(-_hpCost));
+        }
     }
 }

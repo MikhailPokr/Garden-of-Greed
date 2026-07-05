@@ -21,8 +21,7 @@ namespace Garden
         private int _stage;
         private bool _timerEnabled;
         private Queue<ICommand[]> _commandList;
-        private GeoMap _geoMap;
-
+        
         public TreeData(TreeDataConfig dataConfig, Vector2Int position)
         {
             DataConfig = dataConfig;
@@ -42,9 +41,17 @@ namespace Garden
         {
             if (!_timerEnabled)
                 return;
-            if (currentTime >= DataConfig.GetNextTimer(_stage, Position))
+            float time = DataConfig.GetNextTimer(_stage, Position) - currentTime;
+            if (time <= 0)
             {
                 ProcessCommands(_commandList.Dequeue());
+            }
+            else if (time > DataConfig.DeadValue && _stage < TreeGenome.LastGrowthStage && _stage > 0)
+            {
+                ProcessCommands(
+                    new ChangeSpriteCommand(TreeSpriteCommandsLegend.DeadShoot),
+                    new DryCommand(),
+                    new MarkChangesCommand());
             }
         }
         public void AddFruit(int fruitCount) => FruitCount += fruitCount;
@@ -91,7 +98,7 @@ namespace Garden
             return commandConfigurator.GetCommands();
         }
 
-        protected virtual void ProcessCommands(ICommand[] commands)
+        protected virtual void ProcessCommands(params ICommand[] commands)
         {
             for (var i = 0; i < commands.Length; i++)
             {

@@ -7,6 +7,7 @@ namespace Garden
     public interface ISpatialMap : IGridMath
     {
         bool IsTileFreeAndValid(Vector2Int pos);
+        bool IsTileFreeAndValid(CellData data);
         void OccupyTile(CellData data);
         void FreeTile(CellData data);
         event Action<Vector2Int> MapUpdated;

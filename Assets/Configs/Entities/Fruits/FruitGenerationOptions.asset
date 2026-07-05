@@ -18,8 +18,10 @@ MonoBehaviour:
   _rottingTimeRange: {x: 4, y: 10}
   _growUpChanceRange: 0.35
   _startQualityRange: {x: 1, y: 5}
+  _lifeRegenerationRange: {x: 1, y: 4}
   _evilFruitCostMultiplierRange: {x: 0.3, y: 0.6}
   _evilFruitCountPerStageRange: {x: 2, y: 5}
   _evilRottingTimeRange: {x: 5, y: 10}
   _evilGrowUpChanceRange: 0.402
   _evilStartQualityRange: {x: -4, y: 0}
+  _evilLifeRegenerationRange: {x: -5, y: -1}

@@ -24,7 +24,11 @@ namespace Garden
             
         }
 
-        public void Process(IClickSignal signal) => OnFieldInteract((FieldClickSignal)signal);
+        public void Process(InteractionData data)
+        {
+            if (Get(out int seed))
+                SignalBus<ArmPlantTreeSignal>.Fire(new ArmPlantTreeSignal(seed, data.Position));
+        }
 
         public bool Get(out int seed)
         {
@@ -36,12 +40,6 @@ namespace Garden
             SignalBus<ChangeMoneySignal>.Fire(new ChangeMoneySignal(_cost));
             seed = SeedUtils.GetNewSeed(_seed, _count++);
             return true;
-        }
-        
-        private void OnFieldInteract(FieldClickSignal signal)
-        {
-            if (Get(out int seed))
-                SignalBus<ArmPlantTreeSignal>.Fire(new ArmPlantTreeSignal(seed, signal.Position));
         }
     }
 }

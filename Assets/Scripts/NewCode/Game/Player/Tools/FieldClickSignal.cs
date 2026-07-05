@@ -5,8 +5,8 @@ namespace Garden
     public struct FieldClickSignal : IClickSignal
     {
         public InteractionType InteractionType { get; }
-        public readonly Vector2Int Position;
-
+        public Vector2Int Position { get; }
+        
         public FieldClickSignal(InteractionType interactionType, Vector2Int position)
         {
             InteractionType = interactionType;

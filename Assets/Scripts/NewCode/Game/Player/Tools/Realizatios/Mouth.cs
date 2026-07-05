@@ -11,11 +11,9 @@ namespace Garden
         {
         }
 
-        public void Process(IClickSignal signal) => OnEntityClicked((EntityClickSignal)signal);
-
-        private void OnEntityClicked(EntityClickSignal signal)
+        public void Process(InteractionData data)
         {
-            signal.Entity.EntityData.ForceUseCommands(new EatCommand(signal.Entity.EntityData));
+            data.EntityView.EntityData.ForceUseCommands(new EatCommand(data.EntityView.EntityData));
         }
     }
 }

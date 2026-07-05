@@ -4,6 +4,6 @@
     {
         ToolType Type { get; }
         void Activate();
-        void Process(IClickSignal signal);
+        void Process(InteractionData signal);
     }
 }

@@ -162,12 +162,5 @@ namespace Garden
             if (_crownSpriteRenderer.color != targetCrownColor)
                 _colorSequence.Group(Tween.Color(_crownSpriteRenderer, targetCrownColor, duration));
         }
-
-        protected override void OnDestroy()
-        {
-            _treeData.CommandRequest -= OnCommand;
-            
-            base.OnDestroy();
-        }
     }
 }

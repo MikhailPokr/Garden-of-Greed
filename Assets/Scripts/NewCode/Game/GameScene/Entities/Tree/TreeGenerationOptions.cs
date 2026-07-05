@@ -12,6 +12,7 @@ namespace Garden
         [SerializeField, Min(1)] private Vector2Int _growthLastStageRange;
         [SerializeField] private Vector2 _greenOffsetRange;
         [SerializeField] private Vector2 _penaltyPerPointRange;
+        [SerializeField] private float _deadValue;
 
         [Header("Normal")]
         [SerializeField] private Vector2Int _autoBreedCountRange;
@@ -45,6 +46,7 @@ namespace Garden
             _ when (treeType & TreeType.Fruit) != 0 => _fruitStageTimeRange,
             _ => _stageTimeRange
         };
+        public float GetDeadValue() => _deadValue;
         public Vector2Int GetMaxStageRange(TreeType treeType) => treeType switch
         {
             _ when (treeType & TreeType.Evil) != 0 => _evilMaxStageRange,

@@ -65,13 +65,17 @@ namespace Garden
 
         public void FreeTile(CellData data)
         {
-            CellDataList.RemoveAll(x => x.Compare(data, true));
+            CellDataList.RemoveAll(x => x.Compare(data,  ignoreCellType: true));
             MapUpdated?.Invoke(data.Position);
         }
 
         public bool IsTileFreeAndValid(Vector2Int pos)
         {
             return !CellDataList.Any(x => x.Position == pos && x.CellType == CellType.Main) && _fieldOptions.Bounds.Contains(pos);
+        }
+        public bool IsTileFreeAndValid(CellData data)
+        {
+            return !CellDataList.Any(x => x.Compare(data, ignoreEntityType: true) && _fieldOptions.Bounds.Contains(data.Position));
         }
         
         public List<Vector2Int> GetNeighbors(Vector2Int position)

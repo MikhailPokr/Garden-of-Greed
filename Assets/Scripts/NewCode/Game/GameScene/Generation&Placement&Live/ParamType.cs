@@ -38,5 +38,13 @@
         //Grass
         SubCell = 500,
         GrowTime = 501,
+        
+        //Berry
+        BerryChance = 600,
+        BerryCost = 601,
+        BerryColor = 602,
+        BerryColorOffset = 603,
+        BerrySprite = 604,
+        BerryRegeneration = 605,
     }
 }

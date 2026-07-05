@@ -7,8 +7,7 @@ namespace Garden
     public class BerryPalette : BasePalette
     {
         [field: SerializeField] public List<Sprite> BerrySprites { get; private set; }
-        [field: SerializeField] public List<Sprite> BerryEvilSprites { get; private set; }
+        [field: SerializeField] public List<Sprite> LeavesSprites { get; private set; }
         [field: SerializeField] public List<Color> BerryColors { get; private set; }
-        [field: SerializeField] public List<Color> BerryEvilColors { get; private set; }
     }
 }

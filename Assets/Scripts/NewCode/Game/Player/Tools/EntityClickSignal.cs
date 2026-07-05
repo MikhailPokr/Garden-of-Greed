@@ -2,13 +2,15 @@
 {
     public struct EntityClickSignal : IClickSignal
     {
-        public readonly EntityView Entity;
+        public EntityView Entity { get; }
         public InteractionType InteractionType { get; }
+        public bool FieldSource { get; }
 
-        public EntityClickSignal(EntityView entity, InteractionType interactionType)
+        public EntityClickSignal(EntityView entity, InteractionType interactionType, bool fieldSource)
         {
             Entity = entity;
             InteractionType = interactionType;
+            FieldSource = fieldSource;
         }
 
         

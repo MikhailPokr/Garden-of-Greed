@@ -178,7 +178,7 @@ namespace Garden
             TreeType treeType = 0;
             foreach (var treeTypeConfig in chances)
             {
-                if (SeedUtils.GetRandom(seed, treeTypeConfig.ParamType, new Vector2(0, 1)) < treeTypeConfig.Chance)
+                if (SeedUtils.GetRandom(seed, treeTypeConfig.ParamType) < treeTypeConfig.Chance)
                     treeType |= treeTypeConfig.TreeType;
             }
             return treeType;

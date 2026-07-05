@@ -28,20 +28,13 @@ namespace Garden
             Value = 0;
         }
 
-        public bool Compare(CellData other, bool nullIsAll = false)
+        public bool Compare(CellData other, bool ignoreCellType = false, bool ignoreEntityType = false)
         {
-            if (nullIsAll)
-            {
-                return
-                    EntityType == other.EntityType &&
-                    Position == other.Position &&
-                    SubCell == other.SubCell;
-            }
             return
-                CellType == other.CellType &&
-                EntityType == other.EntityType &&
+                (CellType == other.CellType || ignoreCellType) &&
+                (EntityType == other.EntityType || ignoreEntityType) &&
                 Position == other.Position &&
-                SubCell == other.SubCell;
+                (SubCell == other.SubCell || ignoreCellType);
         }
     }
 }

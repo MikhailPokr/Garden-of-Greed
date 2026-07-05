@@ -46,7 +46,7 @@ namespace Garden
         {
             var genome = _genomeFactory.MutateWithQuality(treeData.TreeGenome, childIndex);
             
-            var isGrowth = SeedUtils.GetRandom(genome.Seed, ParamType.GrowthChance, new Vector2(0, 1)) < _options.GetGrowUpChance(genome.TreeType);
+            var isGrowth = SeedUtils.GetRandom(genome.Seed, ParamType.GrowthChance) < _options.GetGrowUpChance(genome.TreeType);
             var colorOffset =
                 SeedUtils.GetRandom(genome.Seed, ParamType.FruitColorOffset, _options.GetColorOffsetRange());
             

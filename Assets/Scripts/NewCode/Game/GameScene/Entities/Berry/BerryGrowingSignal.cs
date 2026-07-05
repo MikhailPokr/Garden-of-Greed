@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Garden
 {
-    public struct GrassGrowingSignal : ISignal
+    public struct BerryGrowingSignal : ISignal
     {
         public List<Vector2Int> Positions { get; }
 
-        public GrassGrowingSignal(List<Vector2Int> positions)
+        public BerryGrowingSignal(List<Vector2Int> positions)
         {
             Positions = positions;
         }

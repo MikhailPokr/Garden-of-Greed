@@ -33,10 +33,10 @@ namespace Garden
         private void OnFieldClickSignal(FieldClickSignal signal)
         {
             if (signal.Position != EntityData.Position) return;
-            OnInteract(signal.InteractionType);
+            OnInteract(signal.InteractionType, true);
         }
 
-        protected virtual void OnInteract(InteractionType type)
+        protected virtual void OnInteract(InteractionType type, bool fieldSource)
         {
             _selected = type switch
             {
@@ -46,7 +46,7 @@ namespace Garden
             };
             
             PlayColorSequence(IsColored);
-            SignalBus<EntityClickSignal>.Fire(new EntityClickSignal(this, type)); 
+            SignalBus<EntityClickSignal>.Fire(new EntityClickSignal(this, type, fieldSource)); 
         }
 
         private void OnColorModeChanged(ColorModeChangedSignal signal)

@@ -18,37 +18,32 @@
         {
         }
 
-        public void Process(IClickSignal signal)
+        public void Process(InteractionData data)
         {
-            switch (signal)
-            {
-                case FieldClickSignal fieldClickSignal:
-                    PlaceFruit(fieldClickSignal);
-                    break;
-                case EntityClickSignal entityClickSignal:
-                    SetInArm(entityClickSignal);
-                    break;
-            }
+            if (data.EntityTarget)
+                SetInArm(data);
+            else
+                PlaceFruit(data);
         }
             
 
-        private void SetInArm(EntityClickSignal signal)
+        private void SetInArm(InteractionData data)
         {
             if (_isHandBusy)
                 return;
-            if (signal.Entity.EntityType == EntityType.Fruit)
+            if (data.EntityView.EntityType == EntityType.Fruit)
             {
                 _isHandBusy = true;
-                _fruitData = signal.Entity.EntityData as FruitData;
-                signal.Entity.EntityData.ForceUseCommands(new GrabCommand(signal.Entity.EntityData,  _poisonMult));
+                _fruitData = data.EntityView.EntityData as FruitData;
+                data.EntityView.EntityData.ForceUseCommands(new GrabCommand(data.EntityView.EntityData,  _poisonMult));
             }
         }
 
-        private void PlaceFruit(FieldClickSignal signal)
+        private void PlaceFruit(InteractionData data)
         {
             if (!_isHandBusy)
                 return;
-            SignalBus<ArmPlantFruitSignal>.Fire(new ArmPlantFruitSignal(_fruitData, signal.Position));
+            SignalBus<ArmPlantFruitSignal>.Fire(new ArmPlantFruitSignal(_fruitData, data.Position));
             _isHandBusy = false;
             _fruitData = null;
         }

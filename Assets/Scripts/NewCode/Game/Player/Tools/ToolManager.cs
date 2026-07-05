@@ -32,6 +32,7 @@ namespace Garden
 
         private void OnFieldInteract(FieldClickSignal signal)
         {
+            var data = new InteractionData(CurrentTool, signal.InteractionType, signal.Position);
             switch (CurrentTool)
             {
                 case ToolType.TreeShop:
@@ -40,14 +41,14 @@ namespace Garden
                     if (signal.InteractionType == InteractionType.Click &&
                         _spatialMap.IsTileFreeAndValid(signal.Position))
                     {
-                        _toolList[CurrentTool].Process(signal);
+                        _toolList[CurrentTool].Process(data);
                     }
                     break;
                 }
                 case ToolType.Scythe:
                     if (signal.InteractionType == InteractionType.Click)
                     {
-                        _toolList[CurrentTool].Process(signal);
+                        _toolList[CurrentTool].Process(data);
                     }
                     break;
             }
@@ -55,20 +56,35 @@ namespace Garden
 
         private void OnEntityClick(EntityClickSignal signal)
         {
+            var data = new InteractionData(CurrentTool, signal.InteractionType, signal.Entity);
             switch (CurrentTool)
             {
-                case ToolType.Mouth:
                 case ToolType.Arm:
+                    if (signal.FieldSource)
+                        break;
                     if (signal.Entity.EntityType == EntityType.Fruit)
-                        goto case ToolType.Sale;
+                        if (signal.InteractionType == InteractionType.Click)
+                            _toolList[CurrentTool].Process(data);
+                    break;
+                case ToolType.Mouth:
+                    if (signal.FieldSource)
+                        break;
+                    if (signal.Entity.EntityType is EntityType.Fruit or EntityType.Berry)
+                        if (signal.InteractionType == InteractionType.Click)
+                            _toolList[CurrentTool].Process(data);
                     break;
                 case ToolType.Scythe:
-                case ToolType.Sale:
-                {
+                    if (!signal.FieldSource)
+                        break;
                     if (signal.InteractionType == InteractionType.Click)
-                        _toolList[CurrentTool].Process(signal);
+                        _toolList[CurrentTool].Process(data);
                     break;
-                }
+                case ToolType.Sale:
+                    if (signal.Entity.EntityType is EntityType.Fruit or EntityType.Berry && signal.FieldSource)
+                        return;
+                    if (signal.InteractionType == InteractionType.Click)
+                        _toolList[CurrentTool].Process(data);
+                    break;
             }
         }
     }
