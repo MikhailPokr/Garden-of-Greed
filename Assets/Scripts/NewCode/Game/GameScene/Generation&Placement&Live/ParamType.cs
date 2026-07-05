@@ -18,6 +18,7 @@
         WoodCost = 200,
         DryWoodCost = 201,
         WoodColor = 202,
+        FuelForce = 203,
         
         //AutoBread
         AutoBreedCount = 300,

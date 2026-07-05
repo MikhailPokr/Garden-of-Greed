@@ -16,6 +16,7 @@ namespace Garden
         public int WoodColorIndex;
         public float WoodCost;
         public float WoodCostDry;
+        public float FuelForce;
         
         public float StageTime;
         public float PenaltyPerPoint;

@@ -16,6 +16,10 @@ MonoBehaviour:
   <StartOptions>k__BackingField: {fileID: 11400000, guid: 937c295ea01fd60489e0d71970cc112f, type: 2}
   <SpriteOrderOptions>k__BackingField: {fileID: 11400000, guid: 9260f43d43e9adb419bc98a6c3d82779, type: 2}
   <MutationOptions>k__BackingField: {fileID: 11400000, guid: 590c4c7d3734998498139da31c634178, type: 2}
+  <FireOptions>k__BackingField:
+    <FireTimePerPoint>k__BackingField: 3
+    <NormalFireMultiplier>k__BackingField: 0.9
+    <EvilFireTimeMultiplier>k__BackingField: 1.2
   <FieldPrefab>k__BackingField: {fileID: 4710773942203756902, guid: cc1dd61ad7e2e9e4d83ad73ace45e2b6, type: 3}
   <FieldOptions>k__BackingField:
     CellWidth: 2.68
@@ -41,5 +45,9 @@ MonoBehaviour:
     Palette: {fileID: 11400000, guid: c5c0b89f68b27c34eae46dbfc0f9b4d9, type: 2}
     EntityView: {fileID: 8001074566422498788, guid: cc1959c77937c5b49a4237d6904336f8, type: 3}
     GenerationOptions: {fileID: 11400000, guid: 2419a402ce18a0048a55154d2a1b2cc8, type: 2}
+  - EntityType: 3
+    Palette: {fileID: 11400000, guid: c64b277ffc21d5544870229b6635352a, type: 2}
+    EntityView: {fileID: 7325891506954440198, guid: 7dd102de7e557fc44957ba9cc07583cd, type: 3}
+    GenerationOptions: {fileID: 11400000, guid: 72a4313d52156f24e8eb710a66bf9bad, type: 2}
   <UseSeed>k__BackingField: 0
   <Seed>k__BackingField: 0

@@ -37,6 +37,7 @@ namespace Garden
             var woodCost = SeedUtils.GetRandom(seed, ParamType.WoodCost, _treeOptions.GetWoodCostRange(treeType));
             var dryWoodCost = SeedUtils.GetRandom(seed, ParamType.DryWoodCost, _treeOptions.GetDryWoodCostRange());
             var woodColor = SeedUtils.GetRandom(seed, ParamType.WoodColor, _treePalette.GetWoodColorsCount(treeType));
+            var fuelForce = SeedUtils.GetRandom(seed, ParamType.FuelForce, _treeOptions.GetFuelForceRange());
             
             var maxStage = lastGrowthStage + 1 + SeedUtils.GetRandom(seed, ParamType.MaxStage, _treeOptions.GetMaxStageRange(treeType));
             
@@ -74,6 +75,7 @@ namespace Garden
                 MaxStage = maxStage,
                 WoodCost = woodCost,
                 WoodCostDry = dryWoodCost,
+                FuelForce = fuelForce,
                 
                 Quality = startQuality,
                 FruitCostMultiplier = fruitCostMultiplier,
@@ -115,12 +117,13 @@ namespace Garden
                 FruitCostMultiplier = treeGenomeConfig.FruitCostMultiplier,
                 FruitSpriteIndex = treeGenomeConfig.FruitSpriteIndex,
                 FruitColorIndex = treeGenomeConfig.FruitColorIndex,
-                FruitLifeRegeneration = treeGenomeConfig.FruitLifeRegeneration,
                 
                 StageTime = GetRandomMutation(childSeed, treeGenomeConfig.TreeType, ParamType.StageTime, treeGenomeConfig.StageTime),
                 MaxStage = treeGenomeConfig.LastGrowthStage + Mathf.Max(mutatedAdultPeriod, 2),
                 LastFruitStage = treeGenomeConfig.LastGrowthStage + Mathf.Max(mutatedAdultPeriod - 1, 1),
                 WoodCost = GetRandomMutation(childSeed, treeGenomeConfig.TreeType, ParamType.WoodCost, treeGenomeConfig.WoodCost),
+                FuelForce = GetRandomMutation(childSeed, treeGenomeConfig.TreeType, ParamType.FuelForce, treeGenomeConfig.FuelForce),
+                FruitLifeRegeneration = GetRandomMutation(childSeed, treeGenomeConfig.TreeType, ParamType.FruitLifeRegeneration, treeGenomeConfig.FruitLifeRegeneration),
             };
             
             return config;
@@ -141,6 +144,8 @@ namespace Garden
             var woodCost = MutateValue(childSeed, ParamType.WoodCost, treeGenomeConfig.WoodCost, ref quality);
             var fruitRotingTime = MutateValue(childSeed, ParamType.RotingTime, treeGenomeConfig.FruitRotingTime, ref quality);
             var fruitCostMultiplier = MutateValue(childSeed, ParamType.CostMultiplier, treeGenomeConfig.FruitCostMultiplier, ref quality);
+            var fruitLifeRegeneration = MutateValue(childSeed, ParamType.FruitLifeRegeneration, treeGenomeConfig.FruitLifeRegeneration, ref quality);
+            var fuelForce = MutateValue(childSeed, ParamType.FuelForce, treeGenomeConfig.FuelForce, ref quality);
             
             var config = new TreeGenomeConfig
             {
@@ -156,15 +161,16 @@ namespace Garden
                 WoodCostDry = treeGenomeConfig.WoodCostDry,
                 FruitSpriteIndex =  treeGenomeConfig.FruitSpriteIndex,
                 FruitColorIndex = treeGenomeConfig.FruitColorIndex,
-                FruitLifeRegeneration =  treeGenomeConfig.FruitLifeRegeneration,
                 
                 FruitCostMultiplier = fruitCostMultiplier,
                 FruitRotingTime =  fruitRotingTime,
+                FruitLifeRegeneration =  fruitLifeRegeneration,
+                FuelForce =  fuelForce,
+                WoodCost = woodCost,
                 
                 StageTime = stageTime,
                 MaxStage = treeGenomeConfig.LastGrowthStage + Mathf.Max(mutatedAdultPeriod, 2),
                 LastFruitStage = treeGenomeConfig.LastGrowthStage + Mathf.Max(mutatedAdultPeriod - 1, 1),
-                WoodCost = woodCost,
                 
                 Quality = quality,
             };

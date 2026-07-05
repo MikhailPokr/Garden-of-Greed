@@ -7,5 +7,6 @@
         Sale = 2,
         Scythe = 3,
         Mouth = 4,
+        Axe = 5,
     }
 }

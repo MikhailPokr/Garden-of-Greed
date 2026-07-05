@@ -15,3 +15,4 @@ MonoBehaviour:
   <StartMoney>k__BackingField: 2000
   <MaxHp>k__BackingField: 10
   <MaxFire>k__BackingField: 10
+  <StartFireForce>k__BackingField: 3

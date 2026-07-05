@@ -5,7 +5,7 @@ namespace Garden
 {
     public class UIHpCounter : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI moneyText;
+        [SerializeField] private TextMeshProUGUI _hpText;
         
         private Player _player;
 
@@ -17,7 +17,7 @@ namespace Garden
         
         private void OnHpChangeSignal(int value)
         {
-            moneyText.text = value.ToString();
+            _hpText.text = value.ToString();
         }
     }
 }

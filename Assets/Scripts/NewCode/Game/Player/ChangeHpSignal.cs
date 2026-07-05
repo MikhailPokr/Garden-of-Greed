@@ -1,6 +1,6 @@
 ﻿namespace Garden
 {
-    internal class ChangeHpSignal : ISignal
+    internal struct ChangeHpSignal : ISignal
     {
         public readonly int Delta;
 

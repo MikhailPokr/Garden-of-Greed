@@ -10,6 +10,7 @@ namespace Garden
         [SerializeField] private ToolSelectorsController _toolSelectorsController;
         [SerializeField] private UIMoneyCounter _moneyCounter;
         [SerializeField] private UIHpCounter _hpCounter;
+        [SerializeField] private UIFireCounter _fireCounter;
         
         private int _seed;
         private Player _player;
@@ -26,6 +27,7 @@ namespace Garden
         private Scythe _scythe;
         private GeoMap _geoMap;
         private Mouth _mouth;
+        private Axe _axe;
         
         Dictionary<EntityType, IEntityCreationController> _entityControllers;
         
@@ -36,7 +38,7 @@ namespace Garden
             if (!_gameConfig.UseSeed)
                 _seed = _gameConfig.UseSeed ? _gameConfig.Seed : SeedUtils.GenerateSeed();
             
-            _player = new Player(_gameConfig.StartOptions);
+            _player = new Player(_gameConfig.StartOptions, _gameConfig);
             
             _spatialMap = new SpatialMap(_gameConfig.FieldOptions);
             
@@ -59,6 +61,7 @@ namespace Garden
             _saleTool = new SaleTool(_player);
             _scythe = new Scythe(1);
             _mouth = new Mouth();
+            _axe = new Axe(1);
             
             List<ITool> tools = new List<ITool>()
             {
@@ -66,7 +69,8 @@ namespace Garden
                 _treeShop,
                 _saleTool,
                 _scythe,
-                _mouth
+                _mouth,
+                _axe
             };
             
             _toolManager = new ToolManager(_spatialMap, tools);
@@ -74,6 +78,8 @@ namespace Garden
             _toolSelectorsController.Init(_toolManager);
             _moneyCounter.Init(_player);
             _hpCounter.Init(_player);
+            _fireCounter.Init(_player);
+            
 
             EntityBundle treeBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Tree);
             EntityBundle fruitBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Fruit);

@@ -108,6 +108,12 @@ namespace Garden
                     case ChangeCostCommand changeCostCommand:
                         Cost = changeCostCommand.Value;
                         break;
+                    case CutDownCommand cutDownCommand:
+                        if (_stage <= TreeGenome.LastGrowthStage)
+                            commands[Array.IndexOf(commands, cutDownCommand)] = null;
+                        else
+                            cutDownCommand.Use();
+                        break;
                     case MowCommand mowCommand:
                         if (_stage > TreeGenome.LastGrowthStage)
                             commands[Array.IndexOf(commands, mowCommand)] = null;

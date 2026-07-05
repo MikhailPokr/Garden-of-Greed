@@ -6,7 +6,7 @@ namespace Garden
 {
     public class UIMoneyCounter : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI moneyText;
+        [SerializeField] private TextMeshProUGUI _moneyText;
         
         private Player _player;
 
@@ -18,7 +18,7 @@ namespace Garden
         
         private void OnMoneyChangeSignal(int value)
         {
-            moneyText.text = value.ToString();
+            _moneyText.text = value.ToString();
         }
     }
 }

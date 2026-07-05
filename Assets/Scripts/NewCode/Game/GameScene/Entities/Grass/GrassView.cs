@@ -7,7 +7,6 @@ namespace Garden
     public class GrassView : EntityView
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
-        [SerializeField] private BoxCollider2D _collider;
         
         private GrassData _grassData;
         public override IEntityData EntityData => _grassData;
@@ -43,8 +42,6 @@ namespace Garden
                         break;
                     case ChangeSpriteCommand spriteCommand:
                         _spriteRenderer.sprite = _grassPalette.GrassSprites[spriteCommand.Value];
-                        _collider.size = _spriteRenderer.sprite.bounds.size;
-                        _collider.offset = _spriteRenderer.sprite.bounds.center;
                         break;
                     case DestroyCommand:
                         Destroy(gameObject);

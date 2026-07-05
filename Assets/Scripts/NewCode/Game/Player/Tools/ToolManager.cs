@@ -73,10 +73,12 @@ namespace Garden
                         if (signal.InteractionType == InteractionType.Click)
                             _toolList[CurrentTool].Process(data);
                     break;
-                case ToolType.Scythe:
-                    if (!signal.FieldSource)
+                case ToolType.Axe:
+                    if (signal.Entity.EntityType != EntityType.Tree)
                         break;
-                    if (signal.InteractionType == InteractionType.Click)
+                    goto case ToolType.Scythe;
+                case ToolType.Scythe:
+                    if (signal.InteractionType == InteractionType.Click && signal.FieldSource)
                         _toolList[CurrentTool].Process(data);
                     break;
                 case ToolType.Sale:

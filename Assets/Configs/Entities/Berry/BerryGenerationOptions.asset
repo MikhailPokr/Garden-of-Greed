@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e07d78651b2446ab9468877651365f04, type: 3}
   m_Name: BerryGenerationOptions
   m_EditorClassIdentifier: Assembly-CSharp::Garden.BerryGenerationOptions
+  _berryChance: 0.678
+  _regenerationValueRange: {x: 1, y: 2}
+  _costRange: {x: 1, y: 3}

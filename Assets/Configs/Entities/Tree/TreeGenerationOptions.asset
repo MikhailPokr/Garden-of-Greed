@@ -16,6 +16,8 @@ MonoBehaviour:
   _growthLastStageRange: {x: 2, y: 8}
   _greenOffsetRange: {x: -0.2, y: 0.05}
   _penaltyPerPointRange: {x: 0, y: 1}
+  _deadValue: 30
+  _fuelForceRange: {x: 3, y: 7}
   _autoBreedCountRange: {x: 0, y: 3}
   _stageTimeRange: {x: 4, y: 15}
   _maxStageRange: {x: 2, y: 20}

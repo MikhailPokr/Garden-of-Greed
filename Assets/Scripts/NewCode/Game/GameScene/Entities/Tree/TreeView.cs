@@ -9,7 +9,6 @@ namespace Garden
     {
         [SerializeField] private SpriteRenderer _treeSpriteRenderer;
         [SerializeField] private SpriteRenderer _crownSpriteRenderer;
-        [SerializeField] private BoxCollider2D _collider;
         
         private TreeData _treeData;
         public override IEntityData EntityData => _treeData;
@@ -68,8 +67,6 @@ namespace Garden
                                 _treeSpriteRenderer.sprite = _treePalette.StageSprites[spriteCommand.Value];
                                 break;
                         }
-                        _collider.size = _treeSpriteRenderer.sprite.bounds.size;
-                        _collider.offset = _treeSpriteRenderer.sprite.bounds.center;
                         break;
                     case ChangeColorCommand colorCommand:
                         switch (colorCommand.Value)
