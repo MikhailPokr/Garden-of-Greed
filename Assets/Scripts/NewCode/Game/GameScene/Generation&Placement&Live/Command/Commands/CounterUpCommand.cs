@@ -2,7 +2,7 @@
 {
     public class CounterUpCommand : ICommand
     {
-        public readonly CellData? CellData;
+        public readonly CellData CellData;
 
         public CounterUpCommand()
         {

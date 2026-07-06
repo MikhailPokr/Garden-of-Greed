@@ -29,6 +29,19 @@ namespace Garden
             SignalBus<ChangeMoneySignal>.OnEvent += OnChangeMoney;
             SignalBus<ChangeHpSignal>.OnEvent += OnChangeHp;
             SignalBus<AddFireSignal>.OnEvent += OnAddFire;
+            SignalBus<BurnSignal>.OnEvent += OnTorchUsed;
+        }
+
+        private void OnTorchUsed(BurnSignal obj)
+        {
+            var fire = FireData.FindAll(x => x.IsEvilFire);
+            if (fire.Count == 0)
+            {
+                fire = FireData;
+            }
+
+            var min = fire.OrderBy(x => x.Time).FirstOrDefault();
+            OnFireIsOver(min);
         }
 
         private void OnAddFire(AddFireSignal signal)

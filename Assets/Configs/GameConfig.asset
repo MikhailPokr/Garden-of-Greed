@@ -20,6 +20,9 @@ MonoBehaviour:
     <FireTimePerPoint>k__BackingField: 3
     <NormalFireMultiplier>k__BackingField: 0.9
     <EvilFireTimeMultiplier>k__BackingField: 1.2
+  <ArsonOptions>k__BackingField:
+    Interval: 2
+    Chance: 0.581
   <FieldPrefab>k__BackingField: {fileID: 4710773942203756902, guid: cc1dd61ad7e2e9e4d83ad73ace45e2b6, type: 3}
   <FieldOptions>k__BackingField:
     CellWidth: 2.68

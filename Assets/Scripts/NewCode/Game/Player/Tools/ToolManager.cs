@@ -73,6 +73,7 @@ namespace Garden
                         if (signal.InteractionType == InteractionType.Click)
                             _toolList[CurrentTool].Process(data);
                     break;
+                case ToolType.Torch:
                 case ToolType.Axe:
                     if (signal.Entity.EntityType != EntityType.Tree)
                         break;

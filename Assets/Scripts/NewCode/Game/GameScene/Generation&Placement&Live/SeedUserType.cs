@@ -7,5 +7,6 @@
         GrassFactory,
         Shop,
         GrassGenerator,
+        ArsonManager
     }
 }

@@ -17,15 +17,15 @@ namespace Garden
         
         public int BreedCount { get; private set; }
         public int FruitCount { get; private set; }
+        public int Stage { get; private set; }
         
-        private int _stage;
         private bool _timerEnabled;
         private Queue<ICommand[]> _commandList;
         
         public TreeData(TreeDataConfig dataConfig, Vector2Int position)
         {
             DataConfig = dataConfig;
-            _stage = 0;
+            Stage = 0;
             _timerEnabled = false;
             Position = position;
         }
@@ -41,12 +41,12 @@ namespace Garden
         {
             if (!_timerEnabled)
                 return;
-            float time = DataConfig.GetNextTimer(_stage, Position) - currentTime;
+            float time = DataConfig.GetNextTimer(Stage, Position) - currentTime;
             if (time <= 0)
             {
                 ProcessCommands(_commandList.Dequeue());
             }
-            else if (time > DataConfig.DeadValue && _stage < TreeGenome.LastGrowthStage && _stage > 0)
+            else if (time > DataConfig.DeadValue && Stage < TreeGenome.LastGrowthStage && Stage > 0)
             {
                 ProcessCommands(
                     new ChangeSpriteCommand(TreeSpriteCommandsLegend.DeadShoot),
@@ -109,13 +109,13 @@ namespace Garden
                         Cost = changeCostCommand.Value;
                         break;
                     case CutDownCommand cutDownCommand:
-                        if (_stage <= TreeGenome.LastGrowthStage)
+                        if (Stage <= TreeGenome.LastGrowthStage)
                             commands[Array.IndexOf(commands, cutDownCommand)] = null;
                         else
                             cutDownCommand.Use();
                         break;
                     case MowCommand mowCommand:
-                        if (_stage > TreeGenome.LastGrowthStage)
+                        if (Stage > TreeGenome.LastGrowthStage)
                             commands[Array.IndexOf(commands, mowCommand)] = null;
                         break;
                     case SaleCommand saleCommand:
@@ -126,7 +126,7 @@ namespace Garden
                         _timerEnabled = false;
                         break;
                     case CounterUpCommand:
-                        _stage++;
+                        Stage++;
                         break;
                     case DryCommand:
                         _timerEnabled = false;

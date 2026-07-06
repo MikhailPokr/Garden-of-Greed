@@ -13,6 +13,7 @@
         MaxStage = 103,
         GreenColorOffset = 104,
         PenaltyPerPoint = 105,
+        BurnChance = 106,
         
         //Wood
         WoodCost = 200,

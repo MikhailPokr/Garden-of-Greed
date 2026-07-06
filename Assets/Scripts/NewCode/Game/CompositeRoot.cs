@@ -28,6 +28,8 @@ namespace Garden
         private GeoMap _geoMap;
         private Mouth _mouth;
         private Axe _axe;
+        private Torch _torch;
+        private ArsonManager _arsonManager;
         
         Dictionary<EntityType, IEntityCreationController> _entityControllers;
         
@@ -55,6 +57,7 @@ namespace Garden
                 _gameConfig.EntityBundles);
             
             _geoMap = new GeoMap(visualContext);
+            _arsonManager = new ArsonManager(_seed, _spatialMap, _creationManager, _gameConfig.ArsonOptions.Interval, _gameConfig.ArsonOptions.Chance);
             
             _arm = new Arm(0.5f);
             _treeShop = new TreeShop(_seed,  _player, -10);
@@ -62,6 +65,7 @@ namespace Garden
             _scythe = new Scythe(1);
             _mouth = new Mouth();
             _axe = new Axe(1);
+            _torch = new Torch(_player);
             
             List<ITool> tools = new List<ITool>()
             {
@@ -70,7 +74,8 @@ namespace Garden
                 _saleTool,
                 _scythe,
                 _mouth,
-                _axe
+                _axe,
+                _torch
             };
             
             _toolManager = new ToolManager(_spatialMap, tools);
@@ -123,6 +128,7 @@ namespace Garden
             _player.Update(time);
             _creationManager.Update(_player.Time);
             _subCellContentGenerator.Update(_player.Time);
+            _arsonManager.Update(time);
         }
     }
 }

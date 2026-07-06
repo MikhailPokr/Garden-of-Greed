@@ -11,6 +11,7 @@ namespace Garden
         [field: SerializeField] public SpriteOrderOptions SpriteOrderOptions { get; private set; }
         [field: SerializeField] public MutationOptions MutationOptions { get; private set; }
         [field: SerializeField] public FireOptions FireOptions { get; private set; }
+        [field: SerializeField] public ArsonOptions ArsonOptions { get; private set; }
         [field: SerializeField] public Field FieldPrefab { get; private set; }
         [field: SerializeField] public FieldOptions FieldOptions { get; private set; }
         

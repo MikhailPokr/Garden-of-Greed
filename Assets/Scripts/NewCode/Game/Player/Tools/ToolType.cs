@@ -8,5 +8,6 @@
         Scythe = 3,
         Mouth = 4,
         Axe = 5,
+        Torch = 6,
     }
 }
