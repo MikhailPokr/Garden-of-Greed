@@ -2,12 +2,13 @@
 {
     public enum ToolType
     {
-        Arm = 0,
-        TreeShop = 1,
-        Sale = 2,
-        Scythe = 3,
-        Mouth = 4,
-        Axe = 5,
-        Torch = 6,
+        None = 0,
+        Arm = 1,
+        Torch = 2,
+        Sale = 3,
+        TreeShop = 4,
+        Scythe = 5,
+        Axe = 6,
+        Mouth = 7,
     }
 }

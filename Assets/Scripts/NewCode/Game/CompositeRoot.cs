@@ -11,6 +11,9 @@ namespace Garden
         [SerializeField] private UIMoneyCounter _moneyCounter;
         [SerializeField] private UIHpCounter _hpCounter;
         [SerializeField] private UIFireCounter _fireCounter;
+        [SerializeField] private UITimer _timer;
+        [SerializeField] private SpeedButtonsController _speedButtonsController;
+        [SerializeField] private RestartButton _restartButton;
         
         private int _seed;
         private Player _player;
@@ -30,6 +33,9 @@ namespace Garden
         private Axe _axe;
         private Torch _torch;
         private ArsonManager _arsonManager;
+        private SpeedController _speedController;
+        private RestartController _restartController;
+        private FenceGenerator _fenceGenerator;
         
         Dictionary<EntityType, IEntityCreationController> _entityControllers;
         
@@ -47,8 +53,13 @@ namespace Garden
 
             _field = Instantiate(_gameConfig.FieldPrefab);
             _field.Init(_spatialMap, _gameConfig.GeneralPalette, _gameConfig.FieldOptions);
+            _fenceGenerator = new FenceGenerator(_spatialMap, _gameConfig.GeneralPalette);
+            _fenceGenerator.GenerateFence();
             
             _inputManager = new InputManager();
+            
+            _speedController = new SpeedController();
+            _restartController = new RestartController();
             
             VisualContext visualContext = new VisualContext(_gameConfig, _field, _spatialMap, _inputManager); 
             
@@ -78,12 +89,15 @@ namespace Garden
                 _torch
             };
             
-            _toolManager = new ToolManager(_spatialMap, tools);
+            _toolManager = new ToolManager(_spatialMap, _speedController, _player, tools);
             
             _toolSelectorsController.Init(_toolManager);
             _moneyCounter.Init(_player);
             _hpCounter.Init(_player);
             _fireCounter.Init(_player);
+            _timer.Init(_player);
+            _speedButtonsController.Init(_speedController);
+            _restartButton.Init(_restartController, _speedController);
             
 
             EntityBundle treeBundle = _gameConfig.EntityBundles.Find(x => x.EntityType == EntityType.Tree);
@@ -124,11 +138,13 @@ namespace Garden
 
         private void Update()
         {
-            float time = Time.deltaTime;
+            float time = Time.deltaTime * _speedController.CurrentSpeed;
             _player.Update(time);
             _creationManager.Update(_player.Time);
             _subCellContentGenerator.Update(_player.Time);
             _arsonManager.Update(time);
+            _fireCounter.UpdateLogic();
+            _timer.UpdateView();
         }
     }
 }

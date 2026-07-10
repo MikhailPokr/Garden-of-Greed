@@ -97,6 +97,37 @@ namespace Garden
             return list;
         }
 
+        public List<Vector2Int> GetOutBounds()
+        {
+            var list = new List<Vector2Int>();
+            for (int i = _fieldOptions.Bounds.xMin - 1; i < _fieldOptions.Bounds.xMax + 1; i++)
+            {
+                for (int j = _fieldOptions.Bounds.yMin - 2; j < _fieldOptions.Bounds.yMax + 2; j++)
+                {
+                    if ((i == _fieldOptions.Bounds.xMin - 1 && j % 2 != 0) ||
+                        (i == _fieldOptions.Bounds.xMax && j % 2 == 0) ||
+                        j == _fieldOptions.Bounds.yMin - 1 ||
+                        j == _fieldOptions.Bounds.yMax ||
+                        j == _fieldOptions.Bounds.yMin - 2 ||
+                        j == _fieldOptions.Bounds.yMax + 1)
+                    {
+                        if (i == _fieldOptions.Bounds.xMin - 1 && j == _fieldOptions.Bounds.yMin - 2)
+                            continue;
+                        if (i == _fieldOptions.Bounds.xMin - 1 && j == _fieldOptions.Bounds.yMax + 1)
+                            continue;
+                        if (i == _fieldOptions.Bounds.xMax &&
+                            (j == _fieldOptions.Bounds.yMin - 2 || j == _fieldOptions.Bounds.yMin - 1))
+                            continue;
+                        if (i == _fieldOptions.Bounds.xMax &&
+                            (j == _fieldOptions.Bounds.yMax || j == _fieldOptions.Bounds.yMax + 1))
+                            continue;
+                        list.Add(new Vector2Int(i, j));
+                    }
+                }
+            }
+            return list;
+        }
+
         public Vector3 GetPoint(IEntityData data)
         {
             if (data is ISubEntity subEntity)

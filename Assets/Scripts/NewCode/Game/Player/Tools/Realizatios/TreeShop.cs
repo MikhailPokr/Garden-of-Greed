@@ -5,7 +5,8 @@ namespace Garden
     public class TreeShop : ITool
     {
         public ToolType Type => ToolType.TreeShop;
-        
+        public bool Locked { get; private set; }
+
         private int _seed;
         private readonly Player _player;
         private int _count;
@@ -22,6 +23,11 @@ namespace Garden
         public void Activate()
         {
             
+        }
+
+        public void Lock(bool locked)
+        {
+            Locked = locked;
         }
 
         public void Process(InteractionData data)

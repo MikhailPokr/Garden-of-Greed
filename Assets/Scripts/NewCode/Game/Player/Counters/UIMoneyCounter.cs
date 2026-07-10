@@ -18,7 +18,15 @@ namespace Garden
         
         private void OnMoneyChangeSignal(int value)
         {
-            _moneyText.text = value.ToString();
+            var str = value.ToString("D12");
+            var text = "";
+            for (int i = 0; i < 3; i++)
+            {
+                text += str.Substring(i * 3, 3);
+                text += ".";
+            }
+            text += str.Substring(9, 3);
+            _moneyText.text = text;
         }
     }
 }

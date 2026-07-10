@@ -105,12 +105,18 @@ namespace Garden
             }
             _lastPosition = position;
         }
-        
+        #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
             if (_gridMath == null)
                 return;
-            
+
+            var b = _gridMath.GetOutBounds();
+            Gizmos.color = Color.chocolate;
+            for (var i = 0; i < b.Count; i++)
+            {
+                Gizmos.DrawCube(_gridMath.GetPoint( b[i]), Vector3.one * 0.5f);
+            }
             
             for (int i = _fieldOptions.Bounds.xMin; i < _fieldOptions.Bounds.xMax; i++)
             {
@@ -149,5 +155,6 @@ namespace Garden
                 }
             }
         }
+        #endif
     }
 }

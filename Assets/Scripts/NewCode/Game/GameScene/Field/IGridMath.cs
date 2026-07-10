@@ -10,5 +10,6 @@ namespace Garden
         Vector3 GetPoint(Vector2Int position, int subPos);
         Vector2Int GetPosition(Vector3 worldPosition);
         List<Vector2Int> GetNeighbors(Vector2Int position);
+        List<Vector2Int> GetOutBounds();
     }
 }

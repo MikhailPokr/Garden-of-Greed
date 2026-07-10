@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GrassPalette
   m_EditorClassIdentifier: Assembly-CSharp::Garden.GrassPalette
   <GrassSprites>k__BackingField:
-  - {fileID: 5001313014596697494, guid: 7510fcc826ce5b14a8f68e92d1016225, type: 3}
-  - {fileID: 6626789566203449431, guid: 7510fcc826ce5b14a8f68e92d1016225, type: 3}
-  - {fileID: -3323135026486930811, guid: 7510fcc826ce5b14a8f68e92d1016225, type: 3}
+  - {fileID: 1457159941, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
+  - {fileID: 590356804, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
+  - {fileID: 2101688078, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}

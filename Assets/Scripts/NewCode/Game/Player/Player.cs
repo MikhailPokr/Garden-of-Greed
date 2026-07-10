@@ -8,6 +8,7 @@ namespace Garden
     public class Player
     {
         public int Money { get; private set; }
+        public int MaxHp => _startOptions.MaxHp;
         public int Hp { get; private set; }
         public List<FireData> FireData { get; private set; }
         public float Time { get; private set; }
@@ -18,7 +19,7 @@ namespace Garden
 
         public event Action<int> HpChanged;
         public event Action<int> MoneyChanged;
-        public event Action<int> FireChanged;
+        public event Action<List<FireData>> FireChanged;
 
 
         public Player(PlayerStartOptions startOptions, GameConfig config)
@@ -49,14 +50,14 @@ namespace Garden
             var fire = new FireData(signal.FuelForce * _gameConfig.FireOptions.FireTimePerPoint, signal.IsEvil);
             FireData.Add(fire);
             fire.TimeIsOver += OnFireIsOver;
-            FireChanged?.Invoke(FireData.Count);
+            FireChanged?.Invoke(FireData);
         }
 
         private void OnFireIsOver(FireData obj)
         {
             obj.TimeIsOver -= OnFireIsOver;
             FireData.Remove(obj);
-            FireChanged?.Invoke(FireData.Count);
+            FireChanged?.Invoke(FireData);
         }
 
         public void Start()

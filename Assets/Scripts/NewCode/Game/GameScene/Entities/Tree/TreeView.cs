@@ -89,9 +89,16 @@ namespace Garden
                     case DryCommand:
                         _crownSpriteRenderer.enabled = false;
                         break;
+                    case BurnCommand:
+                        var fireObject = Instantiate(_context.GeneralPalette.Fire, transform.position, Quaternion.identity);
+                        fireObject.GetComponent<SpriteRenderer>().sortingOrder = _treeSpriteRenderer.sortingOrder;
+                        Tween.Delay(2f).OnComplete(() => Destroy(fireObject));
+                        Destroy(gameObject);
+                        break;
                     case DestroyCommand:
                         Destroy(gameObject);
                         break;
+                    
                 }
             }
         }

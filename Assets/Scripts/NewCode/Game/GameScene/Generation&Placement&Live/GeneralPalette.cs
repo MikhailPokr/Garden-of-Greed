@@ -9,5 +9,7 @@ namespace Garden
         [field: SerializeField] public Color NoColor { get; private set; }
         [field: SerializeField] public Color NormalColor { get; private set; }
         [field: SerializeField] public Color EvilColor { get; private set; }
+        [field: SerializeField] public GameObject Fence { get; private set; }
+        [field: SerializeField] public GameObject Fire { get; private set; }
     }
 }

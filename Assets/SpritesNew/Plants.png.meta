@@ -400,6 +400,204 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Bush1
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 383
+        width: 100
+        height: 85
+      alignment: 9
+      pivot: {x: 0.5042742, y: 0.097849764}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 646ada58ec836234e8fd7b4cfba8c4c7
+      internalID: 1178719177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Berry1
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 288
+        width: 85
+        height: 93
+      alignment: 9
+      pivot: {x: 0.4999992, y: 0.115895264}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbce2e84bf34372439bacc2b93734377
+      internalID: -167344954
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fire
+      rect:
+        serializedVersion: 2
+        x: 3704
+        y: 48
+        width: 357
+        height: 578
+      alignment: 9
+      pivot: {x: 0.51273495, y: 0.07919243}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c3b7a8e58e791b24fb304d2b6d841f44
+      internalID: 1523863929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Seed
+      rect:
+        serializedVersion: 2
+        x: 915
+        y: 1849
+        width: 85
+        height: 75
+      alignment: 9
+      pivot: {x: 0.5000007, y: 0.3524105}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6df377daa436794b86866021b659c2e
+      internalID: 261116790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DeadShot
+      rect:
+        serializedVersion: 2
+        x: 1091
+        y: 1853
+        width: 99
+        height: 112
+      alignment: 9
+      pivot: {x: 0.43788347, y: 0.25840977}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4451ca3a6007d474397059fb8ac22c13
+      internalID: -842721363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass1
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 515
+        width: 103
+        height: 67
+      alignment: 9
+      pivot: {x: 0.5260763, y: 0.25947866}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d7f0431b70d717499d37a67afb25f48
+      internalID: 1457159941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass2
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 519
+        width: 98
+        height: 75
+      alignment: 9
+      pivot: {x: 0.5274071, y: 0.22246419}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: caff0f14ea1cf304aa41dd3840bd07fa
+      internalID: 590356804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Grass3
+      rect:
+        serializedVersion: 2
+        x: 259
+        y: 518
+        width: 91
+        height: 86
+      alignment: 9
+      pivot: {x: 0.52951485, y: 0.16427116}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7200a5abda750b47877e4932b4d29f8
+      internalID: 2101688078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fence
+      rect:
+        serializedVersion: 2
+        x: 3483
+        y: 80
+        width: 131
+        height: 238
+      alignment: 9
+      pivot: {x: 0.51211387, y: 0.11328789}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46de45d5a50e265499ac41009a7ab55d
+      internalID: 638565770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -416,14 +614,23 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
+      Berry1: -167344954
+      Bush1: 1178719177
       Crown 1: 1025324256
       Crown 2: -807385931
       Crown 3: -489016113
+      DeadShot: -842721363
+      Fence: 638565770
+      Fire: 1523863929
       Fruit 1: 713815981
       Fruit 2: -4881008103234269068
       Fruit 3: 346682839
+      Grass1: 1457159941
+      Grass2: 590356804
+      Grass3: 2101688078
       Plants_4: -5840972274582744104
       Plants_5: 3442116038242085032
+      Seed: 261116790
       Sprout 1: -7391759607893831176
       Sprout 2: 1352955200029874055
       Sprout 3: -1268064389544249124

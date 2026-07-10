@@ -4,7 +4,8 @@ using UnityEngine;
 public class Scythe : ITool
 {
     public ToolType Type => ToolType.Scythe;
-    
+    public bool Locked { get; private set;  }
+
     private readonly Player _player;
     private Vector2Int _targetPosition;
     private int _hpCost;
@@ -17,6 +18,11 @@ public class Scythe : ITool
     public void Activate()
     {
         
+    }
+
+    public void Lock(bool locked)
+    {
+        Locked = locked;
     }
 
     public void Process(InteractionData data)

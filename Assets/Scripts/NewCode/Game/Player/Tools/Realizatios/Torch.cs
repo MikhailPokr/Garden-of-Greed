@@ -2,8 +2,10 @@
 {
     public class Torch : ITool
     {
-        private readonly Player _player;
         public ToolType Type => ToolType.Torch;
+        public bool Locked { get; private set; }
+        
+        private readonly Player _player;
 
         public Torch(Player player)
         {
@@ -13,6 +15,11 @@
         public void Activate()
         {
             
+        }
+        
+        public void Lock(bool locked)
+        {
+            Locked = locked;
         }
 
         public void Process(InteractionData signal)

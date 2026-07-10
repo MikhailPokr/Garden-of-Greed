@@ -138,6 +138,15 @@ namespace Garden
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Num"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""0c7fb77c-42e0-4ae1-b0d1-19f0f98dfdf5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -272,6 +281,83 @@ namespace Garden
                     ""action"": ""Speed"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""939d3f6d-4107-4f2b-b1df-e80fb6cc060d"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Num"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cdcda4cc-a2e6-46bd-b2b4-c1c1809d7e42"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Num"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b823c43d-a304-4061-9990-ec33af1f7715"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Num"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8fe306a-97ff-46e2-932b-4823fd9bd955"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Num"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b4800f5-a09f-4ecf-a93b-e3bbb08fc389"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Num"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2b7b86a4-fb1d-49ae-a407-086890a4b020"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Num"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3010c8be-ec83-4213-bda6-9aebb5c9a6ff"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Num"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -285,6 +371,7 @@ namespace Garden
             m_Standart_RightClick = m_Standart.FindAction("RightClick", throwIfNotFound: true);
             m_Standart_Point = m_Standart.FindAction("Point", throwIfNotFound: true);
             m_Standart_Speed = m_Standart.FindAction("Speed", throwIfNotFound: true);
+            m_Standart_Num = m_Standart.FindAction("Num", throwIfNotFound: true);
         }
 
         ~@Actions()
@@ -370,6 +457,7 @@ namespace Garden
         private readonly InputAction m_Standart_RightClick;
         private readonly InputAction m_Standart_Point;
         private readonly InputAction m_Standart_Speed;
+        private readonly InputAction m_Standart_Num;
         /// <summary>
         /// Provides access to input actions defined in input action map "Standart".
         /// </summary>
@@ -401,6 +489,10 @@ namespace Garden
             /// Provides access to the underlying input action "Standart/Speed".
             /// </summary>
             public InputAction @Speed => m_Wrapper.m_Standart_Speed;
+            /// <summary>
+            /// Provides access to the underlying input action "Standart/Num".
+            /// </summary>
+            public InputAction @Num => m_Wrapper.m_Standart_Num;
             /// <summary>
             /// Provides access to the underlying input action map instance.
             /// </summary>
@@ -442,6 +534,9 @@ namespace Garden
                 @Speed.started += instance.OnSpeed;
                 @Speed.performed += instance.OnSpeed;
                 @Speed.canceled += instance.OnSpeed;
+                @Num.started += instance.OnNum;
+                @Num.performed += instance.OnNum;
+                @Num.canceled += instance.OnNum;
             }
 
             /// <summary>
@@ -468,6 +563,9 @@ namespace Garden
                 @Speed.started -= instance.OnSpeed;
                 @Speed.performed -= instance.OnSpeed;
                 @Speed.canceled -= instance.OnSpeed;
+                @Num.started -= instance.OnNum;
+                @Num.performed -= instance.OnNum;
+                @Num.canceled -= instance.OnNum;
             }
 
             /// <summary>
@@ -543,6 +641,13 @@ namespace Garden
             /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
             /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
             void OnSpeed(InputAction.CallbackContext context);
+            /// <summary>
+            /// Method invoked when associated input action "Num" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+            /// </summary>
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+            /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+            void OnNum(InputAction.CallbackContext context);
         }
     }
 }

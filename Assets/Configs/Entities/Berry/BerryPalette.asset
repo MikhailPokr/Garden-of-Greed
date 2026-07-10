@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BerryPalette
   m_EditorClassIdentifier: Assembly-CSharp::Garden.BerryPalette
   <BerrySprites>k__BackingField:
-  - {fileID: 4663126002738595058, guid: 8bad25c5ebc473c47869187e490bf70a, type: 3}
+  - {fileID: -167344954, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
   <LeavesSprites>k__BackingField:
-  - {fileID: 8942973894886036645, guid: 8bad25c5ebc473c47869187e490bf70a, type: 3}
+  - {fileID: 1178719177, guid: f1ffbf6d7274ecd4cb9a7ede2730bc19, type: 3}
   <BerryColors>k__BackingField:
   - {r: 1, g: 0, b: 0, a: 1}
   - {r: 0, g: 0.78653115, b: 0.91764706, a: 1}

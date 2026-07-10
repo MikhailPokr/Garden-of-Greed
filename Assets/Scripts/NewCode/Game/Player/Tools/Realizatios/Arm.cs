@@ -3,6 +3,7 @@
     public class Arm : ITool
     {
         public ToolType Type => ToolType.Arm;
+        public bool Locked { get; private set; }
 
         private bool _isHandBusy;
         private FruitData _fruitData;
@@ -13,9 +14,13 @@
             _poisonMult = poisonMult;
         }
         
-        
         public void Activate()
         {
+        }
+
+        public void Lock(bool locked)
+        {
+            Locked = locked;
         }
 
         public void Process(InteractionData data)
