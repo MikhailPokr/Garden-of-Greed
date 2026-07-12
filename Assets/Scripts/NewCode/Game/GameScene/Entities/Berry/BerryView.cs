@@ -24,10 +24,10 @@ namespace Garden
             _berryData = (BerryData)entityData;
             
             base.Init(entityData, context);
-            
-            var order = _context.SpriteOrder.GetOrder(entityData.Position.y, _context.SpriteOrder.GetGrass(_berryData.SubPosition));
-            _leavesSpriteRenderer.sortingOrder = order;
-            _berrySpriteRenderer.sortingOrder = order + 1;
+
+            var order = _context.SpriteOrder.GetBerry(_berryData.SubPosition);
+            _leavesSpriteRenderer.sortingOrder = _context.SpriteOrder.GetOrder(entityData.Position.y, order.leaves);
+            _berrySpriteRenderer.sortingOrder = _context.SpriteOrder.GetOrder(entityData.Position.y, order.berry);
         }
         
         protected override void OnCommand(ICommand[] commands)

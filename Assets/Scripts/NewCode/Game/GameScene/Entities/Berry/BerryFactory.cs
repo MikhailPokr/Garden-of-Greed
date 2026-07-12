@@ -45,10 +45,11 @@ namespace Garden
                         {
                             Seed = newSeed,
                             Cost = SeedUtils.GetRandom(newSeed, ParamType.BerryCost, _options.GetCostRange()),
-                            Regeneration = SeedUtils.GetRandom(newSeed, ParamType.BerryRegeneration, _options.GetRegenerationValueRange())
+                            Regeneration = SeedUtils.GetRandom(newSeed, ParamType.BerryRegeneration, _options.GetRegenerationValueRange()),
+                            ColorIndex = SeedUtils.GetRandom(newSeed, ParamType.BerryColor, _berryPalette.BerryColors.Count) //TODO: change to interface 
                         };
 
-                        return new BerryData(dataConfig, position, subPosition);
+                        return new BerryData(dataConfig, position, cell.SubCell);
                     }
                 }
             }

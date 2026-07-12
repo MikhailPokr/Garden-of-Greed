@@ -8,6 +8,7 @@ namespace Garden
     {
         bool IsTileFreeAndValid(Vector2Int pos);
         bool IsTileFreeAndValid(CellData data);
+        bool IsTileFreeAndValid(CellData data, params EntityType[] validTypes);
         void OccupyTile(CellData data);
         void FreeTile(CellData data);
         event Action<Vector2Int> MapUpdated;

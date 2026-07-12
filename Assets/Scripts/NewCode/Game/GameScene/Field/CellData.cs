@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Linq;
+using UnityEngine;
 
 namespace Garden
 {
@@ -27,12 +29,12 @@ namespace Garden
             SubCell = subCell;
             Value = 0;
         }
-
-        public bool Compare(CellData other, bool ignoreCellType = false, bool ignoreEntityType = false)
+        
+        public bool Compare(CellData other, bool ignoreCellType = false, bool ignoreEntityType = false, params EntityType[] validTypes)
         {
             return
                 (CellType == other.CellType || ignoreCellType) &&
-                (EntityType == other.EntityType || ignoreEntityType) &&
+                (EntityType == other.EntityType || ignoreEntityType || (validTypes != null && validTypes.Contains(other.EntityType))) &&
                 Position == other.Position &&
                 (SubCell == other.SubCell || ignoreCellType);
         }

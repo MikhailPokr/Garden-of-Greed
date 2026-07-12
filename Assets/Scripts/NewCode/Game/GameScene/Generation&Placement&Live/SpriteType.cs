@@ -8,6 +8,9 @@
 		Fruit,
 		GrassLine1,
 		GrassLine2,
-		GrassLine3
+		GrassLine3,
+		BerryLine1,
+		BerryLine2,
+		BerryLine3,
     }
 }

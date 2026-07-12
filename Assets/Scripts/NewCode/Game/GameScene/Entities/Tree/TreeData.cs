@@ -86,6 +86,8 @@ namespace Garden
             if (!TreeGenome.TreeType.HasFlag(TreeType.Fruit))
                 commandConfigurator.AddInPosition(Mathf.RoundToInt(TreeGenome.MaxStage) - 1, 
                     new BreedCommand(this));
+            commandConfigurator.AddInPosition(Mathf.RoundToInt(TreeGenome.MaxStage) - 1, 
+                new MarkChangesCommand());
             commandConfigurator.AddInPosition(Mathf.RoundToInt(TreeGenome.MaxStage),
                 new DryCommand(),
                 new MarkChangesCommand(),

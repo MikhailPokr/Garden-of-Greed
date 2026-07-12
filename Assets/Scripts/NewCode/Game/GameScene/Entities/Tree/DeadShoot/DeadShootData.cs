@@ -15,15 +15,15 @@ namespace Garden
         protected override Queue<ICommand[]> CreateList()
         {
             CommandConfigurator commandConfigurator = new CommandConfigurator();
-            commandConfigurator.AddInPosition(0, 
+            commandConfigurator.AddInPosition(-1, 
                 new ChangeSpriteCommand(TreeSpriteCommandsLegend.Pit),
-            new ChangeColorCommand(TreeColorCommandsLegend.Pit));
-            commandConfigurator.AddInPosition(1, 
+                new ChangeColorCommand(TreeColorCommandsLegend.Pit),
+                new MarkChangesCommand());
+            commandConfigurator.AddInPosition(0, 
                 new ChangeSpriteCommand(TreeSpriteCommandsLegend.DeadShoot),
                 new ChangeColorCommand(TreeColorCommandsLegend.DeadShot),
-                new DryCommand());
-            commandConfigurator.AddInRange(0, 2,
-                new CounterUpCommand(),
+                new DryCommand(),
+                new CounterUpCommand(), 
                 new MarkChangesCommand());
 
             return commandConfigurator.GetCommands();

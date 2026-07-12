@@ -6,18 +6,18 @@ namespace Garden
     {
         public ToolType Type => ToolType.TreeShop;
         public bool Locked { get; private set; }
+        public readonly int Cost;
 
-        private int _seed;
+        private readonly int _seed;
         private readonly Player _player;
         private int _count;
 
-        private int _cost;
         
         public TreeShop(int globalSeed, Player player, int cost)
         {
             _seed = SeedUtils.GetNewSeed(globalSeed, SeedUserType.Shop);
             _player = player;
-            _cost = cost;
+            Cost = cost;
         }
         
         public void Activate()
@@ -38,12 +38,12 @@ namespace Garden
 
         public bool Get(out int seed)
         {
-            if (_player.Money < _cost)
+            if (_player.Money < Cost)
             {
                 seed = -1;
                 return false;
             }
-            SignalBus<ChangeMoneySignal>.Fire(new ChangeMoneySignal(_cost));
+            SignalBus<ChangeMoneySignal>.Fire(new ChangeMoneySignal(Cost));
             seed = SeedUtils.GetNewSeed(_seed, _count++);
             return true;
         }

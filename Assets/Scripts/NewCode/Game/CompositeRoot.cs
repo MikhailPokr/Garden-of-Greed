@@ -127,7 +127,8 @@ namespace Garden
                 _player));
             _entityControllers.Add(EntityType.Grass, new GrassCreationController(
                 _gameConfig.Seed,
-                grassBundle));
+                grassBundle,
+                _spatialMap));
             _entityControllers.Add(EntityType.Berry, new BerryCreationManager(
                 _gameConfig.Seed,
                 berryBundle,

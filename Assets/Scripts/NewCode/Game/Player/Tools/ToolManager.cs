@@ -130,7 +130,7 @@ namespace Garden
                     locks[i] = true;
                 }
 
-            if (_player.Money == 0)
+            if (_player.Money < ((TreeShop)_toolList[ToolType.TreeShop]).Cost)
             {
                 locks[(int)ToolType.TreeShop] = true;
             }

@@ -77,6 +77,10 @@ namespace Garden
         {
             return !CellDataList.Any(x => x.Compare(data, ignoreEntityType: true) && _fieldOptions.Bounds.Contains(data.Position));
         }
+        public bool IsTileFreeAndValid(CellData data, params EntityType[] validTypes)
+        {
+            return !CellDataList.Any(x => x.Compare(data, ignoreEntityType: true, validTypes: validTypes) && _fieldOptions.Bounds.Contains(data.Position));
+        }
         
         public List<Vector2Int> GetNeighbors(Vector2Int position)
         {

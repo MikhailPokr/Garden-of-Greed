@@ -7,15 +7,16 @@ namespace Garden
     {
         private readonly GrassGenerationOptions _options;
         private readonly GrassPalette _palette;
+        private readonly ISpatialMap _spatialMap;
         
         private readonly GrassFactory _grassFactory;
 
-        public GrassCreationController(int globalSeed, EntityBundle bundle)
+        public GrassCreationController(int globalSeed, EntityBundle bundle, ISpatialMap spatialMap)
         {
             _options = bundle.GenerationOptions as GrassGenerationOptions;
             _palette = bundle.Palette as GrassPalette;
 
-            _grassFactory = new GrassFactory(globalSeed, _options, _palette);
+            _grassFactory = new GrassFactory(globalSeed, _options, _palette, spatialMap);
             
             SignalBus<GrassGrowingSignal>.OnEvent += OnGrassGrowing;
         }
@@ -25,7 +26,8 @@ namespace Garden
             foreach (var position in signal.Positions)
             {
                 var grass = _grassFactory.Create(position);
-                SignalBus<EntityCreationSignal>.Fire(new EntityCreationSignal(grass));
+                if (grass != null)
+                    SignalBus<EntityCreationSignal>.Fire(new EntityCreationSignal(grass));
             }
         }
     }

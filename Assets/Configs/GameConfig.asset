@@ -17,9 +17,9 @@ MonoBehaviour:
   <SpriteOrderOptions>k__BackingField: {fileID: 11400000, guid: 9260f43d43e9adb419bc98a6c3d82779, type: 2}
   <MutationOptions>k__BackingField: {fileID: 11400000, guid: 590c4c7d3734998498139da31c634178, type: 2}
   <FireOptions>k__BackingField:
-    <FireTimePerPoint>k__BackingField: 3
-    <NormalFireMultiplier>k__BackingField: 0.9
-    <EvilFireTimeMultiplier>k__BackingField: 1.2
+    <FireTimePerPoint>k__BackingField: 6
+    <NormalFireMultiplier>k__BackingField: 0.6
+    <EvilFireTimeMultiplier>k__BackingField: 0.9
   <ArsonOptions>k__BackingField:
     Interval: 2
     Chance: 0.581

@@ -15,8 +15,8 @@ MonoBehaviour:
   _colorOffsetRange: {x: 0.1, y: 0.2}
   _fruitCostMultiplierRange: {x: 0.1, y: 0.4}
   _fruitCountPerStageRange: {x: 1, y: 3}
-  _rottingTimeRange: {x: 4, y: 10}
-  _growUpChanceRange: 0.35
+  _rottingTimeRange: {x: 7, y: 20}
+  _growUpChanceRange: 0.67
   _startQualityRange: {x: 1, y: 5}
   _lifeRegenerationRange: {x: 1, y: 4}
   _evilFruitCostMultiplierRange: {x: 0.3, y: 0.6}

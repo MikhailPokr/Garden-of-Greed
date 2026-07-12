@@ -26,7 +26,8 @@ namespace Garden
                 new ChangeSpriteCommand(0),
                 new ChangeColorCommand(0),
                 new ChangeCostCommand(DataConfig.Cost),
-                new MarkChangesCommand()
+                new MarkChangesCommand(),
+                new CounterUpCommand(new CellData(CellType.Sub, EntityType.Berry, Position, SubPosition))
                 );
         }
         
